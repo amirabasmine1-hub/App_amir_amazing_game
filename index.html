@@ -1,543 +1,630 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#8a2be2">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMIR_AMAZING_GAME</title>
 
-  <title>AMIR_AMAZING_GAME</title>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top,#301060 0%,#12051f 45%,#07030d 100%);
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #35105f 0%, #090512 45%, #030207 100%);
-      color: white;
-      overflow-x: hidden;
-    }
+/* LOADING */
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#35106b 0%,#12051f 45%,#050208 100%);
+  transition:opacity .7s ease,visibility .7s ease;
+}
 
-    header {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid #7b2cff;
-      background: rgba(5, 3, 12, 0.9);
-      box-shadow: 0 0 25px rgba(125, 43, 255, 0.25);
-    }
+#loadingScreen.hide{
+  opacity:0;
+  visibility:hidden;
+}
 
-    .logo {
-      color: #c477ff;
-      font-size: 21px;
-      font-weight: bold;
-      text-shadow: 0 0 15px #8a2be2;
-    }
+.loader{
+  width:min(90%,430px);
+  text-align:center;
+  padding:35px 22px;
+}
 
-    main {
-      width: min(700px, 92%);
-      margin: 70px auto 30px;
-      text-align: center;
-    }
+.loader-logo{
+  font-size:34px;
+  font-weight:bold;
+  text-shadow:0 0 12px #b56cff,0 0 30px #7d2cff;
+  margin-bottom:25px;
+}
 
-    .hero {
-      padding: 35px 20px;
-      border: 1px solid #6d27c9;
-      border-radius: 22px;
-      background: rgba(15, 8, 28, 0.88);
-      box-shadow: 0 0 35px rgba(123, 44, 255, 0.15);
-    }
+.spinner{
+  width:58px;
+  height:58px;
+  margin:0 auto 25px;
+  border:5px solid rgba(255,255,255,.15);
+  border-top-color:#b86cff;
+  border-right-color:#7d2cff;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  box-shadow:0 0 20px rgba(164,84,255,.5);
+}
 
-    .hero h1 {
-      font-size: 38px;
-      color: #d79cff;
-      text-shadow: 0 0 20px #8a2be2;
-      margin-bottom: 12px;
-    }
+.loading-text{
+  font-size:17px;
+  color:#ddd;
+  margin-bottom:18px;
+}
 
-    .hero p {
-      color: #aaa;
-      margin-bottom: 30px;
-    }
+.version{
+  display:inline-block;
+  padding:10px 15px;
+  border:1px solid rgba(190,120,255,.5);
+  border-radius:12px;
+  background:rgba(255,255,255,.06);
+  color:#e6c9ff;
+  font-size:14px;
+  box-shadow:0 0 15px rgba(145,65,255,.18);
+}
 
-    .buttons {
-      display: grid;
-      gap: 15px;
-    }
+.progress{
+  width:100%;
+  height:5px;
+  background:rgba(255,255,255,.1);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:25px;
+}
 
-    button {
-      width: 100%;
-      padding: 16px;
-      border: 1px solid #8a2be2;
-      border-radius: 13px;
-      background: #160925;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.25s;
-    }
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6b20ff,#d58aff);
+  box-shadow:0 0 12px #a95cff;
+  animation:load 3s linear forwards;
+}
 
-    button:hover {
-      background: #8a2be2;
-      box-shadow: 0 0 22px #8a2be2;
-      transform: translateY(-2px);
-    }
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
 
-    /* LINK BOX */
+@keyframes load{
+  from{width:0%;}
+  to{width:100%;}
+}
 
-    .links-box {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      border: 1px solid #54208d;
-      border-radius: 15px;
-      background: rgba(8, 4, 16, 0.95);
-      gap: 10px;
-    }
+/* MAIN */
+#mainContent{
+  opacity:0;
+  animation:showPage .8s ease forwards;
+  animation-delay:3.1s;
+}
 
-    .links-box.show {
-      display: grid;
-    }
+@keyframes showPage{
+  to{opacity:1;}
+}
 
-    .links-box button {
-      margin: 0;
-      padding: 13px;
-      font-size: 15px;
-    }
+header{
+  padding:18px 20px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(10,4,18,.65);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
 
-    /* ABOUT BOX */
+.logo{
+  text-align:center;
+  font-size:21px;
+  font-weight:bold;
+  text-shadow:0 0 12px #a84cff;
+}
 
-    .about-box {
-      display: none;
-      margin-top: 15px;
-      padding: 20px;
-      border: 1px solid #54208d;
-      border-radius: 15px;
-      background: rgba(8, 4, 16, 0.95);
-      color: #ccc;
-      line-height: 2;
-      font-size: 14px;
-    }
+.container{
+  width:min(92%,700px);
+  margin:0 auto;
+  padding:55px 0;
+}
 
-    .about-box.show {
-      display: block;
-    }
+.hero{
+  text-align:center;
+  margin-bottom:35px;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #666;
-      font-size: 13px;
-    }
+.hero h1{
+  font-size:clamp(30px,8vw,52px);
+  text-shadow:
+    0 0 10px #a64cff,
+    0 0 30px #7020ff;
+  margin-bottom:12px;
+}
 
-    /* PASSWORD MODAL */
+.hero p{
+  color:#cfc5d9;
+  font-size:16px;
+}
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.82);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-    }
+.buttons{
+  display:grid;
+  gap:14px;
+}
 
-    .modal-box {
-      width: min(420px, 100%);
-      padding: 28px;
-      border: 1px solid #8a2be2;
-      border-radius: 18px;
-      background: #0b0612;
-      box-shadow: 0 0 40px rgba(138, 43, 226, 0.35);
-      text-align: center;
-    }
+button,
+.link-button{
+  width:100%;
+  border:none;
+  border-radius:15px;
+  padding:17px 18px;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+  background:linear-gradient(135deg,#35116b,#711dcc);
+  box-shadow:
+    0 5px 20px rgba(105,25,190,.25),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+  transition:.2s ease;
+}
 
-    .modal-box h2 {
-      color: #d79cff;
-      margin-bottom: 10px;
-    }
+button:hover,
+.link-button:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 8px 25px rgba(125,40,220,.4),
+    inset 0 0 0 1px rgba(255,255,255,.15);
+}
 
-    .modal-box p {
-      color: #999;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
+button:active,
+.link-button:active{
+  transform:scale(.98);
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #54208d;
-      border-radius: 10px;
-      outline: none;
-      background: #050308;
-      color: white;
-      font-size: 15px;
-      direction: ltr;
-      text-align: left;
-    }
+/* COLLAPSIBLE BOXES */
+.links-box,
+.about-box{
+  display:none;
+  margin-top:14px;
+  padding:16px;
+  border-radius:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(190,120,255,.2);
+}
 
-    input:focus {
-      border-color: #b86cff;
-      box-shadow: 0 0 12px rgba(184, 108, 255, 0.3);
-    }
+.links-box.show,
+.about-box.show{
+  display:grid;
+  gap:10px;
+  animation:boxIn .25s ease;
+}
 
-    .error {
-      display: none;
-      margin-top: 12px;
-      color: #ff4f70;
-      font-family: monospace;
-      font-size: 13px;
-    }
+@keyframes boxIn{
+  from{
+    opacity:0;
+    transform:translateY(-7px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-    .cancel {
-      border-color: #333;
-      color: #aaa;
-    }
+.about-text{
+  line-height:2;
+  color:#ddd;
+  font-size:14px;
+  text-align:right;
+}
 
-    .cancel:hover {
-      background: #222;
-      box-shadow: none;
-    }
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,.72);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    /* TOAST */
+.modal.show{
+  display:flex;
+}
 
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%) translateY(100px);
-      background: #120a1d;
-      border: 1px solid #8a2be2;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 12px;
-      opacity: 0;
-      transition: 0.3s;
-      z-index: 2000;
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.25);
-      pointer-events: none;
-    }
+.modal-box{
+  width:min(100%,420px);
+  background:linear-gradient(145deg,#1d0c31,#0c0613);
+  border:1px solid rgba(190,120,255,.35);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 0 40px rgba(130,50,255,.3);
+}
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+.modal-box h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:21px;
+}
 
-    @media (max-width: 600px) {
-      main {
-        margin-top: 40px;
-      }
+.modal-box input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+  outline:none;
+  background:#08040d;
+  color:#fff;
+  text-align:center;
+  font-size:15px;
+  margin-bottom:12px;
+}
 
-      .hero h1 {
-        font-size: 28px;
-      }
+.modal-buttons{
+  display:grid;
+  gap:10px;
+}
 
-      .logo {
-        font-size: 17px;
-      }
-    }
-  </style>
+.error{
+  display:none;
+  text-align:center;
+  color:#ff7070;
+  font-size:14px;
+  margin-top:12px;
+}
+
+.error.show{
+  display:block;
+}
+
+/* TOAST */
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(100px);
+  background:#190b28;
+  border:1px solid rgba(190,120,255,.4);
+  color:#fff;
+  padding:13px 18px;
+  border-radius:12px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  opacity:0;
+  transition:.35s ease;
+  z-index:2000;
+  max-width:90%;
+  text-align:center;
+  font-size:14px;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  padding:25px 15px 35px;
+}
+
+@media(max-width:480px){
+  .container{
+    padding-top:40px;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  button,
+  .link-button{
+    padding:15px;
+  }
+
+  .loader-logo{
+    font-size:27px;
+  }
+}
+</style>
 </head>
 
 <body>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loader">
+    <div class="loader-logo">🎮 AMIR_AMAZING_GAME</div>
+
+    <div class="spinner"></div>
+
+    <div class="loading-text">
+      در حال راه‌اندازی...
+    </div>
+
+    <div class="version">
+      نسخه سایت یا برنامه AMIR_AMAZING_GAME : ۱.۱ بتا
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
 
 <header>
   <div class="logo">🎮 AMIR_AMAZING_GAME</div>
 </header>
 
-<main>
+<main class="container">
 
   <section class="hero">
-
     <h1>🎮 AMIR_AMAZING_GAME</h1>
+    <p>مرکز اصلی سایت 🎮</p>
+  </section>
 
-    <p>
-      مرکز اصلی سایت 🎮
-    </p>
+  <section class="buttons">
 
-    <div class="buttons">
+    <button onclick="goNews()">
+      📰 رفتن به صفحه اخبار
+    </button>
 
-      <button onclick="goNews()">
-        📰 رفتن به صفحه اخبار
-      </button>
+    <button onclick="goHome()">
+      🏠 رفتن به خانه
+    </button>
 
-      <button onclick="goHome()">
-        🏠 رفتن به خانه
-      </button>
+    <button onclick="toggleLinks()">
+      🔗 لینک‌های دیگر
+    </button>
 
-      <button onclick="toggleLinks()">
-        🔗 لینک‌های دیگر
-      </button>
+    <div id="linksBox" class="links-box">
 
-      <div class="links-box" id="linksBox">
+      <a class="link-button"
+         href="https://reymit.ir/amir_amazing"
+         target="_blank">
+        💰 دونیت
+      </a>
 
-        <button onclick="openLink('https://reymit.ir/amir_amazing')">
-          💰 دونیت
-        </button>
+      <a class="link-button"
+         href="https://rubika.ir/amir_amazing_game1"
+         target="_blank">
+        💬 روبیکا
+      </a>
 
-        <button onclick="openLink('https://rubika.ir/amir_amazing_game1')">
-          💬 روبیکا
-        </button>
+      <a class="link-button"
+         href="https://www.instagram.com/amir_amazing_game?igsh=M2lnN3Uwcndxbmg1"
+         target="_blank">
+        📸 اینستاگرام
+      </a>
 
-        <button onclick="openLink('https://www.instagram.com/amir_amazing_game?igsh=M2lnN3Uwcndxbmg1')">
-          📸 اینستاگرام
-        </button>
+      <a class="link-button"
+         href="https://youtube.com/@amir_amazing_game?si=PhlFptHZW19WoU-Y"
+         target="_blank">
+        ▶️ یوتوب
+      </a>
 
-        <button onclick="openLink('https://youtube.com/@amir_amazing_game?si=PhlFptHZW19WoU-Y')">
-          ▶️ یوتوب
-        </button>
-
-        <button onclick="openLink('https://t.me/amir_amazing')">
-          ✈️ تلگرام
-        </button>
-
-      </div>
-
-      <button onclick="toggleAbout()">
-        ℹ️ درباره سایت
-      </button>
-
-      <div class="about-box" id="aboutBox">
-
-        🎮 <b>AMIR_AMAZING_GAME</b>
-
-        <br><br>
-
-        سایت رسمی AMIR_AMAZING_GAME
-
-        <br>
-
-        🎥 فعالیت و استریم گیمینگ
-
-        <br>
-
-        🎮 Minecraft • The Last of Us • CS2
-
-        <br><br>
-
-        🌐 ساخته شده برای کامیونیتی AMIR_AMAZING_GAME
-
-      </div>
-
-      <button onclick="openPanel()">
-        🖥️ پنل مدیریت
-      </button>
+      <a class="link-button"
+         href="https://t.me/amir_amazing"
+         target="_blank">
+        ✈️ تلگرام
+      </a>
 
     </div>
+
+    <button onclick="toggleAbout()">
+      ℹ️ درباره سایت
+    </button>
+
+    <div id="aboutBox" class="about-box">
+      <div class="about-text">
+        🎮 این سایت متعلق به <b>امیر امیزینگ</b> است.<br><br>
+
+        👨‍💻 سازنده: <b>امیر عباس</b><br><br>
+
+        🎮 فعالیت در زمینه گیمینگ و استریم<br>
+        Minecraft • The Last of Us • CS2<br><br>
+
+        📺 استریم‌های شبانه در آپارات<br><br>
+
+        👥 این سایت برای کامیونیتی
+        <b>AMIR_AMAZING_GAME</b> ساخته شده است.
+      </div>
+    </div>
+
+    <button onclick="openPanel()">
+      🖥️ پنل مدیریت
+    </button>
 
   </section>
 
 </main>
 
 <footer>
-  AMIR_AMAZING_GAME © 2026
+  🎮 AMIR_AMAZING_GAME<br>
+  ساخته‌شده توسط امیر عباس
 </footer>
 
+</div>
 
 <!-- PASSWORD MODAL -->
-
-<div class="modal" id="passwordModal">
+<div id="panelModal" class="modal">
 
   <div class="modal-box">
 
-    <h2>🔐 ACCESS CONTROL</h2>
-
-    <p>
-      برای ورود به پنل مدیریت رمز عبور را وارد کنید.
-    </p>
+    <h2>🖥️ پنل مدیریت</h2>
 
     <input
-      id="passwordInput"
       type="password"
-      placeholder="Enter password..."
+      id="panelPassword"
+      placeholder="رمز عبور را وارد کنید"
       autocomplete="off"
-      onkeydown="if(event.key === 'Enter') checkPassword()"
     >
 
-    <div class="error" id="errorMessage">
-      ERROR 403: ACCESS DENIED
+    <div class="modal-buttons">
+
+      <button onclick="checkPassword()">
+        🔐 ورود
+      </button>
+
+      <button onclick="closePanel()">
+        ❌ بستن
+      </button>
+
     </div>
 
-    <button onclick="checkPassword()">
-      🔓 ورود به پنل
-    </button>
-
-    <button class="cancel" onclick="closePanel()">
-      ❌ لغو
-    </button>
+    <div id="errorMessage" class="error">
+      ERROR 403: ACCESS DENIED
+    </div>
 
   </div>
 
 </div>
 
-
 <!-- TOAST -->
-
-<div class="toast" id="toast"></div>
-
+<div id="toast"></div>
 
 <script>
 
-  // ==============================
-  // PANEL PASSWORD
-  // ==============================
+/* LOADING */
+setTimeout(function(){
+  const loading = document.getElementById("loadingScreen");
 
-  const PANEL_PASSWORD = "Am!r_Amazing#Panel_7X9@2026";
-
-
-  // ==============================
-  // PAGE BUTTONS
-  // ==============================
-
-  function goNews() {
-    window.location.href = "news.html";
+  if(loading){
+    loading.classList.add("hide");
   }
+},3000);
 
+/* NEWS */
+function goNews(){
+  window.location.href="news.html";
+}
 
-  function goHome() {
-    window.location.href = "index.html";
+/* HOME */
+function goHome(){
+  window.location.href="index.html";
+}
+
+/* LINKS */
+function toggleLinks(){
+  const box=document.getElementById("linksBox");
+  box.classList.toggle("show");
+
+  if(box.classList.contains("show")){
+    showToast("🔗 لینک‌های رسمی نمایش داده شدند");
   }
+}
 
+/* ABOUT */
+function toggleAbout(){
+  const box=document.getElementById("aboutBox");
+  box.classList.toggle("show");
 
-  // ==============================
-  // OTHER LINKS
-  // ==============================
-
-  function toggleLinks() {
-
-    const box = document.getElementById("linksBox");
-
-    box.classList.toggle("show");
-
+  if(box.classList.contains("show")){
+    showToast("ℹ️ درباره AMIR_AMAZING_GAME");
   }
+}
 
+/* PANEL */
+function openPanel(){
+  document.getElementById("panelModal").classList.add("show");
 
-  function openLink(url) {
+  document.getElementById("panelPassword").value="";
+  document.getElementById("errorMessage").classList.remove("show");
 
-    window.open(url, "_blank");
+  setTimeout(function(){
+    document.getElementById("panelPassword").focus();
+  },100);
+}
 
+function closePanel(){
+  document.getElementById("panelModal").classList.remove("show");
+}
+
+/* PASSWORD */
+function checkPassword(){
+
+  const password =
+    document.getElementById("panelPassword").value;
+
+  const correctPassword =
+    "Am!r_Amazing#Panel_7X9@2026";
+
+  if(password === correctPassword){
+
+    showToast("✅ ورود موفق! در حال ورود به پنل...");
+
+    setTimeout(function(){
+      window.location.href="panel.html";
+    },700);
+
+  }else{
+
+    document
+      .getElementById("errorMessage")
+      .classList.add("show");
+
+    showToast("❌ رمز عبور اشتباه است");
   }
+}
 
+/* ENTER KEY */
+document
+  .getElementById("panelPassword")
+  .addEventListener("keydown",function(event){
 
-  // ==============================
-  // ABOUT
-  // ==============================
-
-  function toggleAbout() {
-
-    const box = document.getElementById("aboutBox");
-
-    box.classList.toggle("show");
-
-  }
-
-
-  // ==============================
-  // MANAGEMENT PANEL
-  // ==============================
-
-  function openPanel() {
-
-    document.getElementById("passwordModal").style.display = "flex";
-
-    document.getElementById("passwordInput").value = "";
-
-    document.getElementById("errorMessage").style.display = "none";
-
-    setTimeout(() => {
-
-      document.getElementById("passwordInput").focus();
-
-    }, 100);
-
-  }
-
-
-  function closePanel() {
-
-    document.getElementById("passwordModal").style.display = "none";
-
-  }
-
-
-  function checkPassword() {
-
-    const enteredPassword =
-      document.getElementById("passwordInput").value;
-
-    const error =
-      document.getElementById("errorMessage");
-
-
-    if (enteredPassword === PANEL_PASSWORD) {
-
-      showToast("✅ ACCESS GRANTED");
-
-      setTimeout(() => {
-
-        window.location.href = "panel.html";
-
-      }, 500);
-
-    } else {
-
-      error.style.display = "block";
-
-      showToast("❌ رمز عبور اشتباه است");
-
-      document.getElementById("passwordInput").value = "";
-
-      document.getElementById("passwordInput").focus();
-
+    if(event.key==="Enter"){
+      checkPassword();
     }
 
-  }
+  });
 
+/* MODAL OUTSIDE CLICK */
+document
+  .getElementById("panelModal")
+  .addEventListener("click",function(event){
 
-  // ==============================
-  // TOAST
-  // ==============================
+    if(event.target === this){
+      closePanel();
+    }
 
-  function showToast(message) {
+  });
 
-    const toast =
-      document.getElementById("toast");
+/* TOAST */
+let toastTimer;
 
-    toast.textContent = message;
+function showToast(message){
 
-    toast.classList.add("show");
+  const toast=document.getElementById("toast");
 
-    setTimeout(() => {
+  toast.textContent=message;
+  toast.classList.add("show");
 
-      toast.classList.remove("show");
+  clearTimeout(toastTimer);
 
-    }, 2200);
-
-  }
-
-
-  // ==============================
-  // CLOSE MODAL OUTSIDE
-  // ==============================
-
-  document
-    .getElementById("passwordModal")
-    .addEventListener("click", function(event) {
-
-      if (event.target === this) {
-
-        closePanel();
-
-      }
-
-    });
+  toastTimer=setTimeout(function(){
+    toast.classList.remove("show");
+  },2500);
+}
 
 </script>
 
