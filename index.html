@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AMIR AMAZING GAME</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, #18264d 0%, transparent 28%),
+        radial-gradient(circle at 85% 10%, #35145f 0%, transparent 30%),
+        linear-gradient(135deg, #050611, #090b18 45%, #10061c);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BOOT SCREEN
+    ========================= */
+
+    #bootScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+
+      background: #030408;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    #bootScreen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .bootTerminal {
+      width: min(700px, 90%);
+      font-family: "Share Tech Mono", monospace;
+      color: #b996ff;
+      font-size: 14px;
+      line-height: 2;
+
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(155,108,255,.2);
+      border-radius: 16px;
+      padding: 25px;
+
+      box-shadow: 0 0 60px rgba(130,87,255,.12);
+    }
+
+    .bootTitle {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: #b996ff;
+      animation: blink .7s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .25;
+      animation: float 8s infinite alternate ease-in-out;
+    }
+
+    .orb.one {
+      width: 280px;
+      height: 280px;
+      background: #5865f2;
+      top: 10%;
+      left: -100px;
+    }
+
+    .orb.two {
+      width: 250px;
+      height: 250px;
+      background: #a855f7;
+      bottom: 10%;
+      right: -100px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0) scale(1);
+      }
+
+      to {
+        transform: translateY(-40px) scale(1.15);
+      }
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    nav {
+      position: sticky;
+      top: 15px;
+      z-index: 50;
+
+      width: min(1100px, calc(100% - 30px));
+      margin: 15px auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 13px 18px;
+
+      background: rgba(10, 12, 28, .72);
+      backdrop-filter: blur(18px);
+
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .logo span {
+      color: #9b6cff;
+    }
+
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      margin-right: 18px;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    nav a:hover {
+      color: #b993ff;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      width: min(1100px, calc(100% - 30px));
+      margin: 70px auto 40px;
+
+      min-height: 570px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 8px 15px;
+      border-radius: 999px;
+
+      background: rgba(155,108,255,.12);
+      border: 1px solid rgba(155,108,255,.3);
+
+      color: #cdb8ff;
+      font-size: 13px;
+
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 9vw, 90px);
+      line-height: 1;
+      font-weight: 900;
+
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #b997ff,
+        #ffffff
+      );
+
+      -webkit-background-clip: text;
+      color: transparent;
+
+      animation: titleGlow 3s infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from {
+        filter: drop-shadow(0 0 8px rgba(155,108,255,.1));
+      }
+
+      to {
+        filter: drop-shadow(0 0 25px rgba(155,108,255,.4));
+      }
+    }
+
+    .hero p {
+      margin: 25px auto;
+      max-width: 650px;
+
+      color: #b9bdca;
+      font-size: 17px;
+      line-height: 2;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: white;
+
+      padding: 13px 24px;
+      border-radius: 14px;
+
+      font-weight: 700;
+      font-size: 14px;
+
+      transition: .25s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7650ff, #a855f7);
+      box-shadow: 0 10px 30px rgba(124,77,255,.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      width: min(1100px, calc(100% - 30px));
+      margin: 100px auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .section-title p {
+      color: #888e9f;
+      margin-top: 8px;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      padding: 27px;
+      min-height: 190px;
+
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.09);
+
+      border-radius: 22px;
+
+      backdrop-filter: blur(15px);
+
+      transition: .3s;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 130px;
+      height: 130px;
+
+      background: #8257ff;
+      filter: blur(70px);
+      opacity: .12;
+
+      top: -60px;
+      right: -60px;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(160,120,255,.35);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #a6abb9;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    /* =========================
+       GAMES
+    ========================= */
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .game {
+      padding: 30px 20px;
+      text-align: center;
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+
+      transition: .3s;
+    }
+
+    .game:hover {
+      transform: scale(1.03);
+      background: rgba(255,255,255,.07);
+    }
+
+    .game .game-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .game h3 {
+      font-size: 19px;
+    }
+
+    /* =========================
+       STREAM
+    ========================= */
+
+    .stream-box {
+      padding: 35px;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(120,80,255,.13),
+          rgba(255,255,255,.035)
+        );
+
+      border: 1px solid rgba(155,108,255,.2);
+
+      text-align: center;
+    }
+
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 13px;
+      border-radius: 999px;
+
+      background: rgba(255,60,80,.1);
+      color: #ff8290;
+
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .live-dot i {
+      width: 8px;
+      height: 8px;
+      background: #ff4d61;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #ff4d61;
+    }
+
+    /* =========================
+       COMMUNITY
+    ========================= */
+
+    .community {
+      text-align: center;
+
+      padding: 55px 20px;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(168,85,247,.13),
+          rgba(88,101,242,.08)
+        );
+
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .community h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .community p {
+      color: #aeb2c0;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       TERMINAL
+    ========================= */
+
+    .terminal {
+      background: #030407;
+
+      border: 1px solid rgba(155,108,255,.25);
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.4),
+        0 0 40px rgba(130,87,255,.08);
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 13px 17px;
+
+      background: rgba(255,255,255,.04);
+
+      border-bottom: 1px solid rgba(255,255,255,.08);
+
+      font-family: "Share Tech Mono", monospace;
+      direction: ltr;
+    }
+
+    .terminal-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .terminal-title {
+      margin-left: 8px;
+      color: #8e94a5;
+      font-size: 12px;
+    }
+
+    .terminal-body {
+      padding: 20px;
+
+      min-height: 270px;
+
+      direction: ltr;
+      text-align: left;
+
+      font-family: "Share Tech Mono", monospace;
+
+      font-size: 13px;
+      line-height: 2;
+
+      overflow-x: auto;
+    }
+
+    .line {
+      white-space: nowrap;
+    }
+
+    .system {
+      color: #9b6cff;
+    }
+
+    .success {
+      color: #64e572;
+    }
+
+    .warning {
+      color: #ffd166;
+    }
+
+    .error {
+      color: #ff6678;
+    }
+
+    .muted {
+      color: #6f7585;
+    }
+
+    .commandInput {
+      margin-top: 10px;
+
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .commandInput span {
+      color: #9b6cff;
+    }
+
+    #terminalInput {
+      flex: 1;
+
+      background: transparent;
+      border: none;
+      outline: none;
+
+      color: white;
+
+      font-family: "Share Tech Mono", monospace;
+      font-size: 13px;
+    }
+
+    /* =========================
+       404
+    ========================= */
+
+    #error404 {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      z-index: 9000;
+
+      background: rgba(3,4,8,.96);
+      backdrop-filter: blur(15px);
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+    .error-box {
+      width: min(550px, 100%);
+
+      background: #080a12;
+
+      border: 1px solid rgba(255,80,100,.25);
+
+      border-radius: 25px;
+
+      padding: 40px 25px;
+
+      text-align: center;
+
+      box-shadow: 0 30px 100px rgba(0,0,0,.6);
+    }
+
+    .error-code {
+      font-family: "Share Tech Mono", monospace;
+
+      font-size: 90px;
+      font-weight: bold;
+
+      color: #ff6678;
+
+      text-shadow: 0 0 30px rgba(255,80,100,.3);
+    }
+
+    .error-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .error-box p {
+      color: #9298a8;
+      line-height: 2;
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    #toastContainer {
+      position: fixed;
+
+      left: 20px;
+      bottom: 20px;
+
+      z-index: 10000;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 10px;
+
+      width: min(350px, calc(100% - 40px));
+    }
+
+    .toast {
+      padding: 15px 17px;
+
+      background: rgba(12,14,27,.92);
+
+      border: 1px solid rgba(155,108,255,.25);
+
+      border-radius: 15px;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+
+      backdrop-filter: blur(15px);
+
+      animation: toastIn .35s ease forwards;
+
+      font-size: 13px;
+    }
+
+    .toast.hide {
+      animation: toastOut .35s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+
+      padding: 40px 20px 55px;
+
+      color: #777d8d;
+
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    footer strong {
+      color: #b996ff;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media(max-width: 750px) {
+
+      nav {
+        padding: 12px 14px;
+      }
+
+      nav div:last-child {
+        display: none;
+      }
+
+      .hero {
+        min-height: 500px;
+        margin-top: 40px;
+      }
+
+      .cards,
+      .games {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        margin: 75px auto;
+      }
+
+      .stream-box {
+        padding: 30px 18px;
+      }
+
+      .error-code {
+        font-size: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================
+     BOOT SCREEN
+========================= -->
+
+<div id="bootScreen">
+
+  <div class="bootTerminal">
+
+    <div class="bootTitle">
+      AMIR AMAZING GAME // SYSTEM
+    </div>
+
+    <div id="bootText"></div>
+
+    <span class="cursor"></span>
+
+  </div>
+
+</div>
+
+
+<!-- BACKGROUND -->
+
+<div class="background">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+</div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+  <div class="logo">
+    AMIR <span>AMAZING</span> GAME
+  </div>
+
+  <div>
+    <a href="#about">درباره</a>
+    <a href="#games">بازی‌ها</a>
+    <a href="#stream">استریم</a>
+    <a href="#terminal">SYSTEM</a>
+    <a href="#community">انجمن</a>
+  </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      🎮 AMIR AMAZING GAME
+    </div>
+
+    <h1>
+      AMAZING<br>
+      GAME
+    </h1>
+
+    <p>
+      سایت رسمی AMIR AMAZING GAME
+      <br>
+      دنیای گیم، استریم و کامیونیتی
+    </p>
+
+    <div class="buttons">
+
+      <a
+        class="btn btn-primary"
+        href="https://www.aparat.com/AMIR_AMAZING_GAME"
+        target="_blank"
+        onclick="showToast('در حال باز کردن کانال آپارات...')">
+
+        ▶ مشاهده کانال آپارات
+
+      </a>
+
+      <a
+        class="btn btn-secondary"
+        href="#terminal"
+        onclick="showToast('SYSTEM PANEL فعال شد 🖥️')">
+
+        🖥️ SYSTEM
+
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+  <div class="section-title">
+
+    <h2>درباره AMIR AMAZING GAME</h2>
+
+    <p>
+      اطلاعاتی که درباره این مجموعه ارائه شده
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">👑</div>
+
+      <h3>مالک سایت</h3>
+
+      <p>
+        این سایت برای
+        <strong>amir_amazing_game</strong>
+        ساخته شده و متعلق به اوست.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📺</div>
+
+      <h3>استریم</h3>
+
+      <p>
+        او هر شب در آپارات استریم می‌کند.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🎮</div>
+
+      <h3>علاقه‌مندی‌ها</h3>
+
+      <p>
+        Minecraft،
+        The Last of Us
+        و CS2
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GAMES -->
+
+<section id="games">
+
+  <div class="section-title">
+
+    <h2>🎮 بازی‌های مورد علاقه</h2>
+
+    <p>
+      بازی‌هایی که معرفی شده‌اند
+    </p>
+
+  </div>
+
+
+  <div class="games">
+
+    <div class="game">
+
+      <div class="game-icon">⛏️</div>
+
+      <h3>Minecraft</h3>
+
+    </div>
+
+
+    <div class="game">
+
+      <div class="game-icon">🧟</div>
+
+      <h3>The Last of Us</h3>
+
+    </div>
+
+
+    <div class="game">
+
+      <div class="game-icon">🎯</div>
+
+      <h3>Counter-Strike 2</h3>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STREAM -->
+
+<section id="stream">
+
+  <div class="section-title">
+
+    <h2>📺 استریم‌های شبانه</h2>
+
+    <p>
+      کانال آپارات AMIR AMAZING GAME
+    </p>
+
+  </div>
+
+
+  <div class="stream-box">
+
+    <div class="live-dot">
+
+      <i></i>
+
+      STREAM
+
+    </div>
+
+
+    <h2>
+      هر شب، یک استریم جدید 🎮
+    </h2>
+
+
+    <p style="color:#999;margin:15px 0 25px;">
+
+      برای مشاهده کانال آپارات وارد صفحه رسمی شوید.
+
+    </p>
+
+
+    <a
+      class="btn btn-primary"
+      href="https://www.aparat.com/AMIR_AMAZING_GAME"
+      target="_blank"
+      onclick="showToast('Opening Aparat...')">
+
+      ورود به آپارات
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- SYSTEM TERMINAL -->
+
+<section id="terminal">
+
+  <div class="section-title">
+
+    <h2>🖥️ SYSTEM TERMINAL</h2>
+
+    <p>
+      وضعیت سیستم سایت
+    </p>
+
+  </div>
+
+
+  <div class="terminal">
+
+    <div class="terminal-header">
+
+      <div
+        class="terminal-dot"
+        style="background:#ff5f57">
+      </div>
+
+      <div
+        class="terminal-dot"
+        style="background:#febc2e">
+      </div>
+
+      <div
+        class="terminal-dot"
+        style="background:#28c840">
+      </div>
+
+      <div class="terminal-title">
+        amir_amazing_game@web-system
+      </div>
+
+    </div>
+
+
+    <div class="terminal-body">
+
+      <div class="line system">
+        [SYSTEM] AMIR AMAZING GAME SYSTEM
+      </div>
+
+      <div class="line muted">
+        ----------------------------------------
+      </div>
+
+      <div class="line success">
+        [OK] Website interface loaded.
+      </div>
+
+      <div class="line success">
+        [OK] User interface ready.
+      </div>
+
+      <div class="line success">
+        [OK] Gaming modules loaded.
+      </div>
+
+      <div class="line success">
+        [OK] Aparat link available.
+      </div>
+
+      <div class="line warning">
+        [INFO] Rubika group link is not available.
+      </div>
+
+      <div class="line system">
+        [SYSTEM] Waiting for command...
+      </div>
+
+
+      <div class="commandInput">
+
+        <span>
+          user@amazing:~$
+        </span>
+
+        <input
+          id="terminalInput"
+          autocomplete="off"
+          placeholder="type help">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section id="community">
+
+  <div class="community">
+
+    <h2>
+      👥 amazing_fans
+    </h2>
+
+    <p>
+      گروه روبیکای AMIR AMAZING GAME
+    </p>
+
+    <p style="font-size:13px;color:#777;">
+      لینک گروه در حال حاضر ارائه نشده است.
+    </p>
+
+
+    <button
+      class="btn btn-secondary"
+      onclick="show404()">
+
+      🔗 ورود به گروه
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <p>
+    🎮 <strong>AMIR AMAZING GAME</strong>
+  </p>
+
+  <p style="margin-top:10px;">
+    Official website
+  </p>
+
+</footer>
+
+
+<!-- 404 -->
+
+<div id="error404">
+
+  <div class="error-box">
+
+    <div class="error-code">
+      404
+    </div>
+
+    <h2>
+      LINK NOT FOUND
+    </h2>
+
+    <p>
+      لینک گروه روبیکا هنوز در اختیار سایت قرار نگرفته است.
+      <br>
+      بنابراین امکان ورود مستقیم وجود ندارد.
+    </p>
+
+    <button
+      class="btn btn-primary"
+      onclick="close404()">
+
+      ← بازگشت به سایت
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST CONTAINER -->
+
+<div id="toastContainer"></div>
+
+
+<script>
+
+  /* =========================
+     BOOT SYSTEM
+  ========================= */
+
+  const bootMessages = [
+
+    "[BOOT] Starting AMIR AMAZING GAME...",
+    "[BOOT] Loading gaming interface...",
+    "[BOOT] Loading system modules...",
+    "[OK] Interface loaded.",
+    "[OK] Gaming modules ready.",
+    "[OK] Aparat connection ready.",
+    "[INFO] amazing_fans detected.",
+    "[SYSTEM] Website is ready."
+
+  ];
+
+  const bootText = document.getElementById("bootText");
+  const bootScreen = document.getElementById("bootScreen");
+
+  let bootIndex = 0;
+
+
+  function boot() {
+
+    if (bootIndex < bootMessages.length) {
+
+      const line = document.createElement("div");
+
+      line.textContent = bootMessages[bootIndex];
+
+      bootText.appendChild(line);
+
+      bootIndex++;
+
+      setTimeout(boot, 180);
+
+    } else {
+
+      setTimeout(() => {
+
+        bootScreen.classList.add("hide");
+
+        showToast(
+          "SYSTEM ONLINE — خوش آمدید 🎮"
+        );
+
+      }, 700);
+
+    }
+
+  }
+
+
+  window.addEventListener("load", () => {
+
+    setTimeout(boot, 300);
+
+  });
+
+
+  /* =========================
+     TOAST
+  ========================= */
+
+  function showToast(message) {
+
+    const container =
+      document.getElementById("toastContainer");
+
+    const toast =
+      document.createElement("div");
+
+    toast.className = "toast";
+
+    toast.innerHTML =
+      "⚡ " + message;
+
+    container.appendChild(toast);
+
+
+    setTimeout(() => {
+
+      toast.classList.add("hide");
+
+      setTimeout(() => {
+
+        toast.remove();
+
+      }, 350);
+
+    }, 3000);
+
+  }
+
+
+  /* =========================
+     404 SYSTEM
+  ========================= */
+
+  function show404() {
+
+    document.getElementById(
+      "error404"
+    ).style.display = "flex";
+
+    showToast(
+      "ERROR 404 — Link not found"
+    );
+
+  }
+
+
+  function close404() {
+
+    document.getElementById(
+      "error404"
+    ).style.display = "none";
+
+  }
+
+
+  /* =========================
+     TERMINAL
+  ========================= */
+
+  const terminalInput =
+    document.getElementById("terminalInput");
+
+  const terminalBody =
+    document.querySelector(".terminal-body");
+
+
+  function terminalLine(
+    text,
+    className = ""
+  ) {
+
+    const line =
+      document.createElement("div");
+
+    line.className =
+      "line " + className;
+
+    line.textContent = text;
+
+    terminalBody.insertBefore(
+      line,
+      document.querySelector(".commandInput")
+    );
+
+  }
+
+
+  terminalInput.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key !== "Enter") return;
+
+
+      const command =
+        terminalInput.value
+          .trim()
+          .toLowerCase();
+
+
+      terminalInput.value = "";
+
+
+      if (!command) return;
+
+
+      terminalLine(
+        "user@amazing:~$ " + command
+      );
+
+
+      /* HELP */
+
+      if (command === "help") {
+
+        terminalLine(
+          "Available commands:",
+          "system"
+        );
+
+        terminalLine(
+          "help     - show commands",
+          "muted"
+        );
+
+        terminalLine(
+          "status   - system status",
+          "muted"
+        );
+
+        terminalLine(
+          "games    - show games",
+          "muted"
+        );
+
+        terminalLine(
+          "aparat   - open Aparat",
+          "muted"
+        );
+
+        terminalLine(
+          "clear    - clear terminal",
+          "muted"
+        );
+
+        showToast(
+          "Help menu loaded."
+        );
+
+      }
+
+
+      /* STATUS */
+
+      else if (command === "status") {
+
+        terminalLine(
+          "[OK] SYSTEM ONLINE",
+          "success"
+        );
+
+        terminalLine(
+          "[OK] Website interface: READY",
+          "success"
+        );
+
+        terminalLine(
+          "[OK] Aparat: AVAILABLE",
+          "success"
+        );
+
+        terminalLine(
+          "[INFO] Rubika group link: NOT PROVIDED",
+          "warning"
+        );
+
+      }
+
+
+      /* GAMES */
+
+      else if (command === "games") {
+
+        terminalLine(
+          "Minecraft",
+          "system"
+        );
+
+        terminalLine(
+          "The Last of Us",
+          "system"
+        );
+
+        terminalLine(
+          "Counter-Strike 2",
+          "system"
+        );
+
+      }
+
+
+      /* APARAT */
+
+      else if (command === "aparat") {
+
+        terminalLine(
+          "[SYSTEM] Opening Aparat...",
+          "success"
+        );
+
+        showToast(
+          "در حال باز کردن آپارات..."
+        );
+
+        window.open(
+          "https://www.aparat.com/AMIR_AMAZING_GAME",
+          "_blank"
+        );
+
+      }
+
+
+      /* CLEAR */
+
+      else if (command === "clear") {
+
+        const lines =
+          terminalBody.querySelectorAll(".line");
+
+        lines.forEach(line => {
+
+          line.remove();
+
+        });
+
+        terminalLine(
+          "[SYSTEM] Terminal cleared.",
+          "success"
+        );
+
+      }
+
+
+      /* UNKNOWN COMMAND */
+
+      else {
+
+        terminalLine(
+          "ERROR: Command not found.",
+          "error"
+        );
+
+        terminalLine(
+          "Type 'help' to see available commands.",
+          "muted"
+        );
+
+        showToast(
+          "Unknown command ⚠️"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     CARD SCROLL ANIMATION
+  ========================= */
+
+  const cards =
+    document.querySelectorAll(
+      ".card, .game, .stream-box, .community, .terminal"
+    );
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform =
+              "translateY(0)";
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .12
+      }
+    );
+
+
+  cards.forEach(card => {
+
+    card.style.opacity = "0";
+
+    card.style.transform =
+      "translateY(25px)";
+
+    card.style.transition =
+      "opacity .7s ease, transform .7s ease";
+
+    observer.observe(card);
+
+  });
+
+</script>
+
+</body>
+  </html>
