@@ -89,21 +89,44 @@
       transform: translateY(-2px);
     }
 
-    .terminal {
-      margin-top: 25px;
-      padding: 18px;
-      border: 1px solid #222;
-      border-radius: 14px;
-      background: #020203;
-      direction: ltr;
-      text-align: left;
-      font-family: monospace;
-      color: #00ff9d;
-      font-size: 13px;
+    /* LINK BOX */
+
+    .links-box {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid #54208d;
+      border-radius: 15px;
+      background: rgba(8, 4, 16, 0.95);
+      gap: 10px;
     }
 
-    .terminal span {
-      color: #777;
+    .links-box.show {
+      display: grid;
+    }
+
+    .links-box button {
+      margin: 0;
+      padding: 13px;
+      font-size: 15px;
+    }
+
+    /* ABOUT BOX */
+
+    .about-box {
+      display: none;
+      margin-top: 15px;
+      padding: 20px;
+      border: 1px solid #54208d;
+      border-radius: 15px;
+      background: rgba(8, 4, 16, 0.95);
+      color: #ccc;
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .about-box.show {
+      display: block;
     }
 
     footer {
@@ -199,6 +222,7 @@
       transition: 0.3s;
       z-index: 2000;
       box-shadow: 0 0 20px rgba(138, 43, 226, 0.25);
+      pointer-events: none;
     }
 
     .toast.show {
@@ -232,7 +256,7 @@
 
   <section class="hero">
 
-    <h1>AMIR_AMAZING_GAME</h1>
+    <h1>🎮 AMIR_AMAZING_GAME</h1>
 
     <p>
       مرکز اصلی سایت 🎮
@@ -248,17 +272,64 @@
         🏠 رفتن به خانه
       </button>
 
+      <button onclick="toggleLinks()">
+        🔗 لینک‌های دیگر
+      </button>
+
+      <div class="links-box" id="linksBox">
+
+        <button onclick="openLink('https://reymit.ir/amir_amazing')">
+          💰 دونیت
+        </button>
+
+        <button onclick="openLink('https://rubika.ir/amir_amazing_game1')">
+          💬 روبیکا
+        </button>
+
+        <button onclick="openLink('https://www.instagram.com/amir_amazing_game?igsh=M2lnN3Uwcndxbmg1')">
+          📸 اینستاگرام
+        </button>
+
+        <button onclick="openLink('https://youtube.com/@amir_amazing_game?si=PhlFptHZW19WoU-Y')">
+          ▶️ یوتوب
+        </button>
+
+        <button onclick="openLink('https://t.me/amir_amazing')">
+          ✈️ تلگرام
+        </button>
+
+      </div>
+
+      <button onclick="toggleAbout()">
+        ℹ️ درباره سایت
+      </button>
+
+      <div class="about-box" id="aboutBox">
+
+        🎮 <b>AMIR_AMAZING_GAME</b>
+
+        <br><br>
+
+        سایت رسمی AMIR_AMAZING_GAME
+
+        <br>
+
+        🎥 فعالیت و استریم گیمینگ
+
+        <br>
+
+        🎮 Minecraft • The Last of Us • CS2
+
+        <br><br>
+
+        🌐 ساخته شده برای کامیونیتی AMIR_AMAZING_GAME
+
+      </div>
+
       <button onclick="openPanel()">
         🖥️ پنل مدیریت
       </button>
 
-    </div>
-
-    <div class="terminal">
-      <div><span>[SYSTEM]</span> AMIR_AMAZING_GAME</div>
-      <div><span>[STATUS]</span> ONLINE</div>
-      <div><span>[ACCESS]</span> MANAGEMENT PANEL PROTECTED</div>
-      <div><span>[READY]</span> Waiting for command...</div>
     </div>
 
   </section>
@@ -321,6 +392,10 @@
   const PANEL_PASSWORD = "Am!r_Amazing#Panel_7X9@2026";
 
 
+  // ==============================
+  // PAGE BUTTONS
+  // ==============================
+
   function goNews() {
     window.location.href = "news.html";
   }
@@ -331,6 +406,43 @@
   }
 
 
+  // ==============================
+  // OTHER LINKS
+  // ==============================
+
+  function toggleLinks() {
+
+    const box = document.getElementById("linksBox");
+
+    box.classList.toggle("show");
+
+  }
+
+
+  function openLink(url) {
+
+    window.open(url, "_blank");
+
+  }
+
+
+  // ==============================
+  // ABOUT
+  // ==============================
+
+  function toggleAbout() {
+
+    const box = document.getElementById("aboutBox");
+
+    box.classList.toggle("show");
+
+  }
+
+
+  // ==============================
+  // MANAGEMENT PANEL
+  // ==============================
+
   function openPanel() {
 
     document.getElementById("passwordModal").style.display = "flex";
@@ -340,7 +452,9 @@
     document.getElementById("errorMessage").style.display = "none";
 
     setTimeout(() => {
+
       document.getElementById("passwordInput").focus();
+
     }, 100);
 
   }
@@ -367,7 +481,9 @@
       showToast("✅ ACCESS GRANTED");
 
       setTimeout(() => {
+
         window.location.href = "panel.html";
+
       }, 500);
 
     } else {
@@ -385,6 +501,10 @@
   }
 
 
+  // ==============================
+  // TOAST
+  // ==============================
+
   function showToast(message) {
 
     const toast =
@@ -395,23 +515,29 @@
     toast.classList.add("show");
 
     setTimeout(() => {
+
       toast.classList.remove("show");
+
     }, 2200);
 
   }
 
 
-  // Close modal by clicking outside
+  // ==============================
+  // CLOSE MODAL OUTSIDE
+  // ==============================
 
-  document.getElementById("passwordModal")
+  document
+    .getElementById("passwordModal")
     .addEventListener("click", function(event) {
 
       if (event.target === this) {
+
         closePanel();
+
       }
 
     });
-
 
 </script>
 
