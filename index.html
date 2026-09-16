@@ -1,1085 +1,419 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8a2be2">
 
-  <title>AMIR AMAZING GAME</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=Share+Tech+Mono&display=swap"
-    rel="stylesheet"
-  >
+  <title>AMIR_AMAZING_GAME</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
     }
 
     body {
-
-      font-family: "Vazirmatn", sans-serif;
-
       min-height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-
-      color: white;
-
       background:
-        radial-gradient(
-          circle at 15% 15%,
-          #18264d 0%,
-          transparent 30%
-        ),
-
-        radial-gradient(
-          circle at 85% 10%,
-          #35145f 0%,
-          transparent 30%
-        ),
-
-        linear-gradient(
-          135deg,
-          #050611,
-          #090b18 45%,
-          #10061c
-        );
-
+        radial-gradient(circle at top, #35105f 0%, #090512 45%, #030207 100%);
+      color: white;
       overflow-x: hidden;
     }
 
-
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    .background {
-      position: fixed;
-      inset: 0;
-
-      overflow: hidden;
-
-      pointer-events: none;
-
-      z-index: -1;
-    }
-
-
-    .orb {
-
-      position: absolute;
-
-      border-radius: 50%;
-
-      filter: blur(90px);
-
-      opacity: .22;
-
-      animation:
-        float 8s
-        infinite alternate
-        ease-in-out;
-    }
-
-
-    .orb.one {
-
-      width: 300px;
-      height: 300px;
-
-      background: #5865f2;
-
-      top: 5%;
-      left: -100px;
-    }
-
-
-    .orb.two {
-
-      width: 280px;
-      height: 280px;
-
-      background: #a855f7;
-
-      bottom: 5%;
-      right: -100px;
-
-      animation-delay: 2s;
-    }
-
-
-    @keyframes float {
-
-      from {
-        transform:
-          translateY(0)
-          scale(1);
-      }
-
-      to {
-        transform:
-          translateY(-45px)
-          scale(1.15);
-      }
-
-    }
-
-
-    /* =========================
-       NAVBAR
-    ========================= */
-
-    nav {
-
-      width:
-        min(
-          1100px,
-          calc(100% - 30px)
-        );
-
-      margin: 15px auto;
-
-      padding: 14px 20px;
-
+    header {
+      height: 70px;
       display: flex;
-
-      justify-content: center;
       align-items: center;
-
-      background:
-        rgba(10,12,28,.72);
-
-      backdrop-filter: blur(18px);
-
-      border:
-        1px solid
-        rgba(255,255,255,.1);
-
-      border-radius: 20px;
-
-      box-shadow:
-        0 10px 40px
-        rgba(0,0,0,.3);
+      justify-content: center;
+      border-bottom: 1px solid #7b2cff;
+      background: rgba(5, 3, 12, 0.9);
+      box-shadow: 0 0 25px rgba(125, 43, 255, 0.25);
     }
-
 
     .logo {
-
-      font-size: 18px;
-
-      font-weight: 900;
-
-      letter-spacing: .5px;
+      color: #c477ff;
+      font-size: 21px;
+      font-weight: bold;
+      text-shadow: 0 0 15px #8a2be2;
     }
 
-
-    .logo span {
-      color: #9b6cff;
+    main {
+      width: min(700px, 92%);
+      margin: 70px auto 30px;
+      text-align: center;
     }
-
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
-
-      width:
-        min(
-          1000px,
-          calc(100% - 30px)
-        );
-
-      flex: 1;
-
-      margin: auto;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      text-align: center;
-
-      padding:
-        80px 0;
+      padding: 35px 20px;
+      border: 1px solid #6d27c9;
+      border-radius: 22px;
+      background: rgba(15, 8, 28, 0.88);
+      box-shadow: 0 0 35px rgba(123, 44, 255, 0.15);
     }
 
-
-    .hero-content {
-      width: 100%;
-    }
-
-
-    .badge {
-
-      display: inline-block;
-
-      padding:
-        8px 15px;
-
-      margin-bottom: 25px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(155,108,255,.12);
-
-      border:
-        1px solid
-        rgba(155,108,255,.3);
-
-      color: #cdb8ff;
-
-      font-size: 13px;
-    }
-
-
-    h1 {
-
-      font-size:
-        clamp(
-          48px,
-          10vw,
-          95px
-        );
-
-      line-height: .95;
-
-      font-weight: 900;
-
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #b997ff,
-          #ffffff
-        );
-
-      -webkit-background-clip: text;
-
-      color: transparent;
-
-      animation:
-        glow 3s
-        infinite alternate;
-    }
-
-
-    @keyframes glow {
-
-      from {
-        filter:
-          drop-shadow(
-            0 0 8px
-            rgba(155,108,255,.1)
-          );
-      }
-
-      to {
-        filter:
-          drop-shadow(
-            0 0 30px
-            rgba(155,108,255,.4)
-          );
-      }
-
-    }
-
-
-    .hero p {
-
-      max-width: 650px;
-
-      margin:
-        28px auto 35px;
-
-      color: #aeb3c1;
-
-      font-size: 16px;
-
-      line-height: 2;
-    }
-
-
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .buttons {
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      gap: 14px;
-
-      flex-wrap: wrap;
-    }
-
-
-    .btn {
-
-      min-width: 190px;
-
-      padding:
-        15px 24px;
-
-      border-radius: 15px;
-
-      color: white;
-
-      text-decoration: none;
-
-      font-weight: 700;
-
-      font-size: 14px;
-
-      cursor: pointer;
-
-      border: none;
-
-      font-family:
-        "Vazirmatn",
-        sans-serif;
-
-      transition:
-        transform .25s,
-        box-shadow .25s,
-        background .25s;
-    }
-
-
-    .btn:hover {
-
-      transform:
-        translateY(-5px);
-
-    }
-
-
-    .btn-news {
-
-      background:
-        linear-gradient(
-          135deg,
-          #7650ff,
-          #a855f7
-        );
-
-      box-shadow:
-        0 10px 30px
-        rgba(124,77,255,.3);
-    }
-
-
-    .btn-home {
-
-      background:
-        rgba(255,255,255,.07);
-
-      border:
-        1px solid
-        rgba(255,255,255,.12);
-    }
-
-
-    .btn-panel {
-
-      background:
-        rgba(255,255,255,.04);
-
-      border:
-        1px solid
-        rgba(155,108,255,.3);
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-
-      padding:
-        25px 20px 35px;
-
-      text-align: center;
-
-      color: #666d7d;
-
-      border-top:
-        1px solid
-        rgba(255,255,255,.06);
-
-      font-size: 12px;
-    }
-
-
-    footer strong {
-      color: #a98cff;
-    }
-
-
-    /* =========================
-       PASSWORD MODAL
-    ========================= */
-
-    #passwordModal {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 9999;
-
-      display: none;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-      background:
-        rgba(2,3,8,.88);
-
-      backdrop-filter:
-        blur(15px);
-    }
-
-
-    .password-box {
-
-      width:
-        min(
-          430px,
-          100%
-        );
-
-      padding: 30px;
-
-      text-align: center;
-
-      border-radius: 23px;
-
-      background:
-        #090b14;
-
-      border:
-        1px solid
-        rgba(155,108,255,.25);
-
-      box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.6);
-    }
-
-
-    .password-icon {
-
-      font-size: 45px;
-
-      margin-bottom: 15px;
-    }
-
-
-    .password-box h2 {
-
-      margin-bottom: 10px;
-    }
-
-
-    .password-box p {
-
-      color: #858b9b;
-
-      font-size: 13px;
-
-      line-height: 1.9;
-
-      margin-bottom: 20px;
-    }
-
-
-    #passwordInput {
-
-      width: 100%;
-
-      padding: 13px 15px;
-
-      border-radius: 12px;
-
-      outline: none;
-
-      border:
-        1px solid
-        rgba(255,255,255,.1);
-
-      background:
-        rgba(255,255,255,.05);
-
-      color: white;
-
-      text-align: center;
-
-      font-family:
-        "Share Tech Mono",
-        monospace;
-
+    .hero h1 {
+      font-size: 38px;
+      color: #d79cff;
+      text-shadow: 0 0 20px #8a2be2;
       margin-bottom: 12px;
     }
 
-
-    #passwordInput:focus {
-
-      border-color:
-        #9b6cff;
-
-      box-shadow:
-        0 0 20px
-        rgba(155,108,255,.12);
+    .hero p {
+      color: #aaa;
+      margin-bottom: 30px;
     }
 
-
-    .password-buttons {
-
-      display: flex;
-
-      gap: 10px;
+    .buttons {
+      display: grid;
+      gap: 15px;
     }
 
-
-    .password-buttons button {
-
-      flex: 1;
-
-      padding: 12px;
-
-      border-radius: 11px;
-
-      border: none;
-
-      cursor: pointer;
-
-      font-family:
-        "Vazirmatn",
-        sans-serif;
-
-      font-weight: 700;
-    }
-
-
-    .login-button {
-
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7650ff,
-          #a855f7
-        );
-    }
-
-
-    .cancel-button {
-
-      color: #ccc;
-
-      background:
-        rgba(255,255,255,.07);
-    }
-
-
-    #passwordError {
-
-      display: none;
-
-      margin-top: 15px;
-
-      color: #ff6678;
-
-      font-size: 12px;
-
-      font-family:
-        "Share Tech Mono",
-        monospace;
-    }
-
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toast {
-
-      position: fixed;
-
-      left: 20px;
-      bottom: 20px;
-
-      z-index: 10000;
-
-      padding:
-        13px 17px;
-
-      max-width:
-        calc(100% - 40px);
-
+    button {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #8a2be2;
       border-radius: 13px;
+      background: #160925;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.25s;
+    }
 
-      background:
-        rgba(10,12,25,.95);
+    button:hover {
+      background: #8a2be2;
+      box-shadow: 0 0 22px #8a2be2;
+      transform: translateY(-2px);
+    }
 
-      border:
-        1px solid
-        rgba(155,108,255,.25);
-
-      box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.4);
-
-      opacity: 0;
-
-      transform:
-        translateY(20px);
-
-      pointer-events: none;
-
-      transition:
-        .3s;
-
+    .terminal {
+      margin-top: 25px;
+      padding: 18px;
+      border: 1px solid #222;
+      border-radius: 14px;
+      background: #020203;
+      direction: ltr;
+      text-align: left;
+      font-family: monospace;
+      color: #00ff9d;
       font-size: 13px;
     }
 
+    .terminal span {
+      color: #777;
+    }
 
-    #toast.show {
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+      font-size: 13px;
+    }
 
+    /* PASSWORD MODAL */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-box {
+      width: min(420px, 100%);
+      padding: 28px;
+      border: 1px solid #8a2be2;
+      border-radius: 18px;
+      background: #0b0612;
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.35);
+      text-align: center;
+    }
+
+    .modal-box h2 {
+      color: #d79cff;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      color: #999;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #54208d;
+      border-radius: 10px;
+      outline: none;
+      background: #050308;
+      color: white;
+      font-size: 15px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    input:focus {
+      border-color: #b86cff;
+      box-shadow: 0 0 12px rgba(184, 108, 255, 0.3);
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      color: #ff4f70;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .cancel {
+      border-color: #333;
+      color: #aaa;
+    }
+
+    .cancel:hover {
+      background: #222;
+      box-shadow: none;
+    }
+
+    /* TOAST */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%) translateY(100px);
+      background: #120a1d;
+      border: 1px solid #8a2be2;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 12px;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 2000;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.25);
+    }
+
+    .toast.show {
       opacity: 1;
-
-      transform:
-        translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media(max-width: 600px) {
-
-      .hero {
-        padding: 55px 0;
+    @media (max-width: 600px) {
+      main {
+        margin-top: 40px;
       }
 
-      .btn {
-        width: 100%;
+      .hero h1 {
+        font-size: 28px;
       }
 
-      .buttons {
-        flex-direction: column;
+      .logo {
+        font-size: 17px;
       }
-
-      .password-buttons {
-        flex-direction: column;
-      }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
+<header>
+  <div class="logo">🎮 AMIR_AMAZING_GAME</div>
+</header>
 
-  <!-- BACKGROUND -->
+<main>
 
-  <div class="background">
+  <section class="hero">
 
-    <div class="orb one"></div>
-
-    <div class="orb two"></div>
-
-  </div>
-
-
-  <!-- HEADER -->
-
-  <nav>
-
-    <div class="logo">
-
-      AMIR
-      <span>AMAZING</span>
-      GAME
-
-    </div>
-
-  </nav>
-
-
-  <!-- HOME -->
-
-  <main class="hero">
-
-    <div class="hero-content">
-
-      <div class="badge">
-
-        🎮 AMIR AMAZING GAME
-
-      </div>
-
-
-      <h1>
-
-        AMAZING<br>
-        GAME
-
-      </h1>
-
-
-      <p>
-
-        سایت رسمی AMIR AMAZING GAME
-
-        <br>
-
-        دنیای گیم، استریم و کامیونیتی
-
-      </p>
-
-
-      <!-- ONLY 3 BUTTONS -->
-
-      <div class="buttons">
-
-
-        <!-- NEWS -->
-
-        <a
-          class="btn btn-news"
-          href="news.html"
-          onclick="showToast('در حال ورود به اخبار...')">
-
-          📰 رفتن به صفحه اخبار
-
-        </a>
-
-
-        <!-- HOME -->
-
-        <a
-          class="btn btn-home"
-          href="index.html"
-          onclick="showToast('شما در صفحه خانه هستید')">
-
-          🏠 رفتن به خانه
-
-        </a>
-
-
-        <!-- PANEL -->
-
-        <button
-          class="btn btn-panel"
-          onclick="openPassword()">
-
-          🖥️ پنل مدیریت
-
-        </button>
-
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- FOOTER -->
-
-  <footer>
+    <h1>AMIR_AMAZING_GAME</h1>
 
     <p>
-
-      🎮
-      <strong>
-        AMIR AMAZING GAME
-      </strong>
-
+      مرکز اصلی سایت 🎮
     </p>
 
-    <p style="margin-top:8px;">
+    <div class="buttons">
 
-      Official Website
+      <button onclick="goNews()">
+        📰 رفتن به صفحه اخبار
+      </button>
 
-    </p>
+      <button onclick="goHome()">
+        🏠 رفتن به خانه
+      </button>
 
-  </footer>
-
-
-  <!-- PASSWORD MODAL -->
-
-  <div id="passwordModal">
-
-    <div class="password-box">
-
-
-      <div class="password-icon">
-        🔐
-      </div>
-
-
-      <h2>
-        مدیریت سایت
-      </h2>
-
-
-      <p>
-
-        برای ورود به پنل مدیریت،
-        رمز عبور را وارد کنید.
-
-      </p>
-
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="ENTER PASSWORD"
-        autocomplete="off"
-      >
-
-
-      <div class="password-buttons">
-
-
-        <button
-          class="login-button"
-          onclick="checkPassword()">
-
-          ورود
-
-        </button>
-
-
-        <button
-          class="cancel-button"
-          onclick="closePassword()">
-
-          لغو
-
-        </button>
-
-
-      </div>
-
-
-      <div id="passwordError">
-
-        ERROR 403:
-        ACCESS DENIED
-
-      </div>
-
+      <button onclick="openPanel()">
+        🖥️ پنل مدیریت
+      </button>
 
     </div>
 
+    <div class="terminal">
+      <div><span>[SYSTEM]</span> AMIR_AMAZING_GAME</div>
+      <div><span>[STATUS]</span> ONLINE</div>
+      <div><span>[ACCESS]</span> MANAGEMENT PANEL PROTECTED</div>
+      <div><span>[READY]</span> Waiting for command...</div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  AMIR_AMAZING_GAME © 2026
+</footer>
+
+
+<!-- PASSWORD MODAL -->
+
+<div class="modal" id="passwordModal">
+
+  <div class="modal-box">
+
+    <h2>🔐 ACCESS CONTROL</h2>
+
+    <p>
+      برای ورود به پنل مدیریت رمز عبور را وارد کنید.
+    </p>
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Enter password..."
+      autocomplete="off"
+      onkeydown="if(event.key === 'Enter') checkPassword()"
+    >
+
+    <div class="error" id="errorMessage">
+      ERROR 403: ACCESS DENIED
+    </div>
+
+    <button onclick="checkPassword()">
+      🔓 ورود به پنل
+    </button>
+
+    <button class="cancel" onclick="closePanel()">
+      ❌ لغو
+    </button>
+
   </div>
 
-
-  <!-- TOAST -->
-
-  <div id="toast"></div>
+</div>
 
 
-  <script>
+<!-- TOAST -->
 
-    /*
-      ==========================================
-      PANEL PASSWORD
-      ==========================================
-
-      این رمز نمونه را بعداً خودت می‌توانی تغییر بدهی.
-
-      نکته:
-      چون GitHub Pages سایت استاتیک است،
-      این رمز امنیت واقعی سروری ایجاد نمی‌کند.
-    */
-
-    const PANEL_PASSWORD = "AmirAmazing@2026!";
+<div class="toast" id="toast"></div>
 
 
-    /* =========================
-       OPEN PASSWORD
-    ========================= */
+<script>
 
-    function openPassword() {
+  // ==============================
+  // PANEL PASSWORD
+  // ==============================
 
-      document
-        .getElementById("passwordModal")
-        .style.display = "flex";
+  const PANEL_PASSWORD = "Am!r_Amazing#Panel_7X9@2026";
 
 
-      document
-        .getElementById("passwordInput")
-        .value = "";
+  function goNews() {
+    window.location.href = "news.html";
+  }
 
 
-      document
-        .getElementById("passwordError")
-        .style.display = "none";
+  function goHome() {
+    window.location.href = "index.html";
+  }
 
+
+  function openPanel() {
+
+    document.getElementById("passwordModal").style.display = "flex";
+
+    document.getElementById("passwordInput").value = "";
+
+    document.getElementById("errorMessage").style.display = "none";
+
+    setTimeout(() => {
+      document.getElementById("passwordInput").focus();
+    }, 100);
+
+  }
+
+
+  function closePanel() {
+
+    document.getElementById("passwordModal").style.display = "none";
+
+  }
+
+
+  function checkPassword() {
+
+    const enteredPassword =
+      document.getElementById("passwordInput").value;
+
+    const error =
+      document.getElementById("errorMessage");
+
+
+    if (enteredPassword === PANEL_PASSWORD) {
+
+      showToast("✅ ACCESS GRANTED");
 
       setTimeout(() => {
+        window.location.href = "panel.html";
+      }, 500);
 
-        document
-          .getElementById("passwordInput")
-          .focus();
+    } else {
 
-      }, 100);
+      error.style.display = "block";
 
-    }
+      showToast("❌ رمز عبور اشتباه است");
 
+      document.getElementById("passwordInput").value = "";
 
-    /* =========================
-       CLOSE PASSWORD
-    ========================= */
-
-    function closePassword() {
-
-      document
-        .getElementById("passwordModal")
-        .style.display = "none";
+      document.getElementById("passwordInput").focus();
 
     }
 
-
-    /* =========================
-       CHECK PASSWORD
-    ========================= */
-
-    function checkPassword() {
-
-      const input =
-        document
-          .getElementById("passwordInput")
-          .value;
+  }
 
 
-      if (input === PANEL_PASSWORD) {
+  function showToast(message) {
 
-        showToast(
-          "ACCESS GRANTED ✓"
-        );
+    const toast =
+      document.getElementById("toast");
 
+    toast.textContent = message;
 
-        setTimeout(() => {
+    toast.classList.add("show");
 
-          window.location.href =
-            "panel.html";
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2200);
 
-        }, 500);
-
-
-      } else {
-
-        document
-          .getElementById("passwordError")
-          .style.display = "block";
+  }
 
 
-        showToast(
-          "ACCESS DENIED ⚠️"
-        );
+  // Close modal by clicking outside
 
+  document.getElementById("passwordModal")
+    .addEventListener("click", function(event) {
+
+      if (event.target === this) {
+        closePanel();
       }
 
-    }
+    });
 
 
-    /* =========================
-       ENTER KEY
-    ========================= */
-
-    document
-      .getElementById("passwordInput")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (event.key === "Enter") {
-
-            checkPassword();
-
-          }
-
-          if (event.key === "Escape") {
-
-            closePassword();
-
-          }
-
-        }
-      );
-
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    let toastTimer;
-
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById("toast");
-
-
-      toast.textContent =
-        "⚡ " + message;
-
-
-      toast.classList.add("show");
-
-
-      clearTimeout(toastTimer);
-
-
-      toastTimer =
-        setTimeout(() => {
-
-          toast.classList.remove("show");
-
-        }, 2500);
-
-    }
-
-  </script>
-
+</script>
 
 </body>
-
 </html>
