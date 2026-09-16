@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,9 +10,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -22,70 +29,39 @@
     }
 
     body {
+
       font-family: "Vazirmatn", sans-serif;
-      background:
-        radial-gradient(circle at 15% 15%, #18264d 0%, transparent 28%),
-        radial-gradient(circle at 85% 10%, #35145f 0%, transparent 30%),
-        linear-gradient(135deg, #050611, #090b18 45%, #10061c);
-      color: white;
+
       min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at 15% 15%,
+          #18264d 0%,
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 85% 10%,
+          #35145f 0%,
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #050611,
+          #090b18 45%,
+          #10061c
+        );
+
       overflow-x: hidden;
     }
 
-    /* =========================
-       BOOT SCREEN
-    ========================= */
-
-    #bootScreen {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-
-      background: #030408;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      transition: opacity .8s ease, visibility .8s ease;
-    }
-
-    #bootScreen.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .bootTerminal {
-      width: min(700px, 90%);
-      font-family: "Share Tech Mono", monospace;
-      color: #b996ff;
-      font-size: 14px;
-      line-height: 2;
-
-      background: rgba(255,255,255,.025);
-      border: 1px solid rgba(155,108,255,.2);
-      border-radius: 16px;
-      padding: 25px;
-
-      box-shadow: 0 0 60px rgba(130,87,255,.12);
-    }
-
-    .bootTitle {
-      color: white;
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 15px;
-      background: #b996ff;
-      animation: blink .7s infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
 
     /* =========================
        BACKGROUND
@@ -94,576 +70,567 @@
     .background {
       position: fixed;
       inset: 0;
-      pointer-events: none;
+
       overflow: hidden;
+
+      pointer-events: none;
+
       z-index: -1;
     }
 
+
     .orb {
+
       position: absolute;
+
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: .25;
-      animation: float 8s infinite alternate ease-in-out;
+
+      filter: blur(90px);
+
+      opacity: .22;
+
+      animation:
+        float 8s
+        infinite alternate
+        ease-in-out;
     }
 
+
     .orb.one {
-      width: 280px;
-      height: 280px;
+
+      width: 300px;
+      height: 300px;
+
       background: #5865f2;
-      top: 10%;
+
+      top: 5%;
       left: -100px;
     }
 
+
     .orb.two {
-      width: 250px;
-      height: 250px;
+
+      width: 280px;
+      height: 280px;
+
       background: #a855f7;
-      bottom: 10%;
+
+      bottom: 5%;
       right: -100px;
+
       animation-delay: 2s;
     }
 
+
     @keyframes float {
+
       from {
-        transform: translateY(0) scale(1);
+        transform:
+          translateY(0)
+          scale(1);
       }
 
       to {
-        transform: translateY(-40px) scale(1.15);
+        transform:
+          translateY(-45px)
+          scale(1.15);
       }
+
     }
+
 
     /* =========================
        NAVBAR
     ========================= */
 
     nav {
-      position: sticky;
-      top: 15px;
-      z-index: 50;
 
-      width: min(1100px, calc(100% - 30px));
+      width:
+        min(
+          1100px,
+          calc(100% - 30px)
+        );
+
       margin: 15px auto;
 
+      padding: 14px 20px;
+
       display: flex;
+
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
 
-      padding: 13px 18px;
+      background:
+        rgba(10,12,28,.72);
 
-      background: rgba(10, 12, 28, .72);
       backdrop-filter: blur(18px);
 
-      border: 1px solid rgba(255,255,255,.1);
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
       border-radius: 20px;
 
-      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+      box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.3);
     }
 
+
     .logo {
-      font-weight: 900;
+
       font-size: 18px;
+
+      font-weight: 900;
+
+      letter-spacing: .5px;
     }
+
 
     .logo span {
       color: #9b6cff;
     }
 
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      margin-right: 18px;
-      font-size: 14px;
-      transition: .25s;
-    }
-
-    nav a:hover {
-      color: #b993ff;
-    }
 
     /* =========================
        HERO
     ========================= */
 
     .hero {
-      width: min(1100px, calc(100% - 30px));
-      margin: 70px auto 40px;
 
-      min-height: 570px;
+      width:
+        min(
+          1000px,
+          calc(100% - 30px)
+        );
+
+      flex: 1;
+
+      margin: auto;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       text-align: center;
+
+      padding:
+        80px 0;
     }
+
 
     .hero-content {
-      max-width: 850px;
+      width: 100%;
     }
+
 
     .badge {
+
       display: inline-block;
 
-      padding: 8px 15px;
+      padding:
+        8px 15px;
+
+      margin-bottom: 25px;
+
       border-radius: 999px;
 
-      background: rgba(155,108,255,.12);
-      border: 1px solid rgba(155,108,255,.3);
+      background:
+        rgba(155,108,255,.12);
+
+      border:
+        1px solid
+        rgba(155,108,255,.3);
 
       color: #cdb8ff;
-      font-size: 13px;
 
-      margin-bottom: 22px;
+      font-size: 13px;
     }
+
 
     h1 {
-      font-size: clamp(45px, 9vw, 90px);
-      line-height: 1;
+
+      font-size:
+        clamp(
+          48px,
+          10vw,
+          95px
+        );
+
+      line-height: .95;
+
       font-weight: 900;
 
-      background: linear-gradient(
-        90deg,
-        #ffffff,
-        #b997ff,
-        #ffffff
-      );
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #b997ff,
+          #ffffff
+        );
 
       -webkit-background-clip: text;
+
       color: transparent;
 
-      animation: titleGlow 3s infinite alternate;
+      animation:
+        glow 3s
+        infinite alternate;
     }
 
-    @keyframes titleGlow {
+
+    @keyframes glow {
+
       from {
-        filter: drop-shadow(0 0 8px rgba(155,108,255,.1));
+        filter:
+          drop-shadow(
+            0 0 8px
+            rgba(155,108,255,.1)
+          );
       }
 
       to {
-        filter: drop-shadow(0 0 25px rgba(155,108,255,.4));
+        filter:
+          drop-shadow(
+            0 0 30px
+            rgba(155,108,255,.4)
+          );
       }
+
     }
 
+
     .hero p {
-      margin: 25px auto;
+
       max-width: 650px;
 
-      color: #b9bdca;
-      font-size: 17px;
+      margin:
+        28px auto 35px;
+
+      color: #aeb3c1;
+
+      font-size: 16px;
+
       line-height: 2;
     }
 
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
     .buttons {
+
       display: flex;
-      gap: 12px;
+
       justify-content: center;
+
+      align-items: center;
+
+      gap: 14px;
+
       flex-wrap: wrap;
-      margin-top: 30px;
     }
+
 
     .btn {
-      text-decoration: none;
+
+      min-width: 190px;
+
+      padding:
+        15px 24px;
+
+      border-radius: 15px;
+
       color: white;
 
-      padding: 13px 24px;
-      border-radius: 14px;
+      text-decoration: none;
 
       font-weight: 700;
+
       font-size: 14px;
 
-      transition: .25s;
       cursor: pointer;
+
       border: none;
-      font-family: inherit;
+
+      font-family:
+        "Vazirmatn",
+        sans-serif;
+
+      transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #7650ff, #a855f7);
-      box-shadow: 0 10px 30px rgba(124,77,255,.3);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-    }
 
     .btn:hover {
-      transform: translateY(-4px);
+
+      transform:
+        translateY(-5px);
+
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
 
-    section {
-      width: min(1100px, calc(100% - 30px));
-      margin: 100px auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 900;
-    }
-
-    .section-title p {
-      color: #888e9f;
-      margin-top: 8px;
-    }
-
-    /* =========================
-       CARDS
-    ========================= */
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      position: relative;
-      padding: 27px;
-      min-height: 190px;
-
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.09);
-
-      border-radius: 22px;
-
-      backdrop-filter: blur(15px);
-
-      transition: .3s;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 130px;
-      height: 130px;
-
-      background: #8257ff;
-      filter: blur(70px);
-      opacity: .12;
-
-      top: -60px;
-      right: -60px;
-    }
-
-    .card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(160,120,255,.35);
-      box-shadow: 0 20px 50px rgba(0,0,0,.25);
-    }
-
-    .icon {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #a6abb9;
-      line-height: 1.9;
-      font-size: 14px;
-    }
-
-    /* =========================
-       GAMES
-    ========================= */
-
-    .games {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 18px;
-    }
-
-    .game {
-      padding: 30px 20px;
-      text-align: center;
-
-      border-radius: 22px;
-
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.08);
-
-      transition: .3s;
-    }
-
-    .game:hover {
-      transform: scale(1.03);
-      background: rgba(255,255,255,.07);
-    }
-
-    .game .game-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .game h3 {
-      font-size: 19px;
-    }
-
-    /* =========================
-       STREAM
-    ========================= */
-
-    .stream-box {
-      padding: 35px;
-
-      border-radius: 25px;
+    .btn-news {
 
       background:
         linear-gradient(
           135deg,
-          rgba(120,80,255,.13),
-          rgba(255,255,255,.035)
+          #7650ff,
+          #a855f7
         );
-
-      border: 1px solid rgba(155,108,255,.2);
-
-      text-align: center;
-    }
-
-    .live-dot {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 7px 13px;
-      border-radius: 999px;
-
-      background: rgba(255,60,80,.1);
-      color: #ff8290;
-
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .live-dot i {
-      width: 8px;
-      height: 8px;
-      background: #ff4d61;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #ff4d61;
-    }
-
-    /* =========================
-       COMMUNITY
-    ========================= */
-
-    .community {
-      text-align: center;
-
-      padding: 55px 20px;
-
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(168,85,247,.13),
-          rgba(88,101,242,.08)
-        );
-
-      border: 1px solid rgba(255,255,255,.1);
-    }
-
-    .community h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-
-    .community p {
-      color: #aeb2c0;
-      margin-bottom: 20px;
-    }
-
-    /* =========================
-       TERMINAL
-    ========================= */
-
-    .terminal {
-      background: #030407;
-
-      border: 1px solid rgba(155,108,255,.25);
-      border-radius: 20px;
-
-      overflow: hidden;
 
       box-shadow:
-        0 20px 60px rgba(0,0,0,.4),
-        0 0 40px rgba(130,87,255,.08);
+        0 10px 30px
+        rgba(124,77,255,.3);
     }
 
-    .terminal-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
 
-      padding: 13px 17px;
+    .btn-home {
 
-      background: rgba(255,255,255,.04);
+      background:
+        rgba(255,255,255,.07);
 
-      border-bottom: 1px solid rgba(255,255,255,.08);
-
-      font-family: "Share Tech Mono", monospace;
-      direction: ltr;
+      border:
+        1px solid
+        rgba(255,255,255,.12);
     }
 
-    .terminal-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
+
+    .btn-panel {
+
+      background:
+        rgba(255,255,255,.04);
+
+      border:
+        1px solid
+        rgba(155,108,255,.3);
     }
 
-    .terminal-title {
-      margin-left: 8px;
-      color: #8e94a5;
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+
+      padding:
+        25px 20px 35px;
+
+      text-align: center;
+
+      color: #666d7d;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
       font-size: 12px;
     }
 
-    .terminal-body {
-      padding: 20px;
 
-      min-height: 270px;
-
-      direction: ltr;
-      text-align: left;
-
-      font-family: "Share Tech Mono", monospace;
-
-      font-size: 13px;
-      line-height: 2;
-
-      overflow-x: auto;
+    footer strong {
+      color: #a98cff;
     }
 
-    .line {
-      white-space: nowrap;
-    }
-
-    .system {
-      color: #9b6cff;
-    }
-
-    .success {
-      color: #64e572;
-    }
-
-    .warning {
-      color: #ffd166;
-    }
-
-    .error {
-      color: #ff6678;
-    }
-
-    .muted {
-      color: #6f7585;
-    }
-
-    .commandInput {
-      margin-top: 10px;
-
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .commandInput span {
-      color: #9b6cff;
-    }
-
-    #terminalInput {
-      flex: 1;
-
-      background: transparent;
-      border: none;
-      outline: none;
-
-      color: white;
-
-      font-family: "Share Tech Mono", monospace;
-      font-size: 13px;
-    }
 
     /* =========================
-       404
+       PASSWORD MODAL
     ========================= */
 
-    #error404 {
-      display: none;
+    #passwordModal {
 
       position: fixed;
+
       inset: 0;
 
-      z-index: 9000;
+      z-index: 9999;
 
-      background: rgba(3,4,8,.96);
-      backdrop-filter: blur(15px);
+      display: none;
 
       align-items: center;
+
       justify-content: center;
 
       padding: 20px;
+
+      background:
+        rgba(2,3,8,.88);
+
+      backdrop-filter:
+        blur(15px);
     }
 
-    .error-box {
-      width: min(550px, 100%);
 
-      background: #080a12;
+    .password-box {
 
-      border: 1px solid rgba(255,80,100,.25);
+      width:
+        min(
+          430px,
+          100%
+        );
 
-      border-radius: 25px;
-
-      padding: 40px 25px;
+      padding: 30px;
 
       text-align: center;
 
-      box-shadow: 0 30px 100px rgba(0,0,0,.6);
+      border-radius: 23px;
+
+      background:
+        #090b14;
+
+      border:
+        1px solid
+        rgba(155,108,255,.25);
+
+      box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.6);
     }
 
-    .error-code {
-      font-family: "Share Tech Mono", monospace;
 
-      font-size: 90px;
-      font-weight: bold;
+    .password-icon {
 
-      color: #ff6678;
+      font-size: 45px;
 
-      text-shadow: 0 0 30px rgba(255,80,100,.3);
+      margin-bottom: 15px;
     }
 
-    .error-box h2 {
+
+    .password-box h2 {
+
       margin-bottom: 10px;
     }
 
-    .error-box p {
-      color: #9298a8;
-      line-height: 2;
-      margin-bottom: 25px;
+
+    .password-box p {
+
+      color: #858b9b;
+
+      font-size: 13px;
+
+      line-height: 1.9;
+
+      margin-bottom: 20px;
     }
+
+
+    #passwordInput {
+
+      width: 100%;
+
+      padding: 13px 15px;
+
+      border-radius: 12px;
+
+      outline: none;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      background:
+        rgba(255,255,255,.05);
+
+      color: white;
+
+      text-align: center;
+
+      font-family:
+        "Share Tech Mono",
+        monospace;
+
+      margin-bottom: 12px;
+    }
+
+
+    #passwordInput:focus {
+
+      border-color:
+        #9b6cff;
+
+      box-shadow:
+        0 0 20px
+        rgba(155,108,255,.12);
+    }
+
+
+    .password-buttons {
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+
+    .password-buttons button {
+
+      flex: 1;
+
+      padding: 12px;
+
+      border-radius: 11px;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-family:
+        "Vazirmatn",
+        sans-serif;
+
+      font-weight: 700;
+    }
+
+
+    .login-button {
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7650ff,
+          #a855f7
+        );
+    }
+
+
+    .cancel-button {
+
+      color: #ccc;
+
+      background:
+        rgba(255,255,255,.07);
+    }
+
+
+    #passwordError {
+
+      display: none;
+
+      margin-top: 15px;
+
+      color: #ff6678;
+
+      font-size: 12px;
+
+      font-family:
+        "Share Tech Mono",
+        monospace;
+    }
+
 
     /* =========================
        TOAST
     ========================= */
 
-    #toastContainer {
+    #toast {
+
       position: fixed;
 
       left: 20px;
@@ -671,946 +638,448 @@
 
       z-index: 10000;
 
-      display: flex;
-      flex-direction: column;
+      padding:
+        13px 17px;
 
-      gap: 10px;
+      max-width:
+        calc(100% - 40px);
 
-      width: min(350px, calc(100% - 40px));
-    }
+      border-radius: 13px;
 
-    .toast {
-      padding: 15px 17px;
+      background:
+        rgba(10,12,25,.95);
 
-      background: rgba(12,14,27,.92);
+      border:
+        1px solid
+        rgba(155,108,255,.25);
 
-      border: 1px solid rgba(155,108,255,.25);
+      box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.4);
 
-      border-radius: 15px;
+      opacity: 0;
 
-      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+      transform:
+        translateY(20px);
 
-      backdrop-filter: blur(15px);
+      pointer-events: none;
 
-      animation: toastIn .35s ease forwards;
+      transition:
+        .3s;
 
       font-size: 13px;
     }
 
-    .toast.hide {
-      animation: toastOut .35s ease forwards;
+
+    #toast.show {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
     }
 
-    @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes toastOut {
-      from {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      to {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      text-align: center;
-
-      padding: 40px 20px 55px;
-
-      color: #777d8d;
-
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-
-    footer strong {
-      color: #b996ff;
-    }
 
     /* =========================
        MOBILE
     ========================= */
 
-    @media(max-width: 750px) {
-
-      nav {
-        padding: 12px 14px;
-      }
-
-      nav div:last-child {
-        display: none;
-      }
+    @media(max-width: 600px) {
 
       .hero {
-        min-height: 500px;
-        margin-top: 40px;
+        padding: 55px 0;
       }
 
-      .cards,
-      .games {
-        grid-template-columns: 1fr;
+      .btn {
+        width: 100%;
       }
 
-      section {
-        margin: 75px auto;
+      .buttons {
+        flex-direction: column;
       }
 
-      .stream-box {
-        padding: 30px 18px;
+      .password-buttons {
+        flex-direction: column;
       }
 
-      .error-code {
-        font-size: 70px;
-      }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================
-     BOOT SCREEN
-========================= -->
 
-<div id="bootScreen">
+  <!-- BACKGROUND -->
 
-  <div class="bootTerminal">
+  <div class="background">
 
-    <div class="bootTitle">
-      AMIR AMAZING GAME // SYSTEM
-    </div>
+    <div class="orb one"></div>
 
-    <div id="bootText"></div>
-
-    <span class="cursor"></span>
+    <div class="orb two"></div>
 
   </div>
 
-</div>
 
+  <!-- HEADER -->
 
-<!-- BACKGROUND -->
+  <nav>
 
-<div class="background">
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-</div>
+    <div class="logo">
 
-
-<!-- NAVBAR -->
-
-<nav>
-
-  <div class="logo">
-    AMIR <span>AMAZING</span> GAME
-  </div>
-
-  <div>
-    <a href="#about">درباره</a>
-    <a href="#games">بازی‌ها</a>
-    <a href="#stream">استریم</a>
-    <a href="#terminal">SYSTEM</a>
-    <a href="#community">انجمن</a>
-  </div>
-
-</nav>
-
-
-<!-- HERO -->
-
-<header class="hero">
-
-  <div class="hero-content">
-
-    <div class="badge">
-      🎮 AMIR AMAZING GAME
-    </div>
-
-    <h1>
-      AMAZING<br>
+      AMIR
+      <span>AMAZING</span>
       GAME
-    </h1>
-
-    <p>
-      سایت رسمی AMIR AMAZING GAME
-      <br>
-      دنیای گیم، استریم و کامیونیتی
-    </p>
-
-    <div class="buttons">
-
-      <a
-        class="btn btn-primary"
-        href="https://www.aparat.com/AMIR_AMAZING_GAME"
-        target="_blank"
-        onclick="showToast('در حال باز کردن کانال آپارات...')">
-
-        ▶ مشاهده کانال آپارات
-
-      </a>
-
-      <a
-        class="btn btn-secondary"
-        href="#terminal"
-        onclick="showToast('SYSTEM PANEL فعال شد 🖥️')">
-
-        🖥️ SYSTEM
-
-      </a>
 
     </div>
 
-  </div>
-
-</header>
+  </nav>
 
 
-<!-- ABOUT -->
+  <!-- HOME -->
 
-<section id="about">
+  <main class="hero">
 
-  <div class="section-title">
+    <div class="hero-content">
 
-    <h2>درباره AMIR AMAZING GAME</h2>
+      <div class="badge">
 
-    <p>
-      اطلاعاتی که درباره این مجموعه ارائه شده
-    </p>
+        🎮 AMIR AMAZING GAME
 
-  </div>
+      </div>
 
 
-  <div class="cards">
+      <h1>
 
-    <div class="card">
+        AMAZING<br>
+        GAME
 
-      <div class="icon">👑</div>
+      </h1>
 
-      <h3>مالک سایت</h3>
 
       <p>
-        این سایت برای
-        <strong>amir_amazing_game</strong>
-        ساخته شده و متعلق به اوست.
+
+        سایت رسمی AMIR AMAZING GAME
+
+        <br>
+
+        دنیای گیم، استریم و کامیونیتی
+
       </p>
+
+
+      <!-- ONLY 3 BUTTONS -->
+
+      <div class="buttons">
+
+
+        <!-- NEWS -->
+
+        <a
+          class="btn btn-news"
+          href="news.html"
+          onclick="showToast('در حال ورود به اخبار...')">
+
+          📰 رفتن به صفحه اخبار
+
+        </a>
+
+
+        <!-- HOME -->
+
+        <a
+          class="btn btn-home"
+          href="index.html"
+          onclick="showToast('شما در صفحه خانه هستید')">
+
+          🏠 رفتن به خانه
+
+        </a>
+
+
+        <!-- PANEL -->
+
+        <button
+          class="btn btn-panel"
+          onclick="openPassword()">
+
+          🖥️ پنل مدیریت
+
+        </button>
+
+
+      </div>
 
     </div>
 
+  </main>
 
-    <div class="card">
 
-      <div class="icon">📺</div>
+  <!-- FOOTER -->
 
-      <h3>استریم</h3>
+  <footer>
+
+    <p>
+
+      🎮
+      <strong>
+        AMIR AMAZING GAME
+      </strong>
+
+    </p>
+
+    <p style="margin-top:8px;">
+
+      Official Website
+
+    </p>
+
+  </footer>
+
+
+  <!-- PASSWORD MODAL -->
+
+  <div id="passwordModal">
+
+    <div class="password-box">
+
+
+      <div class="password-icon">
+        🔐
+      </div>
+
+
+      <h2>
+        مدیریت سایت
+      </h2>
+
 
       <p>
-        او هر شب در آپارات استریم می‌کند.
+
+        برای ورود به پنل مدیریت،
+        رمز عبور را وارد کنید.
+
       </p>
 
-    </div>
+
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="ENTER PASSWORD"
+        autocomplete="off"
+      >
 
 
-    <div class="card">
-
-      <div class="icon">🎮</div>
-
-      <h3>علاقه‌مندی‌ها</h3>
-
-      <p>
-        Minecraft،
-        The Last of Us
-        و CS2
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
+      <div class="password-buttons">
 
 
-<!-- GAMES -->
+        <button
+          class="login-button"
+          onclick="checkPassword()">
 
-<section id="games">
+          ورود
 
-  <div class="section-title">
-
-    <h2>🎮 بازی‌های مورد علاقه</h2>
-
-    <p>
-      بازی‌هایی که معرفی شده‌اند
-    </p>
-
-  </div>
+        </button>
 
 
-  <div class="games">
+        <button
+          class="cancel-button"
+          onclick="closePassword()">
 
-    <div class="game">
+          لغو
 
-      <div class="game-icon">⛏️</div>
-
-      <h3>Minecraft</h3>
-
-    </div>
+        </button>
 
 
-    <div class="game">
-
-      <div class="game-icon">🧟</div>
-
-      <h3>The Last of Us</h3>
-
-    </div>
+      </div>
 
 
-    <div class="game">
+      <div id="passwordError">
 
-      <div class="game-icon">🎯</div>
+        ERROR 403:
+        ACCESS DENIED
 
-      <h3>Counter-Strike 2</h3>
+      </div>
+
 
     </div>
 
   </div>
 
-</section>
 
+  <!-- TOAST -->
 
-<!-- STREAM -->
+  <div id="toast"></div>
 
-<section id="stream">
 
-  <div class="section-title">
+  <script>
 
-    <h2>📺 استریم‌های شبانه</h2>
+    /*
+      ==========================================
+      PANEL PASSWORD
+      ==========================================
 
-    <p>
-      کانال آپارات AMIR AMAZING GAME
-    </p>
+      این رمز نمونه را بعداً خودت می‌توانی تغییر بدهی.
 
-  </div>
+      نکته:
+      چون GitHub Pages سایت استاتیک است،
+      این رمز امنیت واقعی سروری ایجاد نمی‌کند.
+    */
 
+    const PANEL_PASSWORD = "AmirAmazing@2026!";
 
-  <div class="stream-box">
 
-    <div class="live-dot">
+    /* =========================
+       OPEN PASSWORD
+    ========================= */
 
-      <i></i>
+    function openPassword() {
 
-      STREAM
+      document
+        .getElementById("passwordModal")
+        .style.display = "flex";
 
-    </div>
 
+      document
+        .getElementById("passwordInput")
+        .value = "";
 
-    <h2>
-      هر شب، یک استریم جدید 🎮
-    </h2>
 
+      document
+        .getElementById("passwordError")
+        .style.display = "none";
 
-    <p style="color:#999;margin:15px 0 25px;">
-
-      برای مشاهده کانال آپارات وارد صفحه رسمی شوید.
-
-    </p>
-
-
-    <a
-      class="btn btn-primary"
-      href="https://www.aparat.com/AMIR_AMAZING_GAME"
-      target="_blank"
-      onclick="showToast('Opening Aparat...')">
-
-      ورود به آپارات
-
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- SYSTEM TERMINAL -->
-
-<section id="terminal">
-
-  <div class="section-title">
-
-    <h2>🖥️ SYSTEM TERMINAL</h2>
-
-    <p>
-      وضعیت سیستم سایت
-    </p>
-
-  </div>
-
-
-  <div class="terminal">
-
-    <div class="terminal-header">
-
-      <div
-        class="terminal-dot"
-        style="background:#ff5f57">
-      </div>
-
-      <div
-        class="terminal-dot"
-        style="background:#febc2e">
-      </div>
-
-      <div
-        class="terminal-dot"
-        style="background:#28c840">
-      </div>
-
-      <div class="terminal-title">
-        amir_amazing_game@web-system
-      </div>
-
-    </div>
-
-
-    <div class="terminal-body">
-
-      <div class="line system">
-        [SYSTEM] AMIR AMAZING GAME SYSTEM
-      </div>
-
-      <div class="line muted">
-        ----------------------------------------
-      </div>
-
-      <div class="line success">
-        [OK] Website interface loaded.
-      </div>
-
-      <div class="line success">
-        [OK] User interface ready.
-      </div>
-
-      <div class="line success">
-        [OK] Gaming modules loaded.
-      </div>
-
-      <div class="line success">
-        [OK] Aparat link available.
-      </div>
-
-      <div class="line warning">
-        [INFO] Rubika group link is not available.
-      </div>
-
-      <div class="line system">
-        [SYSTEM] Waiting for command...
-      </div>
-
-
-      <div class="commandInput">
-
-        <span>
-          user@amazing:~$
-        </span>
-
-        <input
-          id="terminalInput"
-          autocomplete="off"
-          placeholder="type help">
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- COMMUNITY -->
-
-<section id="community">
-
-  <div class="community">
-
-    <h2>
-      👥 amazing_fans
-    </h2>
-
-    <p>
-      گروه روبیکای AMIR AMAZING GAME
-    </p>
-
-    <p style="font-size:13px;color:#777;">
-      لینک گروه در حال حاضر ارائه نشده است.
-    </p>
-
-
-    <button
-      class="btn btn-secondary"
-      onclick="show404()">
-
-      🔗 ورود به گروه
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-  <p>
-    🎮 <strong>AMIR AMAZING GAME</strong>
-  </p>
-
-  <p style="margin-top:10px;">
-    Official website
-  </p>
-
-</footer>
-
-
-<!-- 404 -->
-
-<div id="error404">
-
-  <div class="error-box">
-
-    <div class="error-code">
-      404
-    </div>
-
-    <h2>
-      LINK NOT FOUND
-    </h2>
-
-    <p>
-      لینک گروه روبیکا هنوز در اختیار سایت قرار نگرفته است.
-      <br>
-      بنابراین امکان ورود مستقیم وجود ندارد.
-    </p>
-
-    <button
-      class="btn btn-primary"
-      onclick="close404()">
-
-      ← بازگشت به سایت
-
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- TOAST CONTAINER -->
-
-<div id="toastContainer"></div>
-
-
-<script>
-
-  /* =========================
-     BOOT SYSTEM
-  ========================= */
-
-  const bootMessages = [
-
-    "[BOOT] Starting AMIR AMAZING GAME...",
-    "[BOOT] Loading gaming interface...",
-    "[BOOT] Loading system modules...",
-    "[OK] Interface loaded.",
-    "[OK] Gaming modules ready.",
-    "[OK] Aparat connection ready.",
-    "[INFO] amazing_fans detected.",
-    "[SYSTEM] Website is ready."
-
-  ];
-
-  const bootText = document.getElementById("bootText");
-  const bootScreen = document.getElementById("bootScreen");
-
-  let bootIndex = 0;
-
-
-  function boot() {
-
-    if (bootIndex < bootMessages.length) {
-
-      const line = document.createElement("div");
-
-      line.textContent = bootMessages[bootIndex];
-
-      bootText.appendChild(line);
-
-      bootIndex++;
-
-      setTimeout(boot, 180);
-
-    } else {
 
       setTimeout(() => {
 
-        bootScreen.classList.add("hide");
+        document
+          .getElementById("passwordInput")
+          .focus();
 
-        showToast(
-          "SYSTEM ONLINE — خوش آمدید 🎮"
-        );
-
-      }, 700);
+      }, 100);
 
     }
 
-  }
+
+    /* =========================
+       CLOSE PASSWORD
+    ========================= */
+
+    function closePassword() {
+
+      document
+        .getElementById("passwordModal")
+        .style.display = "none";
+
+    }
 
 
-  window.addEventListener("load", () => {
+    /* =========================
+       CHECK PASSWORD
+    ========================= */
 
-    setTimeout(boot, 300);
+    function checkPassword() {
 
-  });
-
-
-  /* =========================
-     TOAST
-  ========================= */
-
-  function showToast(message) {
-
-    const container =
-      document.getElementById("toastContainer");
-
-    const toast =
-      document.createElement("div");
-
-    toast.className = "toast";
-
-    toast.innerHTML =
-      "⚡ " + message;
-
-    container.appendChild(toast);
+      const input =
+        document
+          .getElementById("passwordInput")
+          .value;
 
 
-    setTimeout(() => {
-
-      toast.classList.add("hide");
-
-      setTimeout(() => {
-
-        toast.remove();
-
-      }, 350);
-
-    }, 3000);
-
-  }
-
-
-  /* =========================
-     404 SYSTEM
-  ========================= */
-
-  function show404() {
-
-    document.getElementById(
-      "error404"
-    ).style.display = "flex";
-
-    showToast(
-      "ERROR 404 — Link not found"
-    );
-
-  }
-
-
-  function close404() {
-
-    document.getElementById(
-      "error404"
-    ).style.display = "none";
-
-  }
-
-
-  /* =========================
-     TERMINAL
-  ========================= */
-
-  const terminalInput =
-    document.getElementById("terminalInput");
-
-  const terminalBody =
-    document.querySelector(".terminal-body");
-
-
-  function terminalLine(
-    text,
-    className = ""
-  ) {
-
-    const line =
-      document.createElement("div");
-
-    line.className =
-      "line " + className;
-
-    line.textContent = text;
-
-    terminalBody.insertBefore(
-      line,
-      document.querySelector(".commandInput")
-    );
-
-  }
-
-
-  terminalInput.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (event.key !== "Enter") return;
-
-
-      const command =
-        terminalInput.value
-          .trim()
-          .toLowerCase();
-
-
-      terminalInput.value = "";
-
-
-      if (!command) return;
-
-
-      terminalLine(
-        "user@amazing:~$ " + command
-      );
-
-
-      /* HELP */
-
-      if (command === "help") {
-
-        terminalLine(
-          "Available commands:",
-          "system"
-        );
-
-        terminalLine(
-          "help     - show commands",
-          "muted"
-        );
-
-        terminalLine(
-          "status   - system status",
-          "muted"
-        );
-
-        terminalLine(
-          "games    - show games",
-          "muted"
-        );
-
-        terminalLine(
-          "aparat   - open Aparat",
-          "muted"
-        );
-
-        terminalLine(
-          "clear    - clear terminal",
-          "muted"
-        );
+      if (input === PANEL_PASSWORD) {
 
         showToast(
-          "Help menu loaded."
+          "ACCESS GRANTED ✓"
         );
 
-      }
+
+        setTimeout(() => {
+
+          window.location.href =
+            "panel.html";
+
+        }, 500);
 
 
-      /* STATUS */
+      } else {
 
-      else if (command === "status") {
+        document
+          .getElementById("passwordError")
+          .style.display = "block";
 
-        terminalLine(
-          "[OK] SYSTEM ONLINE",
-          "success"
-        );
-
-        terminalLine(
-          "[OK] Website interface: READY",
-          "success"
-        );
-
-        terminalLine(
-          "[OK] Aparat: AVAILABLE",
-          "success"
-        );
-
-        terminalLine(
-          "[INFO] Rubika group link: NOT PROVIDED",
-          "warning"
-        );
-
-      }
-
-
-      /* GAMES */
-
-      else if (command === "games") {
-
-        terminalLine(
-          "Minecraft",
-          "system"
-        );
-
-        terminalLine(
-          "The Last of Us",
-          "system"
-        );
-
-        terminalLine(
-          "Counter-Strike 2",
-          "system"
-        );
-
-      }
-
-
-      /* APARAT */
-
-      else if (command === "aparat") {
-
-        terminalLine(
-          "[SYSTEM] Opening Aparat...",
-          "success"
-        );
 
         showToast(
-          "در حال باز کردن آپارات..."
-        );
-
-        window.open(
-          "https://www.aparat.com/AMIR_AMAZING_GAME",
-          "_blank"
-        );
-
-      }
-
-
-      /* CLEAR */
-
-      else if (command === "clear") {
-
-        const lines =
-          terminalBody.querySelectorAll(".line");
-
-        lines.forEach(line => {
-
-          line.remove();
-
-        });
-
-        terminalLine(
-          "[SYSTEM] Terminal cleared.",
-          "success"
-        );
-
-      }
-
-
-      /* UNKNOWN COMMAND */
-
-      else {
-
-        terminalLine(
-          "ERROR: Command not found.",
-          "error"
-        );
-
-        terminalLine(
-          "Type 'help' to see available commands.",
-          "muted"
-        );
-
-        showToast(
-          "Unknown command ⚠️"
+          "ACCESS DENIED ⚠️"
         );
 
       }
 
     }
-  );
 
 
-  /* =========================
-     CARD SCROLL ANIMATION
-  ========================= */
+    /* =========================
+       ENTER KEY
+    ========================= */
 
-  const cards =
-    document.querySelectorAll(
-      ".card, .game, .stream-box, .community, .terminal"
-    );
+    document
+      .getElementById("passwordInput")
+      .addEventListener(
+        "keydown",
+        function(event) {
 
+          if (event.key === "Enter") {
 
-  const observer =
-    new IntersectionObserver(
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform =
-              "translateY(0)";
+            checkPassword();
 
           }
 
-        });
+          if (event.key === "Escape") {
 
-      },
-      {
-        threshold: .12
-      }
-    );
+            closePassword();
+
+          }
+
+        }
+      );
 
 
-  cards.forEach(card => {
+    /* =========================
+       TOAST
+    ========================= */
 
-    card.style.opacity = "0";
+    let toastTimer;
 
-    card.style.transform =
-      "translateY(25px)";
 
-    card.style.transition =
-      "opacity .7s ease, transform .7s ease";
+    function showToast(message) {
 
-    observer.observe(card);
+      const toast =
+        document.getElementById("toast");
 
-  });
 
-</script>
+      toast.textContent =
+        "⚡ " + message;
+
+
+      toast.classList.add("show");
+
+
+      clearTimeout(toastTimer);
+
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 2500);
+
+    }
+
+  </script>
+
 
 </body>
-  </html>
+
+</html>
