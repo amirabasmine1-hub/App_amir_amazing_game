@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📺 اتاق تماشا | AMIR_AMAZING_GAME</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(130,30,255,.25),transparent 35%),
+        radial-gradient(circle at 85% 80%,rgba(0,100,255,.18),transparent 35%),
+        linear-gradient(135deg,#07000f,#11001f,#040009);
+    padding:20px;
+}
+
+.container{
+    width:min(100%,1000px);
+    margin:auto;
+}
+
+header{
+    text-align:center;
+    padding:25px 15px;
+    border:1px solid rgba(170,80,255,.25);
+    border-radius:24px;
+    background:rgba(20,7,35,.75);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 35px rgba(120,20,255,.12);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    text-shadow:0 0 18px #9d3cff;
+}
+
+.subtitle{
+    margin-top:10px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.back{
+    display:inline-flex;
+    margin-top:18px;
+    padding:11px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    color:#fff;
+    background:linear-gradient(135deg,#6414b5,#351078);
+    border:1px solid rgba(190,100,255,.3);
+}
+
+.videos{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:20px;
+}
+
+.video-card{
+    padding:15px;
+    border-radius:22px;
+    background:rgba(18,7,35,.75);
+    border:1px solid rgba(170,80,255,.22);
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+.video-card h2{
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+video{
+    width:100%;
+    display:block;
+    border-radius:15px;
+    background:#000;
+}
+
+.error{
+    display:none;
+    margin-top:10px;
+    padding:10px;
+    border-radius:12px;
+    color:#ffb0b0;
+    background:rgba(180,0,0,.12);
+    border:1px solid rgba(255,80,80,.2);
+    font-size:12px;
+}
+
+footer{
+    text-align:center;
+    color:#777;
+    font-size:12px;
+    margin-top:25px;
+}
+
+@media(max-width:700px){
+    .videos{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <div class="logo">📺 اتاق تماشا</div>
+    <div class="subtitle">کلیپ‌های AMIR_AMAZING_GAME</div>
+    <a class="back" href="index.html">🏠 بازگشت به خانه</a>
+</header>
+
+<div class="videos">
+
+    <div class="video-card">
+        <h2>🎬 کلیپ روبیکا ۱</h2>
+
+        <video controls preload="metadata">
+            <source
+                src="Screen_Recording_20260917_224344_Rubika.mp4"
+                type="video/mp4">
+            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
+
+        <div class="error">
+            ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
+        </div>
+    </div>
+
+
+    <div class="video-card">
+        <h2>🎬 کلیپ روبیکا ۲</h2>
+
+        <video controls preload="metadata">
+            <source
+                src="Screen_Recording_20260917_230018_Rubika.mp4"
+                type="video/mp4">
+            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
+
+        <div class="error">
+            ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    🎮 AMIR_AMAZING_GAME
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll("video").forEach(video => {
+    const errorBox = video.parentElement.querySelector(".error");
+
+    video.addEventListener("error", () => {
+        errorBox.style.display = "block";
+    });
+});
+</script>
+
+</body>
+</html>
