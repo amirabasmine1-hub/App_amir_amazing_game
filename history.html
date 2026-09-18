@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📜 تاریخچه | AMIR_AMAZING_GAME</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(130,30,255,.25),transparent 35%),
+        radial-gradient(circle at 85% 80%,rgba(0,100,255,.18),transparent 35%),
+        linear-gradient(135deg,#06000d,#11001f,#040008);
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+    background-size:35px 35px;
+}
+
+.container{
+    width:min(100%,950px);
+    margin:auto;
+    padding:20px 15px 50px;
+}
+
+header{
+    text-align:center;
+    padding:30px 18px;
+    border-radius:25px;
+    border:1px solid rgba(180,90,255,.25);
+    background:rgba(18,7,35,.75);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(120,20,255,.12);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    text-shadow:0 0 20px #9d3cff;
+}
+
+.subtitle{
+    margin-top:10px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:18px;
+    padding:11px 19px;
+    border-radius:14px;
+    color:#fff;
+    text-decoration:none;
+    border:1px solid rgba(190,100,255,.28);
+    background:linear-gradient(
+        135deg,
+        rgba(105,20,185,.45),
+        rgba(45,10,90,.65)
+    );
+    transition:.25s;
+}
+
+.back:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(130,30,255,.22);
+}
+
+.timeline{
+    position:relative;
+    margin-top:25px;
+    padding-right:25px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    right:8px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(
+        to bottom,
+        #9c36ff,
+        #4b1680,
+        transparent
+    );
+    box-shadow:0 0 12px rgba(150,50,255,.5);
+}
+
+.event{
+    position:relative;
+    margin-bottom:20px;
+    padding:20px;
+    border-radius:20px;
+    border:1px solid rgba(180,90,255,.2);
+    background:rgba(18,7,35,.72);
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+
+.event::before{
+    content:"";
+    position:absolute;
+    right:-25px;
+    top:25px;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#a84cff;
+    border:3px solid #10051c;
+    box-shadow:0 0 15px #a84cff;
+}
+
+.event-date{
+    display:inline-block;
+    padding:5px 10px;
+    margin-bottom:10px;
+    border-radius:10px;
+    color:#d8b4ff;
+    font-size:11px;
+    background:rgba(130,40,220,.12);
+    border:1px solid rgba(180,90,255,.15);
+}
+
+.event h2{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.event p{
+    color:#bcb3c7;
+    font-size:13px;
+    line-height:2;
+}
+
+.terminal{
+    margin-top:25px;
+    padding:18px;
+    border-radius:17px;
+    background:#020204;
+    border:1px solid rgba(170,80,255,.18);
+    color:#a96cff;
+    font-family:monospace;
+    direction:ltr;
+    text-align:left;
+    font-size:12px;
+    line-height:2;
+    box-shadow:inset 0 0 20px rgba(100,0,180,.06);
+}
+
+footer{
+    text-align:center;
+    margin-top:30px;
+    color:#666;
+    font-size:11px;
+    line-height:2;
+}
+
+@media(max-width:650px){
+
+    .logo{
+        font-size:23px;
+    }
+
+    .timeline{
+        padding-right:21px;
+    }
+
+    .timeline::before{
+        right:6px;
+    }
+
+    .event::before{
+        right:-21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div class="logo">
+            📜 تاریخچه AMIR_AMAZING_GAME
+        </div>
+
+        <div class="subtitle">
+            آرشیو تغییرات و اتفاقات مهم سایت
+        </div>
+
+        <a class="back" href="index.html">
+            🏠 بازگشت به خانه
+        </a>
+
+    </header>
+
+
+    <div class="timeline">
+
+
+        <!-- EVENT 1 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                🚀 شروع پروژه
+            </div>
+
+            <h2>
+                🎮 شکل‌گیری AMIR_AMAZING_GAME
+            </h2>
+
+            <p>
+                پروژه سایت AMIR_AMAZING_GAME با هدف ایجاد
+                یک مرکز اختصاصی برای امیر امیزینگ و جامعه
+                گیمینگ او شکل گرفت.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 2 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                🖥️ توسعه سایت
+            </div>
+
+            <h2>
+                🌐 ایجاد ساختار اصلی سایت
+            </h2>
+
+            <p>
+                صفحات اصلی سایت از جمله صفحه خانه،
+                اخبار و پنل مدیریت ایجاد شدند و طراحی
+                اختصاصی با تم تاریک و بنفش شکل گرفت.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 3 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                🔗 توسعه لینک‌ها
+            </div>
+
+            <h2>
+                📡 اضافه شدن لینک‌های اجتماعی
+            </h2>
+
+            <p>
+                دسترسی به شبکه‌ها و لینک‌های مرتبط با
+                AMIR_AMAZING_GAME در بخش «لینک‌های دیگر»
+                قرار گرفت.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 4 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                📺 قابلیت جدید
+            </div>
+
+            <h2>
+                🎥 اضافه شدن اتاق تماشا
+            </h2>
+
+            <p>
+                بخش «اتاق تماشا» برای قرار دادن و پخش
+                کلیپ‌های سایت ایجاد شد.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 5 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                🎥 استریم
+            </div>
+
+            <h2>
+                📡 اضافه شدن ورود مستقیم به استریم
+            </h2>
+
+            <p>
+                دکمه «ورود به استریم» اضافه شد تا کاربران
+                مستقیماً به صفحه استریم AMIR_AMAZING_GAME
+                در آپارات دسترسی داشته باشند.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 6 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                📥 قابلیت جدید
+            </div>
+
+            <h2>
+                📦 ایجاد دانلود سنتر
+            </h2>
+
+            <p>
+                بخش دانلود سنتر برای انتشار فایل‌های
+                قابل دانلود سایت ایجاد شد.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 7 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                📦 اولین فایل
+            </div>
+
+            <h2>
+                📱 اضافه شدن فایل برنامه
+            </h2>
+
+            <p>
+                فایل
+                <b>app-release.apk.zip</b>
+                به دانلود سنتر اضافه شد.
+            </p>
+
+        </div>
+
+
+        <!-- EVENT 8 -->
+
+        <div class="event">
+
+            <div class="event-date">
+                🛠️ بهبود سایت
+            </div>
+
+            <h2>
+                🔧 رفع باگ‌ها
+            </h2>
+
+            <p>
+                بخش‌های مختلف سایت بهبود داده شدند و
+                مشکلات و باگ‌های موجود برطرف شدند.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TERMINAL -->
+
+    <div class="terminal">
+
+        &gt; AMIR_AMAZING_GAME HISTORY<br>
+        &gt; Loading archive...<br>
+        &gt; Archive status: ONLINE<br>
+        &gt; Events loaded: 8<br>
+        &gt; System: READY<br>
+        &gt; █
+
+    </div>
+
+
+    <footer>
+
+        🎮 AMIR_AMAZING_GAME
+        <br>
+        ✦ آرشیو رسمی تاریخچه سایت ✦
+
+    </footer>
+
+</div>
+
+</body>
+</html>
