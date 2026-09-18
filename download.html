@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📥 دانلود سنتر | AMIR_AMAZING_GAME</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(130,30,255,.28),transparent 35%),
+        radial-gradient(circle at 85% 80%,rgba(0,100,255,.20),transparent 35%),
+        linear-gradient(135deg,#06000d,#11001f,#040008);
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+    background-size:35px 35px;
+}
+
+.container{
+    width:min(100%,950px);
+    margin:auto;
+    padding:20px 15px 45px;
+}
+
+header{
+    text-align:center;
+    padding:28px 18px;
+    border-radius:25px;
+    border:1px solid rgba(180,90,255,.25);
+    background:rgba(18,7,35,.75);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(120,20,255,.12);
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    text-shadow:0 0 20px #9d3cff;
+}
+
+.subtitle{
+    margin-top:10px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:18px;
+    padding:11px 18px;
+    border-radius:14px;
+    color:#fff;
+    text-decoration:none;
+    border:1px solid rgba(190,100,255,.28);
+    background:linear-gradient(
+        135deg,
+        rgba(105,20,185,.45),
+        rgba(45,10,90,.65)
+    );
+    transition:.25s;
+}
+
+.back:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(130,30,255,.22);
+}
+
+.section{
+    margin-top:20px;
+    padding:20px;
+    border-radius:23px;
+    border:1px solid rgba(180,90,255,.22);
+    background:rgba(18,7,35,.72);
+    backdrop-filter:blur(15px);
+    box-shadow:0 10px 40px rgba(0,0,0,.25);
+}
+
+.section h2{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.section-description{
+    color:#aaa;
+    font-size:13px;
+    line-height:2;
+}
+
+.download-card{
+    margin-top:18px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    border-radius:19px;
+    border:1px solid rgba(180,90,255,.2);
+    background:rgba(5,0,15,.45);
+}
+
+.file-info{
+    min-width:0;
+}
+
+.file-name{
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+    word-break:break-all;
+}
+
+.file-type{
+    margin-top:7px;
+    color:#8f839b;
+    font-size:11px;
+}
+
+.download-btn{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    color:#fff;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#721cff,#3b0877);
+    border:1px solid rgba(205,130,255,.3);
+    transition:.25s;
+}
+
+.download-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(130,30,255,.25);
+}
+
+footer{
+    text-align:center;
+    margin-top:28px;
+    color:#666;
+    font-size:11px;
+    line-height:2;
+}
+
+@media(max-width:650px){
+
+    .logo{
+        font-size:22px;
+    }
+
+    .download-card{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .download-btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div class="logo">
+            📥 دانلود سنتر
+        </div>
+
+        <div class="subtitle">
+            مرکز دانلود فایل‌های AMIR_AMAZING_GAME
+        </div>
+
+        <a class="back" href="index.html">
+            🏠 بازگشت به خانه
+        </a>
+
+    </header>
+
+
+    <section class="section">
+
+        <h2>📦 فایل‌های موجود</h2>
+
+        <div class="section-description">
+            فایل‌های منتشرشده در این بخش قرار می‌گیرند.
+        </div>
+
+
+        <!-- FILE 1 -->
+
+        <div class="download-card">
+
+            <div class="file-info">
+
+                <div class="file-name">
+                    📦 app-release.apk.zip
+                </div>
+
+                <div class="file-type">
+                    ZIP • فایل برنامه
+                </div>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="app-release.apk.zip"
+                download
+            >
+                ⬇️ دانلود
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        🎮 AMIR_AMAZING_GAME
+        <br>
+        ✦ مرکز دانلود رسمی سایت ✦
+    </footer>
+
+</div>
+
+</body>
+</html>
