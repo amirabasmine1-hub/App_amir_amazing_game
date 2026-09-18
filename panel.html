@@ -94,6 +94,52 @@ button:hover {
     filter: brightness(1.15);
 }
 
+input,
+textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #4d2485;
+    background: #090511;
+    color: white;
+    font-family: Arial, sans-serif;
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #a64dff;
+    box-shadow: 0 0 12px rgba(166, 77, 255, .2);
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.form-status {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 9px;
+    display: none;
+    font-size: 13px;
+}
+
+.success {
+    display: block;
+    color: #55ff88;
+    background: rgba(85, 255, 136, .08);
+    border: 1px solid rgba(85, 255, 136, .2);
+}
+
+.error {
+    display: block;
+    color: #ff8c9d;
+    background: rgba(255, 70, 100, .08);
+    border: 1px solid rgba(255, 70, 100, .2);
+}
+
 .stats {
     margin-top: 25px;
 }
@@ -151,9 +197,29 @@ footer {
         <!-- مدیریت اخبار -->
         <div class="card">
             <h2>📰 مدیریت اخبار</h2>
-            <p>رفتن به صفحه اخبار سایت</p>
+            <p>انتشار مستقیم اخبار در پایگاه داده سایت</p>
+
+            <input
+                id="newsTitle"
+                type="text"
+                placeholder="عنوان خبر..."
+                maxlength="150"
+            >
+
+            <textarea
+                id="newsContent"
+                placeholder="متن خبر..."
+                maxlength="5000"
+            ></textarea>
+
+            <button onclick="publishNews()">
+                🚀 انتشار خبر
+            </button>
+
+            <div id="newsStatus" class="form-status"></div>
+
             <button onclick="location.href='news.html'">
-                ورود به اخبار
+                📰 مشاهده اخبار
             </button>
         </div>
 
@@ -263,6 +329,7 @@ footer {
     <div class="terminal">
         &gt; AMIR_AMAZING_GAME SYSTEM<br>
         &gt; MANAGEMENT PANEL LOADED<br>
+        &gt; SUPABASE NEWS API: ONLINE<br>
         &gt; STATISTICS MODULE: ONLINE<br>
         &gt; COMMUNITY LINK: ONLINE<br>
         &gt; SYSTEM STATUS: OK
@@ -276,13 +343,30 @@ footer {
 
 <script>
 
-/* دریافت عدد از LocalStorage */
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://deiaynhcldaxbybctphg.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_EKRrwk5g0__d8GdCwERvtQ_Qgy1Lh0f";
+
+
+/* =========================
+   ابزار LocalStorage
+========================= */
+
 function getNumber(key) {
     return Number(localStorage.getItem(key) || 0);
 }
 
 
-/* ثبت باز شدن پنل */
+/* =========================
+   ثبت باز شدن پنل
+========================= */
+
 let panelOpens = getNumber("panelOpens");
 
 panelOpens++;
@@ -293,7 +377,10 @@ localStorage.setItem(
 );
 
 
-/* ثبت آخرین ورود */
+/* =========================
+   ثبت آخرین ورود
+========================= */
+
 const now = new Date();
 
 localStorage.setItem(
@@ -302,7 +389,178 @@ localStorage.setItem(
 );
 
 
-/* نمایش آمار */
+/* =========================
+   انتشار خبر
+========================= */
+
+async function publishNews() {
+
+    const titleInput =
+        document.getElementById("newsTitle");
+
+    const contentInput =
+        document.getElementById("newsContent");
+
+    const status =
+        document.getElementById("newsStatus");
+
+    const title =
+        titleInput.value.trim();
+
+    const content =
+        contentInput.value.trim();
+
+
+    status.className = "form-status";
+    status.textContent = "";
+
+
+    if (!title || !content) {
+
+        status.className =
+            "form-status error";
+
+        status.textContent =
+            "⚠️ عنوان و متن خبر را وارد کن.";
+
+        return;
+    }
+
+
+    status.className =
+        "form-status success";
+
+    status.textContent =
+        "⏳ در حال انتشار خبر...";
+
+
+    try {
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/news`,
+            {
+                method: "POST",
+
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type":
+                        "application/json",
+                    "Prefer":
+                        "return=minimal"
+                },
+
+                body: JSON.stringify({
+                    title: title,
+                    content: content
+                })
+            }
+        );
+
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                `HTTP ${response.status}: ${errorText}`
+            );
+        }
+
+
+        /* افزایش شمارنده محلی */
+
+        const currentNews =
+            getNumber("newsCount");
+
+        localStorage.setItem(
+            "newsCount",
+            currentNews + 1
+        );
+
+
+        /* پاک کردن فرم */
+
+        titleInput.value = "";
+        contentInput.value = "";
+
+
+        status.className =
+            "form-status success";
+
+        status.textContent =
+            "✅ خبر با موفقیت منتشر شد!";
+
+
+        updateStats();
+
+
+    } catch (error) {
+
+        console.error(
+            "NEWS PUBLISH ERROR:",
+            error
+        );
+
+
+        status.className =
+            "form-status error";
+
+        status.textContent =
+            "❌ انتشار خبر انجام نشد. اتصال یا دسترسی دیتابیس را بررسی کن.";
+    }
+}
+
+
+/* =========================
+   نمایش آمار
+========================= */
+
+async function updateNewsCountFromDatabase() {
+
+    try {
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/news?select=id`,
+            {
+                method: "GET",
+
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+
+        if (!response.ok) {
+            return;
+        }
+
+
+        const news =
+            await response.json();
+
+
+        document.getElementById(
+            "newsCount"
+        ).textContent = news.length;
+
+
+    } catch (error) {
+
+        console.error(
+            "NEWS COUNT ERROR:",
+            error
+        );
+
+    }
+}
+
+
 function updateStats() {
 
     document.getElementById("visits").textContent =
@@ -316,10 +574,15 @@ function updateStats() {
 
     document.getElementById("lastLogin").textContent =
         localStorage.getItem("lastPanelLogin") || "---";
+
+    updateNewsCountFromDatabase();
 }
 
 
-/* رفتن به بخش آمار */
+/* =========================
+   رفتن به بخش آمار
+========================= */
+
 function showStats() {
 
     document.querySelector(".stats").scrollIntoView({
@@ -330,13 +593,51 @@ function showStats() {
 }
 
 
-/* بررسی سیستم */
-function systemCheck() {
+/* =========================
+   بررسی سیستم
+========================= */
+
+async function systemCheck() {
+
+    let databaseStatus =
+        "CHECKING...";
+
+
+    try {
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/news?select=id&limit=1`,
+            {
+                method: "GET",
+
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+
+        databaseStatus =
+            response.ok
+                ? "ONLINE"
+                : "ERROR";
+
+
+    } catch (error) {
+
+        databaseStatus =
+            "OFFLINE";
+    }
+
 
     alert(
         "🟢 SYSTEM CHECK\n\n" +
         "Website: ONLINE\n" +
         "Panel: ONLINE\n" +
+        "News Database: " +
+        databaseStatus + "\n" +
         "Statistics: ONLINE\n" +
         "Community: ONLINE\n" +
         "Browser Storage: AVAILABLE"
@@ -344,7 +645,10 @@ function systemCheck() {
 }
 
 
-/* پاک کردن آمار */
+/* =========================
+   پاک کردن آمار
+========================= */
+
 function resetStats() {
 
     if (
@@ -357,17 +661,22 @@ function resetStats() {
         localStorage.removeItem("panelOpens");
         localStorage.removeItem("lastPanelLogin");
 
-        alert("✅ آمار این دستگاه پاک شد.");
+        alert(
+            "✅ آمار این دستگاه پاک شد."
+        );
 
         location.reload();
     }
 }
 
 
-/* اجرای اولیه */
+/* =========================
+   اجرای اولیه
+========================= */
+
 updateStats();
 
 </script>
 
 </body>
-</html>
+    </html>
