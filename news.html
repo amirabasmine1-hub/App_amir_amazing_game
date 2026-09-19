@@ -39,17 +39,13 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-
       width: 100%;
       padding: 18px 7%;
-
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       background: rgba(8, 5, 14, 0.82);
       backdrop-filter: blur(15px);
-
       border-bottom: 1px solid rgba(170, 90, 255, 0.2);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
@@ -89,10 +85,8 @@
       display: inline-block;
       padding: 7px 14px;
       border-radius: 999px;
-
       background: rgba(155, 89, 255, 0.1);
       border: 1px solid rgba(155, 89, 255, 0.3);
-
       color: #bd8cff;
       font-size: 12px;
       margin-bottom: 18px;
@@ -101,7 +95,6 @@
     .hero h1 {
       font-size: clamp(32px, 6vw, 58px);
       margin-bottom: 14px;
-
       background: linear-gradient(90deg, #fff, #b87cff, #8f5cff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -123,17 +116,13 @@
     .news-card {
       position: relative;
       overflow: hidden;
-
       background: rgba(19, 12, 32, 0.82);
       border: 1px solid rgba(164, 99, 255, 0.18);
       border-radius: 20px;
-
       padding: 25px;
-
       box-shadow:
         0 15px 40px rgba(0, 0, 0, 0.25),
         inset 0 1px rgba(255,255,255,0.03);
-
       transition:
         transform 0.25s ease,
         border-color 0.25s ease,
@@ -147,7 +136,6 @@
       right: 0;
       width: 4px;
       height: 100%;
-
       background: linear-gradient(#9a5cff, #c18aff);
       box-shadow: 0 0 20px rgba(154, 92, 255, 0.45);
     }
@@ -188,10 +176,8 @@
       text-align: center;
       padding: 45px 20px;
       border-radius: 20px;
-
       background: rgba(19, 12, 32, 0.7);
       border: 1px solid rgba(164, 99, 255, 0.15);
-
       color: #aaa;
     }
 
@@ -201,54 +187,61 @@
 
     .error {
       color: #ff8f9d;
+      line-height: 2;
+      word-break: break-word;
+    }
+
+    .error-details {
+      margin-top: 18px;
+      padding: 14px;
+      text-align: left;
+      direction: ltr;
+      font-family: monospace;
+      font-size: 11px;
+      color: #ffb5bd;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 100, 120, 0.12);
+      white-space: pre-wrap;
+      overflow-x: auto;
     }
 
     footer {
       text-align: center;
       padding: 30px 15px;
-
       color: #777;
       font-size: 12px;
-
       border-top: 1px solid rgba(164, 99, 255, 0.12);
       background: rgba(5, 3, 9, 0.6);
     }
 
     /* =========================
-       PANEL LOGIN MODAL
+       PANEL LOGIN
     ========================= */
 
     #panelLoginModal {
       position: fixed;
       inset: 0;
       z-index: 9999;
-
       display: none;
       align-items: center;
       justify-content: center;
-
       padding: 20px;
-
       background: rgba(0, 0, 0, 0.72);
       backdrop-filter: blur(10px);
     }
 
     .login-box {
       width: min(400px, 100%);
-
       padding: 30px;
-
       border-radius: 24px;
-
       background:
         linear-gradient(
           145deg,
           rgba(30, 17, 50, 0.98),
           rgba(12, 7, 20, 0.98)
         );
-
       border: 1px solid rgba(173, 105, 255, 0.3);
-
       box-shadow:
         0 30px 100px rgba(0,0,0,0.65),
         0 0 45px rgba(133, 67, 255, 0.12);
@@ -257,18 +250,13 @@
     .login-icon {
       width: 58px;
       height: 58px;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       margin: 0 auto 18px;
-
       border-radius: 18px;
-
       background: rgba(151, 85, 255, 0.12);
       border: 1px solid rgba(151, 85, 255, 0.25);
-
       font-size: 26px;
     }
 
@@ -286,18 +274,13 @@
 
     #panelPasswordInput {
       width: 100%;
-
       padding: 14px 16px;
-
       border-radius: 13px;
       border: 1px solid rgba(170, 100, 255, 0.25);
-
       background: rgba(0,0,0,0.3);
       color: #fff;
-
       outline: none;
       font-size: 14px;
-
       transition: 0.2s;
     }
 
@@ -314,16 +297,12 @@
 
     .login-buttons button {
       flex: 1;
-
       border: 0;
       border-radius: 12px;
-
       padding: 13px;
-
       cursor: pointer;
       font-family: inherit;
       font-weight: 700;
-
       transition: 0.2s;
     }
 
@@ -349,18 +328,13 @@
 
     #panelLoginError {
       display: none;
-
       margin-top: 13px;
       padding: 10px;
-
       border-radius: 10px;
-
       text-align: center;
-
       color: #ff9ca7;
       background: rgba(255, 75, 100, 0.08);
       border: 1px solid rgba(255, 75, 100, 0.15);
-
       font-size: 12px;
     }
 
@@ -403,10 +377,6 @@
     <div>
       <a href="index.html">🏠 خانه</a>
       <a href="news.html">📰 اخبار</a>
-
-      <!-- مهم:
-           این لینک مستقیماً panel.html را باز نمی‌کند.
-           ابتدا رمز می‌خواهد. -->
       <a href="#" onclick="openPanelLogin(event)">🖥️ پنل</a>
     </div>
   </nav>
@@ -503,28 +473,26 @@
 
     /* ==================================================
        ⚙️ CONFIGURATION
-       فقط اطلاعات این قسمت را تنظیم کن
     ================================================== */
 
     const SUPABASE_URL =
       "https://deiaynhcldaxbybctphg.supabase.co";
 
+
     /*
-      🔑 کلید Supabase فعلی خودت را اینجا قرار بده.
-      مقدار فعلی فایل قبلی خودت را نگه دار.
+      🔑 کلید Supabase
+
+      کلید فعلی خودت را اینجا قرار بده.
     */
 
     const SUPABASE_KEY =
-      "Ysb_publishable_EKRrwk5g0__d8GdCwERvtQ_Qgy1Lh0f";
+      "sb_publishable_EKRrwk5g0__d8GdCwERvtQ_Qgy1Lh0f";
 
 
     /*
-      🔐 رمز پنل دقیقاً اینجاست.
+      🔐 رمز پنل
 
-      فقط مقدار داخل کوتیشن را با رمز خودت عوض کن.
-
-      مثال:
-      const PANEL_PASSWORD = "رمز-خودت";
+      رمز فعلی خودت را اینجا قرار بده.
     */
 
     const PANEL_PASSWORD =
@@ -532,8 +500,7 @@
 
 
     /*
-      🖥️ آدرس صفحه پنل
-      اگر اسم فایل پنل تغییر کرد فقط همین خط را تغییر بده.
+      🖥️ صفحه پنل
     */
 
     const PANEL_PAGE =
@@ -605,7 +572,6 @@
     }
 
 
-    /* Enter = ورود */
     document
       .getElementById("panelPasswordInput")
       .addEventListener("keydown", function(event) {
@@ -621,7 +587,6 @@
       });
 
 
-    /* کلیک بیرون پنجره = بستن */
     document
       .getElementById("panelLoginModal")
       .addEventListener("click", function(event) {
@@ -678,25 +643,40 @@
 
       try {
 
+        const url =
+          SUPABASE_URL +
+          "/rest/v1/news?select=*&order=created_at.desc";
+
+
         const response =
-          await fetch(
-            SUPABASE_URL +
-            "/rest/v1/news?select=*&order=created_at.desc",
-            {
-              method: "GET",
+          await fetch(url, {
+            method: "GET",
 
-              headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization":
-                  "Bearer " + SUPABASE_KEY
-              }
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization":
+                "Bearer " + SUPABASE_KEY,
+              "Accept":
+                "application/json"
             }
-          );
+          });
 
+
+        /*
+          اگر Supabase خطا بده،
+          متن واقعی خطا را می‌گیریم.
+        */
 
         if (!response.ok) {
+
+          const errorText =
+            await response.text();
+
           throw new Error(
-            "HTTP " + response.status
+            "HTTP " +
+            response.status +
+            "\n\n" +
+            errorText
           );
         }
 
@@ -705,7 +685,14 @@
           await response.json();
 
 
-        if (!Array.isArray(news) || news.length === 0) {
+        if (!Array.isArray(news)) {
+          throw new Error(
+            "پاسخ Supabase آرایه نیست."
+          );
+        }
+
+
+        if (news.length === 0) {
 
           newsContainer.innerHTML = `
             <div class="empty">
@@ -749,18 +736,31 @@
         );
 
 
+        const details =
+          escapeHTML(
+            error && error.message
+              ? error.message
+              : String(error)
+          );
+
+
         newsContainer.innerHTML = `
           <div class="error">
+
             ❌ دریافت اخبار با مشکل مواجه شد.
-            <br><br>
-            لطفاً اتصال اینترنت و تنظیمات Supabase را بررسی کنید.
+
+            <div class="error-details">${details}</div>
+
           </div>
         `;
       }
     }
 
 
-    /* شروع دریافت اخبار */
+    /* ==================================================
+       START
+    ================================================== */
+
     loadNews();
 
   </script>
