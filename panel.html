@@ -3,371 +3,1485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پنل مدیریت | AMIR_AMAZING_GAME</title>
+
+<title>🖥️ پنل مدیریت | AMIR_AMAZING_GAME</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
+:root{
+    --purple:#8d35ff;
+    --purple2:#c26cff;
+    --green:#58ef8a;
+    --red:#ff6b81;
+    --yellow:#ffd76a;
+    --bg:#050008;
+    --panel:rgba(19,7,34,.76);
+    --panel2:rgba(8,2,15,.72);
+    --border:rgba(179,92,255,.20);
+    --muted:#918799;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    color:#fff;
+    overflow-x:hidden;
     background:
-        radial-gradient(circle at top, #24104d, #090512 55%);
-    color: white;
+        radial-gradient(circle at 10% 5%,rgba(135,40,255,.22),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(80,25,210,.18),transparent 30%),
+        radial-gradient(circle at 50% 100%,rgba(120,30,255,.12),transparent 38%),
+        linear-gradient(135deg,#030005,#0d0018 48%,#040006);
 }
 
-header {
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #702cff;
-    background: rgba(10, 5, 25, 0.85);
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+    background-size:40px 40px;
+    mask-image:linear-gradient(to bottom,#000,transparent 96%);
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: #b77aff;
+body::after{
+    content:"";
+    position:fixed;
+    width:430px;
+    height:430px;
+    top:-190px;
+    left:-170px;
+    border-radius:50%;
+    background:rgba(130,35,255,.11);
+    filter:blur(100px);
+    pointer-events:none;
+    z-index:-1;
 }
 
-.status {
-    margin-top: 8px;
-    color: #55ff88;
-    font-size: 13px;
+/* =========================
+   LAYOUT
+========================= */
+
+.container{
+    width:min(1120px,94%);
+    margin:auto;
+    padding:18px 0 55px;
 }
 
-.container {
-    width: min(900px, 92%);
-    margin: 30px auto;
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:relative;
+    overflow:hidden;
+    padding:24px;
+    border-radius:25px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,9,50,.86),
+            rgba(8,2,15,.78)
+        );
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 20px 65px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.04);
 }
 
-h1 {
-    text-align: center;
-    color: #d6b3ff;
+header::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:8%;
+    right:8%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(195,105,255,.7),
+        transparent
+    );
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
+.header-content{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.card {
-    padding: 22px;
-    border: 1px solid #6425b8;
-    border-radius: 16px;
-    background: rgba(30, 12, 55, 0.8);
-    box-shadow: 0 0 18px rgba(110, 40, 255, 0.18);
-    transition: 0.2s;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(140, 70, 255, 0.35);
+.brand-icon{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    font-size:24px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(135,45,255,.32),
+            rgba(48,10,85,.5)
+        );
+    border:1px solid rgba(190,100,255,.22);
+    box-shadow:0 0 28px rgba(130,30,255,.12);
 }
 
-.card h2 {
-    margin-top: 0;
-    font-size: 19px;
+.logo{
+    font-size:20px;
+    font-weight:900;
+    text-shadow:0 0 20px rgba(160,65,255,.55);
 }
 
-.card p {
-    color: #bbb;
-    font-size: 14px;
+.header-subtitle{
+    margin-top:5px;
+    color:#908496;
+    font-size:10px;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 0;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #702cff, #a64dff);
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
+.system-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 13px;
+    border-radius:12px;
+    color:#a8f6bd;
+    font-size:10px;
+    border:1px solid rgba(88,239,138,.14);
+    background:rgba(50,170,80,.06);
 }
 
-button:hover {
-    filter: brightness(1.15);
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 13px rgba(88,239,138,.85);
 }
+
+.header-actions{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+    flex-wrap:wrap;
+}
+
+.header-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px 13px;
+    border-radius:11px;
+    color:#ddd2e5;
+    text-decoration:none;
+    font-size:10px;
+    border:1px solid rgba(180,90,255,.16);
+    background:rgba(255,255,255,.025);
+    cursor:pointer;
+    transition:.22s;
+}
+
+.header-btn:hover{
+    transform:translateY(-2px);
+    border-color:rgba(195,110,255,.4);
+    background:rgba(125,35,220,.10);
+}
+
+/* =========================
+   DASHBOARD TITLE
+========================= */
+
+.page-title{
+    margin:26px 0 17px;
+}
+
+.page-title h1{
+    font-size:23px;
+    text-shadow:0 0 20px rgba(160,60,255,.25);
+}
+
+.page-title p{
+    margin-top:7px;
+    color:#817687;
+    font-size:11px;
+}
+
+/* =========================
+   QUICK STATS
+========================= */
+
+.quick-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.quick-card{
+    position:relative;
+    overflow:hidden;
+    padding:17px;
+    border-radius:17px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    backdrop-filter:blur(14px);
+}
+
+.quick-card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    left:-60px;
+    bottom:-60px;
+    border-radius:50%;
+    background:rgba(130,35,255,.10);
+    filter:blur(25px);
+}
+
+.quick-icon{
+    font-size:19px;
+}
+
+.quick-label{
+    margin-top:9px;
+    color:#857a8d;
+    font-size:9px;
+}
+
+.quick-value{
+    margin-top:4px;
+    color:#d4b1ff;
+    font-size:19px;
+    font-weight:bold;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:16px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    position:relative;
+    overflow:hidden;
+    padding:21px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,8,43,.76),
+            rgba(7,2,14,.72)
+        );
+    backdrop-filter:blur(16px);
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.18),
+        inset 0 1px rgba(255,255,255,.025);
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    right:0;
+    top:20px;
+    width:2px;
+    height:35px;
+    background:linear-gradient(var(--purple),transparent);
+    opacity:.8;
+}
+
+.card h2{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.card-description{
+    color:#8b8191;
+    font-size:10px;
+    line-height:1.9;
+    margin-bottom:13px;
+}
+
+/* =========================
+   INPUTS
+========================= */
 
 input,
-textarea {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #4d2485;
-    background: #090511;
-    color: white;
-    font-family: Arial, sans-serif;
-    outline: none;
+textarea{
+    width:100%;
+    margin-top:9px;
+    padding:12px 13px;
+    border-radius:11px;
+    border:1px solid rgba(150,80,220,.18);
+    outline:none;
+    color:#fff;
+    background:rgba(2,0,7,.58);
+    font-family:Tahoma,Arial,sans-serif;
+    font-size:12px;
+    transition:.2s;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#62596b;
 }
 
 input:focus,
-textarea:focus {
-    border-color: #a64dff;
-    box-shadow: 0 0 12px rgba(166, 77, 255, .2);
+textarea:focus{
+    border-color:rgba(180,90,255,.55);
+    box-shadow:0 0 18px rgba(140,40,255,.10);
 }
 
-textarea {
-    min-height: 130px;
-    resize: vertical;
+textarea{
+    min-height:125px;
+    resize:vertical;
 }
 
-.form-status {
-    margin-top: 12px;
-    padding: 10px;
-    border-radius: 9px;
-    display: none;
-    font-size: 13px;
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+    width:100%;
+    padding:11px 13px;
+    margin-top:9px;
+    border:1px solid rgba(200,125,255,.20);
+    border-radius:11px;
+    color:#fff;
+    font-family:inherit;
+    font-size:11px;
+    font-weight:bold;
+    cursor:pointer;
+    background:
+        linear-gradient(
+            135deg,
+            #7628e9,
+            #471080
+        );
+    box-shadow:
+        0 7px 20px rgba(105,25,220,.13),
+        inset 0 1px rgba(255,255,255,.08);
+    transition:.22s;
 }
 
-.success {
-    display: block;
-    color: #55ff88;
-    background: rgba(85, 255, 136, .08);
-    border: 1px solid rgba(85, 255, 136, .2);
+button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+    box-shadow:0 10px 25px rgba(120,30,240,.22);
 }
 
-.error {
-    display: block;
-    color: #ff8c9d;
-    background: rgba(255, 70, 100, .08);
-    border: 1px solid rgba(255, 70, 100, .2);
+button:active{
+    transform:translateY(0);
 }
 
-.stats {
-    margin-top: 25px;
+button.secondary{
+    background:rgba(255,255,255,.025);
+    border-color:rgba(180,90,255,.15);
 }
 
-.stat-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px;
-    margin: 9px 0;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid #3e1b6e;
+button.danger{
+    background:
+        linear-gradient(
+            135deg,
+            #a72d49,
+            #581327
+        );
+    border-color:rgba(255,100,130,.18);
 }
 
-.stat-value {
-    color: #b978ff;
-    font-weight: bold;
+/* =========================
+   FORM STATUS
+========================= */
+
+.form-status{
+    display:none;
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:10px;
+    font-size:10px;
+    line-height:1.8;
 }
 
-.terminal {
-    margin-top: 25px;
-    padding: 18px;
-    border-radius: 14px;
-    background: #050505;
-    border: 1px solid #333;
-    color: #55ff88;
-    font-family: monospace;
-    direction: ltr;
-    text-align: left;
+.form-status.success{
+    display:block;
+    color:#7dff9f;
+    border:1px solid rgba(85,255,136,.17);
+    background:rgba(85,255,136,.06);
 }
 
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #777;
-    font-size: 13px;
+.form-status.error{
+    display:block;
+    color:#ff9aaa;
+    border:1px solid rgba(255,80,110,.17);
+    background:rgba(255,70,100,.06);
+}
+
+.form-status.info{
+    display:block;
+    color:#c7a8ff;
+    border:1px solid rgba(160,90,255,.17);
+    background:rgba(130,40,255,.06);
+}
+
+/* =========================
+   NEWS LIST
+========================= */
+
+.news-toolbar{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.news-toolbar button{
+    margin-top:0;
+}
+
+.news-list{
+    margin-top:14px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.news-item{
+    padding:13px;
+    border-radius:13px;
+    border:1px solid rgba(170,90,240,.13);
+    background:rgba(0,0,0,.20);
+}
+
+.news-item-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.news-item-title{
+    font-size:12px;
+    font-weight:bold;
+    color:#e9ddf1;
+}
+
+.news-item-date{
+    flex-shrink:0;
+    color:#756a7c;
+    font-size:8px;
+}
+
+.news-item-content{
+    margin-top:7px;
+    color:#8c8292;
+    font-size:9px;
+    line-height:1.8;
+    white-space:pre-wrap;
+}
+
+.delete-news{
+    width:auto;
+    margin-top:9px;
+    padding:7px 10px;
+    font-size:9px;
+}
+
+/* =========================
+   STAT ROW
+========================= */
+
+.stat-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:12px 13px;
+    margin-top:8px;
+    border-radius:11px;
+    border:1px solid rgba(150,80,220,.10);
+    background:rgba(0,0,0,.20);
+}
+
+.stat-name{
+    color:#8c8292;
+    font-size:10px;
+}
+
+.stat-value{
+    color:#c99aff;
+    font-size:11px;
+    font-weight:bold;
+    text-align:left;
+    direction:ltr;
+}
+
+/* =========================
+   LINK STATUS
+========================= */
+
+.link-status{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px 12px;
+    margin-top:8px;
+    border-radius:11px;
+    border:1px solid rgba(150,80,220,.10);
+    background:rgba(0,0,0,.20);
+}
+
+.link-name{
+    color:#aaa0ae;
+    font-size:10px;
+}
+
+.link-state{
+    color:#777;
+    font-size:9px;
+}
+
+.link-state.ok{
+    color:var(--green);
+}
+
+.link-state.error{
+    color:var(--red);
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
+.terminal{
+    position:relative;
+    overflow:hidden;
+    margin-top:16px;
+    padding:18px;
+    border-radius:17px;
+    border:1px solid rgba(80,255,130,.10);
+    background:#030504;
+    color:#58e985;
+    font-family:Consolas,monospace;
+    font-size:10px;
+    line-height:2;
+    direction:ltr;
+    text-align:left;
+    box-shadow:inset 0 0 35px rgba(50,255,100,.025);
+}
+
+.terminal::before{
+    content:"● ● ●";
+    display:block;
+    margin-bottom:8px;
+    color:#575d59;
+    letter-spacing:4px;
+}
+
+.terminal-line{
+    min-height:18px;
+}
+
+/* =========================
+   CLOCK
+========================= */
+
+.clock{
+    margin-top:9px;
+    color:#c7a8ff;
+    font-size:13px;
+    direction:ltr;
+    text-align:right;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toastContainer{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    z-index:9999;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    max-width:min(360px,calc(100% - 36px));
+}
+
+.toast{
+    padding:12px 14px;
+    border-radius:13px;
+    color:#fff;
+    font-size:10px;
+    border:1px solid rgba(190,100,255,.20);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(32,10,53,.96),
+            rgba(9,2,17,.96)
+        );
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    animation:toastIn .25s ease;
+}
+
+.toast.success{
+    border-color:rgba(85,255,136,.22);
+}
+
+.toast.error{
+    border-color:rgba(255,80,110,.22);
+}
+
+@keyframes toastIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:28px 0 0;
+    color:#5e5664;
+    font-size:9px;
+    line-height:2;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .quick-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .container{
+        width:94%;
+    }
+
+    header{
+        padding:19px;
+    }
+
+    .header-content{
+        align-items:flex-start;
+    }
+
+    .brand-icon{
+        width:44px;
+        height:44px;
+        font-size:20px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .system-status{
+        font-size:8px;
+        padding:7px 9px;
+    }
+
+    .page-title h1{
+        font-size:19px;
+    }
+
+    .quick-stats{
+        gap:8px;
+    }
+
+    .quick-card{
+        padding:13px;
+    }
+
+    .quick-value{
+        font-size:16px;
+    }
+
+    .card{
+        padding:17px;
+        border-radius:17px;
+    }
+
+    .news-item-top{
+        flex-direction:column;
+        gap:5px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">🎮 AMIR_AMAZING_GAME</div>
-    <div class="status">● SYSTEM ONLINE</div>
-</header>
+<div id="toastContainer"></div>
 
 <div class="container">
 
-    <h1>🖥️ MANAGEMENT PANEL</h1>
+<!-- =========================
+     HEADER
+========================= -->
 
-    <div class="grid">
+<header>
 
-        <!-- مدیریت اخبار -->
-        <div class="card">
-            <h2>📰 مدیریت اخبار</h2>
-            <p>انتشار مستقیم اخبار در پایگاه داده سایت</p>
+    <div class="header-content">
 
-            <input
-                id="newsTitle"
-                type="text"
-                placeholder="عنوان خبر..."
-                maxlength="150"
-            >
+        <div class="brand">
 
-            <textarea
-                id="newsContent"
-                placeholder="متن خبر..."
-                maxlength="5000"
-            ></textarea>
+            <div class="brand-icon">
+                🎮
+            </div>
 
-            <button onclick="publishNews()">
-                🚀 انتشار خبر
-            </button>
+            <div>
 
-            <div id="newsStatus" class="form-status"></div>
+                <div class="logo">
+                    AMIR_AMAZING_GAME
+                </div>
 
-            <button onclick="location.href='news.html'">
-                📰 مشاهده اخبار
-            </button>
+                <div class="header-subtitle">
+                    مرکز مدیریت و کنترل سایت
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- آمار سایت -->
-        <div class="card">
-            <h2>📊 آمار سایت</h2>
-            <p>مشاهده آمار ثبت‌شده در این مرورگر</p>
-            <button onclick="showStats()">
-                مشاهده آمار
-            </button>
-        </div>
-
-        <!-- صفحه اصلی -->
-        <div class="card">
-            <h2>🏠 صفحه اصلی</h2>
-            <p>بازگشت به صفحه اصلی سایت</p>
-            <button onclick="location.href='index.html'">
-                رفتن به خانه
-            </button>
-        </div>
-
-        <!-- آپارات -->
-        <div class="card">
-            <h2>📺 کانال آپارات</h2>
-            <p>کانال AMIR_AMAZING_GAME</p>
-            <button onclick="window.open(
-                'https://www.aparat.com/AMIR_AMAZING_GAME',
-                '_blank'
-            )">
-                باز کردن آپارات
-            </button>
-        </div>
-
-        <!-- کامیونیتی -->
-        <div class="card">
-            <h2>👥 کامیونیتی</h2>
-            <p>گروه روبیکا: AMAZING_FANS</p>
-            <button onclick="window.open(
-                'https://rubika.ir/joing/IHHIBDHD0EROPTPBILOBRQGVCMQEJKML',
-                '_blank'
-            )">
-                🚀 ورود به گروه روبیکا
-            </button>
-        </div>
-
-        <!-- وضعیت سیستم -->
-        <div class="card">
-            <h2>⚙️ وضعیت سیستم</h2>
-            <p>بررسی وضعیت بخش‌های اصلی سایت</p>
-            <button onclick="systemCheck()">
-                بررسی سیستم
-            </button>
-        </div>
-
-        <!-- خروج -->
-        <div class="card">
-            <h2>🚪 خروج از پنل</h2>
-            <p>بازگشت به صفحه اصلی</p>
-            <button onclick="location.href='index.html'">
-                خروج
-            </button>
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
         </div>
 
     </div>
 
-    <!-- بخش آمار -->
-    <div class="stats">
 
-        <div class="card">
+    <div class="header-actions">
 
-            <h2>📊 آمار سایت</h2>
+        <a class="header-btn" href="index.html">
+            🏠 خانه
+        </a>
 
-            <div class="stat-box">
-                <span>👥 تعداد بازدیدهای ثبت‌شده</span>
-                <span class="stat-value" id="visits">0</span>
-            </div>
+        <a class="header-btn" href="news.html">
+            📰 اخبار
+        </a>
 
-            <div class="stat-box">
-                <span>📰 تعداد اخبار</span>
-                <span class="stat-value" id="newsCount">0</span>
-            </div>
+        <a class="header-btn" href="watch.html">
+            📺 تماشا
+        </a>
 
-            <div class="stat-box">
-                <span>📱 دفعات باز شدن پنل</span>
-                <span class="stat-value" id="opens">0</span>
-            </div>
+        <a class="header-btn" href="history.html">
+            📜 تاریخچه
+        </a>
 
-            <div class="stat-box">
-                <span>🟢 وضعیت سایت</span>
-                <span class="stat-value">ONLINE</span>
-            </div>
+        <button
+            class="header-btn"
+            onclick="runFullSystemCheck()"
+        >
+            ⚡ بررسی کامل
+        </button>
 
-            <div class="stat-box">
-                <span>🕐 آخرین ورود به پنل</span>
-                <span class="stat-value" id="lastLogin">---</span>
-            </div>
+    </div>
 
-            <button onclick="resetStats()">
-                🗑️ پاک کردن آمار این دستگاه
-            </button>
+</header>
 
+
+<!-- =========================
+     TITLE
+========================= -->
+
+<div class="page-title">
+
+    <h1>
+        🖥️ MANAGEMENT PANEL
+    </h1>
+
+    <p>
+        مدیریت محتوا، بررسی سرویس‌ها و کنترل وضعیت سایت
+    </p>
+
+</div>
+
+
+<!-- =========================
+     QUICK STATS
+========================= -->
+
+<div class="quick-stats">
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            📰
+        </div>
+
+        <div class="quick-label">
+            تعداد واقعی اخبار
+        </div>
+
+        <div
+            class="quick-value"
+            id="quickNews"
+        >
+            ...
         </div>
 
     </div>
 
-    <!-- ترمینال -->
-    <div class="terminal">
-        &gt; AMIR_AMAZING_GAME SYSTEM<br>
-        &gt; MANAGEMENT PANEL LOADED<br>
-        &gt; SUPABASE NEWS API: ONLINE<br>
-        &gt; STATISTICS MODULE: ONLINE<br>
-        &gt; COMMUNITY LINK: ONLINE<br>
-        &gt; SYSTEM STATUS: OK
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            👁️
+        </div>
+
+        <div class="quick-label">
+            بازدیدهای این دستگاه
+        </div>
+
+        <div
+            class="quick-value"
+            id="quickVisits"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            🖥️
+        </div>
+
+        <div class="quick-label">
+            ورود به پنل
+        </div>
+
+        <div
+            class="quick-value"
+            id="quickOpens"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            🕐
+        </div>
+
+        <div class="quick-label">
+            ساعت سیستم
+        </div>
+
+        <div
+            class="quick-value clock"
+            id="liveClock"
+        >
+            --:--:--
+        </div>
+
     </div>
 
 </div>
 
+
+<!-- =========================
+     MAIN GRID
+========================= -->
+
+<div class="grid">
+
+
+<!-- NEWS MANAGEMENT -->
+
+<div class="card">
+
+    <h2>
+        📰 مدیریت اخبار
+    </h2>
+
+    <div class="card-description">
+        انتشار و مدیریت مستقیم اخبار ذخیره‌شده در Supabase
+    </div>
+
+    <input
+        id="newsTitle"
+        type="text"
+        placeholder="عنوان خبر..."
+        maxlength="150"
+    >
+
+    <textarea
+        id="newsContent"
+        placeholder="متن خبر..."
+        maxlength="5000"
+    ></textarea>
+
+    <button onclick="publishNews()">
+        🚀 انتشار خبر
+    </button>
+
+    <div
+        id="newsStatus"
+        class="form-status"
+    ></div>
+
+    <div class="news-toolbar">
+
+        <button
+            class="secondary"
+            onclick="loadNews()"
+        >
+            🔄 بروزرسانی
+        </button>
+
+        <button
+            class="secondary"
+            onclick="location.href='news.html'"
+        >
+            📰 صفحه اخبار
+        </button>
+
+    </div>
+
+    <div
+        id="newsList"
+        class="news-list"
+    >
+        <div class="form-status info">
+            ⏳ در حال دریافت اخبار...
+        </div>
+    </div>
+
+</div>
+
+
+<!-- SYSTEM -->
+
+<div class="card">
+
+    <h2>
+        ⚙️ وضعیت سیستم
+    </h2>
+
+    <div class="card-description">
+        بررسی واقعی اتصال بخش‌های اصلی سایت
+    </div>
+
+    <div class="link-status">
+
+        <span class="link-name">
+            Supabase Database
+        </span>
+
+        <span
+            id="dbState"
+            class="link-state"
+        >
+            CHECKING...
+        </span>
+
+    </div>
+
+    <div class="link-status">
+
+        <span class="link-name">
+            News API
+        </span>
+
+        <span
+            id="newsApiState"
+            class="link-state"
+        >
+            CHECKING...
+        </span>
+
+    </div>
+
+    <div class="link-status">
+
+        <span class="link-name">
+            Browser Storage
+        </span>
+
+        <span
+            id="storageState"
+            class="link-state ok"
+        >
+            AVAILABLE
+        </span>
+
+    </div>
+
+    <div class="link-status">
+
+        <span class="link-name">
+            JavaScript
+        </span>
+
+        <span class="link-state ok">
+            ONLINE
+        </span>
+
+    </div>
+
+    <button onclick="runSystemCheck()">
+        🔍 بررسی اتصال
+    </button>
+
+</div>
+
+
+<!-- SITE LINKS -->
+
+<div class="card">
+
+    <h2>
+        🔗 دسترسی سریع
+    </h2>
+
+    <div class="card-description">
+        دسترسی سریع به بخش‌های مختلف پروژه
+    </div>
+
+    <button onclick="location.href='index.html'">
+        🏠 صفحه اصلی
+    </button>
+
+    <button onclick="location.href='news.html'">
+        📰 اخبار
+    </button>
+
+    <button onclick="location.href='watch.html'">
+        📺 اتاق تماشا
+    </button>
+
+    <button onclick="location.href='download.html'">
+        📥 دانلود سنتر
+    </button>
+
+    <button onclick="location.href='history.html'">
+        📜 تاریخچه پروژه
+    </button>
+
+</div>
+
+
+<!-- COMMUNITY -->
+
+<div class="card">
+
+    <h2>
+        🌐 شبکه‌های رسمی
+    </h2>
+
+    <div class="card-description">
+        دسترسی مستقیم به صفحات رسمی AMIR_AMAZING_GAME
+    </div>
+
+    <button
+        onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME')"
+    >
+        📺 آپارات
+    </button>
+
+    <button
+        onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME/live')"
+    >
+        🔴 استریم آپارات
+    </button>
+
+    <button
+        onclick="openExternal('https://rubika.ir/joing/IHHIBDHD0EROPTPBILOBRQGVCMQEJKML')"
+    >
+        👥 گروه روبیکا
+    </button>
+
+    <button
+        onclick="openExternal('https://rubika.ir/amir_amazing_game1')"
+    >
+        💜 روبیکا
+    </button>
+
+</div>
+
+
+<!-- LOCAL STATISTICS -->
+
+<div class="card">
+
+    <h2>
+        📊 آمار دستگاه
+    </h2>
+
+    <div class="card-description">
+        این آمار در LocalStorage همین مرورگر نگهداری می‌شود.
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            👁️ بازدید ثبت‌شده
+        </span>
+
+        <span
+            id="visits"
+            class="stat-value"
+        >
+            0
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            🖥️ دفعات ورود به پنل
+        </span>
+
+        <span
+            id="opens"
+            class="stat-value"
+        >
+            0
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            📰 اخبار دیتابیس
+        </span>
+
+        <span
+            id="newsCount"
+            class="stat-value"
+        >
+            ...
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            🕐 آخرین ورود
+        </span>
+
+        <span
+            id="lastLogin"
+            class="stat-value"
+        >
+            ---
+        </span>
+
+    </div>
+
+    <button
+        class="danger"
+        onclick="resetStats()"
+    >
+        🗑️ پاک کردن آمار این دستگاه
+    </button>
+
+</div>
+
+
+<!-- DEVICE INFO -->
+
+<div class="card">
+
+    <h2>
+        📱 اطلاعات دستگاه
+    </h2>
+
+    <div class="card-description">
+        اطلاعات واقعی مرورگر و محیط اجرای پنل
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            🌐 مرورگر
+        </span>
+
+        <span
+            id="browserInfo"
+            class="stat-value"
+        >
+            ...
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            📱 سیستم‌عامل
+        </span>
+
+        <span
+            id="osInfo"
+            class="stat-value"
+        >
+            ...
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            📐 اندازه صفحه
+        </span>
+
+        <span
+            id="screenInfo"
+            class="stat-value"
+        >
+            ...
+        </span>
+
+    </div>
+
+    <div class="stat-row">
+
+        <span class="stat-name">
+            📶 وضعیت اتصال
+        </span>
+
+        <span
+            id="networkInfo"
+            class="stat-value"
+        >
+            ...
+        </span>
+
+    </div>
+
+    <button
+        class="secondary"
+        onclick="copySystemInfo()"
+    >
+        📋 کپی اطلاعات سیستم
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     TERMINAL
+========================= -->
+
+<div class="terminal">
+
+    <div
+        class="terminal-line"
+        id="terminal1"
+    >
+        &gt; AMIR_AMAZING_GAME SYSTEM
+    </div>
+
+    <div
+        class="terminal-line"
+        id="terminal2"
+    >
+        &gt; MANAGEMENT PANEL INITIALIZING...
+    </div>
+
+    <div
+        class="terminal-line"
+        id="terminal3"
+    >
+        &gt; DATABASE CONNECTION: CHECKING...
+    </div>
+
+    <div
+        class="terminal-line"
+        id="terminal4"
+    >
+        &gt; STATISTICS MODULE: ONLINE
+    </div>
+
+    <div
+        class="terminal-line"
+        id="terminal5"
+    >
+        &gt; BROWSER STORAGE: AVAILABLE
+    </div>
+
+    <div
+        class="terminal-line"
+        id="terminal6"
+    >
+        &gt; SYSTEM STATUS: READY
+    </div>
+
+</div>
+
+
 <footer>
-    AMIR_AMAZING_GAME © 2026
+    🎮 AMIR_AMAZING_GAME
+    <br>
+    ساخته شده توسط گروه امازینگ فن 🎮
+    <br>
+    ✦ MANAGEMENT SYSTEM ✦
 </footer>
+
+</div>
+
 
 <script>
 
-/* =========================
+/* =====================================================
    SUPABASE
-========================= */
+===================================================== */
 
 const SUPABASE_URL =
     "https://deiaynhcldaxbybctphg.supabase.co";
 
+/*
+  کلید فعلی خودت را اینجا قرار بده.
+  عمداً کلید واقعی داخل نسخه پاسخ تکرار نشده.
+*/
 const SUPABASE_KEY =
-    "sb_publishable_EKRrwk5g0__d8GdCwERvtQ_Qgy1Lh0f";
+    "PUBLISHABLE_KEY_HERE";
 
 
-/* =========================
-   ابزار LocalStorage
-========================= */
+/* =====================================================
+   HELPERS
+===================================================== */
 
-function getNumber(key) {
-    return Number(localStorage.getItem(key) || 0);
+function getNumber(key){
+
+    return Number(
+        localStorage.getItem(key) || 0
+    );
+
 }
 
 
-/* =========================
-   ثبت باز شدن پنل
-========================= */
+function showToast(message,type=""){
 
-let panelOpens = getNumber("panelOpens");
+    const container =
+        document.getElementById("toastContainer");
+
+    const toast =
+        document.createElement("div");
+
+    toast.className =
+        "toast " + type;
+
+    toast.textContent =
+        message;
+
+    container.appendChild(toast);
+
+    setTimeout(function(){
+
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(8px)";
+
+        setTimeout(function(){
+            toast.remove();
+        },250);
+
+    },3200);
+
+}
+
+
+function setStatus(id,text,type){
+
+    const el =
+        document.getElementById(id);
+
+    if(!el) return;
+
+    el.textContent = text;
+
+    el.className =
+        "link-state " + type;
+
+}
+
+
+/* =====================================================
+   PANEL OPEN COUNTER
+===================================================== */
+
+let panelOpens =
+    getNumber("panelOpens");
 
 panelOpens++;
 
@@ -377,23 +1491,45 @@ localStorage.setItem(
 );
 
 
-/* =========================
-   ثبت آخرین ورود
-========================= */
-
-const now = new Date();
+/* =====================================================
+   LAST LOGIN
+===================================================== */
 
 localStorage.setItem(
     "lastPanelLogin",
-    now.toLocaleString("fa-IR")
+    new Date().toLocaleString("fa-IR")
 );
 
 
-/* =========================
-   انتشار خبر
-========================= */
+/* =====================================================
+   CLOCK
+===================================================== */
 
-async function publishNews() {
+function updateClock(){
+
+    const now =
+        new Date();
+
+    document.getElementById(
+        "liveClock"
+    ).textContent =
+        now.toLocaleTimeString("fa-IR");
+
+}
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =====================================================
+   PUBLISH NEWS
+===================================================== */
+
+async function publishNews(){
 
     const titleInput =
         document.getElementById("newsTitle");
@@ -411,11 +1547,14 @@ async function publishNews() {
         contentInput.value.trim();
 
 
-    status.className = "form-status";
-    status.textContent = "";
+    status.className =
+        "form-status";
+
+    status.textContent =
+        "";
 
 
-    if (!title || !content) {
+    if(!title || !content){
 
         status.className =
             "form-status error";
@@ -428,60 +1567,49 @@ async function publishNews() {
 
 
     status.className =
-        "form-status success";
+        "form-status info";
 
     status.textContent =
         "⏳ در حال انتشار خبر...";
 
 
-    try {
+    try{
 
-        const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/news`,
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/news`,
+                {
+                    method:"POST",
 
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization":
-                        `Bearer ${SUPABASE_KEY}`,
-                    "Content-Type":
-                        "application/json",
-                    "Prefer":
-                        "return=minimal"
-                },
+                    headers:{
+                        "apikey":SUPABASE_KEY,
+                        "Authorization":
+                            `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type":
+                            "application/json",
+                        "Prefer":
+                            "return=minimal"
+                    },
 
-                body: JSON.stringify({
-                    title: title,
-                    content: content
-                })
-            }
-        );
+                    body:JSON.stringify({
+                        title:title,
+                        content:content
+                    })
+                }
+            );
 
 
-        if (!response.ok) {
+        if(!response.ok){
 
-            const errorText =
+            const error =
                 await response.text();
 
             throw new Error(
-                `HTTP ${response.status}: ${errorText}`
+                `HTTP ${response.status} ${error}`
             );
+
         }
 
-
-        /* افزایش شمارنده محلی */
-
-        const currentNews =
-            getNumber("newsCount");
-
-        localStorage.setItem(
-            "newsCount",
-            currentNews + 1
-        );
-
-
-        /* پاک کردن فرم */
 
         titleInput.value = "";
         contentInput.value = "";
@@ -491,16 +1619,22 @@ async function publishNews() {
             "form-status success";
 
         status.textContent =
-            "✅ خبر با موفقیت منتشر شد!";
+            "✅ خبر با موفقیت در دیتابیس منتشر شد.";
 
 
-        updateStats();
+        showToast(
+            "✅ خبر منتشر شد.",
+            "success"
+        );
 
 
-    } catch (error) {
+        await loadNews();
+
+
+    }catch(error){
 
         console.error(
-            "NEWS PUBLISH ERROR:",
+            "PUBLISH ERROR:",
             error
         );
 
@@ -509,35 +1643,57 @@ async function publishNews() {
             "form-status error";
 
         status.textContent =
-            "❌ انتشار خبر انجام نشد. اتصال یا دسترسی دیتابیس را بررسی کن.";
+            "❌ انتشار خبر انجام نشد. اتصال یا مجوز دیتابیس را بررسی کن.";
+
+        showToast(
+            "❌ انتشار خبر ناموفق بود.",
+            "error"
+        );
+
     }
+
 }
 
 
-/* =========================
-   نمایش آمار
-========================= */
+/* =====================================================
+   LOAD NEWS
+===================================================== */
 
-async function updateNewsCountFromDatabase() {
+async function loadNews(){
 
-    try {
+    const list =
+        document.getElementById("newsList");
 
-        const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/news?select=id`,
-            {
-                method: "GET",
 
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization":
-                        `Bearer ${SUPABASE_KEY}`
+    list.innerHTML =
+        `<div class="form-status info">
+            ⏳ در حال دریافت اخبار از Supabase...
+        </div>`;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/news?select=id,title,content,created_at&order=created_at.desc`,
+                {
+                    method:"GET",
+
+                    headers:{
+                        "apikey":SUPABASE_KEY,
+                        "Authorization":
+                            `Bearer ${SUPABASE_KEY}`
+                    }
                 }
-            }
-        );
+            );
 
 
-        if (!response.ok) {
-            return;
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+
         }
 
 
@@ -546,135 +1702,631 @@ async function updateNewsCountFromDatabase() {
 
 
         document.getElementById(
+            "quickNews"
+        ).textContent =
+            news.length;
+
+
+        document.getElementById(
             "newsCount"
-        ).textContent = news.length;
+        ).textContent =
+            news.length;
 
 
-    } catch (error) {
+        if(!news.length){
+
+            list.innerHTML =
+                `<div class="form-status info">
+                    📭 هنوز هیچ خبری منتشر نشده است.
+                </div>`;
+
+            return;
+        }
+
+
+        list.innerHTML = "";
+
+
+        news.forEach(function(item){
+
+            const wrapper =
+                document.createElement("div");
+
+            wrapper.className =
+                "news-item";
+
+
+            const date =
+                item.created_at
+                    ? new Date(
+                        item.created_at
+                    ).toLocaleString("fa-IR")
+                    : "---";
+
+
+            wrapper.innerHTML = `
+                <div class="news-item-top">
+
+                    <div class="news-item-title">
+                        ${escapeHTML(item.title)}
+                    </div>
+
+                    <div class="news-item-date">
+                        ${escapeHTML(date)}
+                    </div>
+
+                </div>
+
+                <div class="news-item-content">
+                    ${escapeHTML(item.content)}
+                </div>
+
+                <button
+                    class="delete-news danger"
+                    onclick="deleteNews(${Number(item.id)})"
+                >
+                    🗑️ حذف این خبر
+                </button>
+            `;
+
+
+            list.appendChild(wrapper);
+
+        });
+
+
+    }catch(error){
 
         console.error(
-            "NEWS COUNT ERROR:",
+            "LOAD NEWS ERROR:",
             error
         );
 
+
+        list.innerHTML =
+            `<div class="form-status error">
+                ❌ دریافت اخبار ناموفق بود.
+                <br>
+                ${escapeHTML(error.message)}
+            </div>`;
+
     }
+
 }
 
 
-function updateStats() {
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-    document.getElementById("visits").textContent =
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   DELETE NEWS
+===================================================== */
+
+async function deleteNews(id){
+
+    if(!confirm(
+        "آیا مطمئنی می‌خواهی این خبر را حذف کنی؟"
+    )){
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/news?id=eq.${encodeURIComponent(id)}`,
+                {
+                    method:"DELETE",
+
+                    headers:{
+                        "apikey":SUPABASE_KEY,
+                        "Authorization":
+                            `Bearer ${SUPABASE_KEY}`,
+                        "Prefer":
+                            "return=minimal"
+                    }
+                }
+            );
+
+
+        if(!response.ok){
+
+            const error =
+                await response.text();
+
+            throw new Error(
+                `HTTP ${response.status}: ${error}`
+            );
+
+        }
+
+
+        showToast(
+            "🗑️ خبر از دیتابیس حذف شد.",
+            "success"
+        );
+
+
+        await loadNews();
+
+
+    }catch(error){
+
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
+
+        showToast(
+            "❌ حذف انجام نشد؛ احتمالاً مجوز DELETE فعال نیست.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SYSTEM CHECK
+===================================================== */
+
+async function runSystemCheck(){
+
+    setStatus(
+        "dbState",
+        "CHECKING...",
+        ""
+    );
+
+    setStatus(
+        "newsApiState",
+        "CHECKING...",
+        ""
+    );
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${SUPABASE_URL}/rest/v1/news?select=id&limit=1`,
+                {
+                    method:"GET",
+
+                    headers:{
+                        "apikey":SUPABASE_KEY,
+                        "Authorization":
+                            `Bearer ${SUPABASE_KEY}`
+                    }
+                }
+            );
+
+
+        if(response.ok){
+
+            setStatus(
+                "dbState",
+                "ONLINE",
+                "ok"
+            );
+
+            setStatus(
+                "newsApiState",
+                "ONLINE",
+                "ok"
+            );
+
+
+            document.getElementById(
+                "terminal3"
+            ).textContent =
+                "> DATABASE CONNECTION: ONLINE";
+
+
+            showToast(
+                "🟢 اتصال Supabase برقرار است.",
+                "success"
+            );
+
+        }else{
+
+            setStatus(
+                "dbState",
+                "HTTP ERROR",
+                "error"
+            );
+
+            setStatus(
+                "newsApiState",
+                "ERROR",
+                "error"
+            );
+
+        }
+
+
+    }catch(error){
+
+        setStatus(
+            "dbState",
+            "OFFLINE",
+            "error"
+        );
+
+        setStatus(
+            "newsApiState",
+            "OFFLINE",
+            "error"
+        );
+
+
+        document.getElementById(
+            "terminal3"
+        ).textContent =
+            "> DATABASE CONNECTION: OFFLINE";
+
+
+        showToast(
+            "🔴 اتصال Supabase برقرار نشد.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FULL SYSTEM CHECK
+===================================================== */
+
+async function runFullSystemCheck(){
+
+    showToast(
+        "⚡ بررسی کامل سیستم شروع شد..."
+    );
+
+
+    await runSystemCheck();
+
+
+    updateDeviceInfo();
+
+
+    setTimeout(function(){
+
+        showToast(
+            "✅ بررسی کامل سیستم انجام شد.",
+            "success"
+        );
+
+    },500);
+
+}
+
+
+/* =====================================================
+   EXTERNAL LINKS
+===================================================== */
+
+function openExternal(url){
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* =====================================================
+   DEVICE INFORMATION
+===================================================== */
+
+function detectBrowser(){
+
+    const ua =
+        navigator.userAgent;
+
+
+    if(ua.includes("SamsungBrowser"))
+        return "Samsung Browser";
+
+    if(ua.includes("Chrome"))
+        return "Chrome";
+
+    if(ua.includes("Firefox"))
+        return "Firefox";
+
+    if(ua.includes("Safari"))
+        return "Safari";
+
+    return "Browser";
+
+}
+
+
+function detectOS(){
+
+    const ua =
+        navigator.userAgent;
+
+
+    if(/Android/i.test(ua))
+        return "Android";
+
+    if(/iPhone|iPad|iPod/i.test(ua))
+        return "iOS";
+
+    if(/Windows/i.test(ua))
+        return "Windows";
+
+    if(/Mac/i.test(ua))
+        return "macOS";
+
+    if(/Linux/i.test(ua))
+        return "Linux";
+
+    return "Unknown";
+
+}
+
+
+function updateDeviceInfo(){
+
+    document.getElementById(
+        "browserInfo"
+    ).textContent =
+        detectBrowser();
+
+
+    document.getElementById(
+        "osInfo"
+    ).textContent =
+        detectOS();
+
+
+    document.getElementById(
+        "screenInfo"
+    ).textContent =
+        `${window.innerWidth}×${window.innerHeight}`;
+
+
+    document.getElementById(
+        "networkInfo"
+    ).textContent =
+        navigator.onLine
+            ? "ONLINE"
+            : "OFFLINE";
+
+}
+
+
+window.addEventListener(
+    "resize",
+    updateDeviceInfo
+);
+
+
+window.addEventListener(
+    "online",
+    updateDeviceInfo
+);
+
+
+window.addEventListener(
+    "offline",
+    updateDeviceInfo
+);
+
+
+/* =====================================================
+   COPY SYSTEM INFO
+===================================================== */
+
+async function copySystemInfo(){
+
+    const text =
+`AMIR_AMAZING_GAME
+Management Panel
+
+Browser: ${detectBrowser()}
+OS: ${detectOS()}
+Screen: ${window.innerWidth}x${window.innerHeight}
+Network: ${navigator.onLine ? "ONLINE" : "OFFLINE"}
+Language: ${navigator.language}
+Time: ${new Date().toLocaleString("fa-IR")}`;
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+
+        showToast(
+            "📋 اطلاعات سیستم کپی شد.",
+            "success"
+        );
+
+    }catch(error){
+
+        showToast(
+            "❌ کپی خودکار در این مرورگر در دسترس نیست.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOCAL STATS
+===================================================== */
+
+function updateLocalStats(){
+
+    const visits =
         getNumber("siteVisits");
 
-    document.getElementById("opens").textContent =
+    const opens =
         getNumber("panelOpens");
 
-    document.getElementById("newsCount").textContent =
-        getNumber("newsCount");
 
-    document.getElementById("lastLogin").textContent =
-        localStorage.getItem("lastPanelLogin") || "---";
+    document.getElementById(
+        "visits"
+    ).textContent =
+        visits;
 
-    updateNewsCountFromDatabase();
+
+    document.getElementById(
+        "quickVisits"
+    ).textContent =
+        visits;
+
+
+    document.getElementById(
+        "opens"
+    ).textContent =
+        opens;
+
+
+    document.getElementById(
+        "quickOpens"
+    ).textContent =
+        opens;
+
+
+    document.getElementById(
+        "lastLogin"
+    ).textContent =
+        localStorage.getItem(
+            "lastPanelLogin"
+        ) || "---";
+
 }
 
 
-/* =========================
-   رفتن به بخش آمار
-========================= */
+/* =====================================================
+   RESET STATS
+===================================================== */
 
-function showStats() {
+function resetStats(){
 
-    document.querySelector(".stats").scrollIntoView({
-        behavior: "smooth"
-    });
-
-    updateStats();
-}
-
-
-/* =========================
-   بررسی سیستم
-========================= */
-
-async function systemCheck() {
-
-    let databaseStatus =
-        "CHECKING...";
-
-
-    try {
-
-        const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/news?select=id&limit=1`,
-            {
-                method: "GET",
-
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization":
-                        `Bearer ${SUPABASE_KEY}`
-                }
-            }
-        );
-
-
-        databaseStatus =
-            response.ok
-                ? "ONLINE"
-                : "ERROR";
-
-
-    } catch (error) {
-
-        databaseStatus =
-            "OFFLINE";
+    if(!confirm(
+        "آیا مطمئنی می‌خواهی آمار این دستگاه پاک شود؟"
+    )){
+        return;
     }
 
 
-    alert(
-        "🟢 SYSTEM CHECK\n\n" +
-        "Website: ONLINE\n" +
-        "Panel: ONLINE\n" +
-        "News Database: " +
-        databaseStatus + "\n" +
-        "Statistics: ONLINE\n" +
-        "Community: ONLINE\n" +
-        "Browser Storage: AVAILABLE"
+    localStorage.removeItem(
+        "siteVisits"
     );
-}
+
+    localStorage.removeItem(
+        "panelOpens"
+    );
+
+    localStorage.removeItem(
+        "lastPanelLogin"
+    );
 
 
-/* =========================
-   پاک کردن آمار
-========================= */
+    showToast(
+        "🗑️ آمار پاک شد. صفحه دوباره بارگذاری می‌شود.",
+        "success"
+    );
 
-function resetStats() {
 
-    if (
-        confirm(
-            "آیا مطمئنی می‌خواهی آمار این دستگاه پاک شود؟"
-        )
-    ) {
-
-        localStorage.removeItem("siteVisits");
-        localStorage.removeItem("panelOpens");
-        localStorage.removeItem("lastPanelLogin");
-
-        alert(
-            "✅ آمار این دستگاه پاک شد."
-        );
+    setTimeout(function(){
 
         location.reload();
-    }
+
+    },800);
+
 }
 
 
-/* =========================
-   اجرای اولیه
-========================= */
+/* =====================================================
+   NETWORK EVENTS
+===================================================== */
 
-updateStats();
+window.addEventListener(
+    "online",
+    function(){
+
+        showToast(
+            "🟢 اتصال اینترنت برقرار شد.",
+            "success"
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "offline",
+    function(){
+
+        showToast(
+            "🔴 اتصال اینترنت قطع شد.",
+            "error"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+async function initializePanel(){
+
+    updateLocalStats();
+
+    updateDeviceInfo();
+
+    await loadNews();
+
+    await runSystemCheck();
+
+
+    document.getElementById(
+        "terminal6"
+    ).textContent =
+        "> SYSTEM STATUS: READY";
+
+
+    showToast(
+        "🟢 پنل مدیریت آماده است.",
+        "success"
+    );
+
+}
+
+
+initializePanel();
 
 </script>
 
