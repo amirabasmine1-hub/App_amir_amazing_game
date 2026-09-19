@@ -13,6 +13,17 @@
     padding:0;
 }
 
+:root{
+    --purple:#9b4dff;
+    --purple-light:#c18aff;
+    --purple-dark:#351078;
+    --bg:#06020b;
+    --card:rgba(19,9,34,.78);
+    --border:rgba(169,91,255,.21);
+    --text:#fff;
+    --muted:#9c95a8;
+}
+
 html{
     scroll-behavior:smooth;
 }
@@ -20,13 +31,17 @@ html{
 body{
     min-height:100vh;
     font-family:Tahoma,Arial,sans-serif;
-    color:#fff;
+    color:var(--text);
     background:
-        radial-gradient(circle at 15% 20%,rgba(130,30,255,.25),transparent 35%),
-        radial-gradient(circle at 85% 80%,rgba(0,100,255,.18),transparent 35%),
-        linear-gradient(135deg,#06000d,#11001f,#040008);
+        radial-gradient(circle at 12% 12%,rgba(125,40,255,.22),transparent 32%),
+        radial-gradient(circle at 88% 75%,rgba(50,20,255,.14),transparent 35%),
+        linear-gradient(135deg,#05020a,#10051b 52%,#030207);
     overflow-x:hidden;
 }
+
+/* =========================
+   BACKGROUND GRID
+========================= */
 
 body::before{
     content:"";
@@ -34,169 +49,464 @@ body::before{
     inset:0;
     pointer-events:none;
     background:
-        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+        linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
     background-size:35px 35px;
+    mask-image:linear-gradient(to bottom,black,transparent 85%);
 }
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-    width:min(100%,950px);
+    width:min(100%,1000px);
     margin:auto;
-    padding:20px 15px 50px;
+    padding:25px 15px 45px;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
+    position:relative;
+    overflow:hidden;
     text-align:center;
-    padding:30px 18px;
-    border-radius:25px;
-    border:1px solid rgba(180,90,255,.25);
-    background:rgba(18,7,35,.75);
-    backdrop-filter:blur(15px);
-    box-shadow:0 0 40px rgba(120,20,255,.12);
+    padding:40px 20px 35px;
+    border-radius:28px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29,12,48,.88),
+            rgba(10,5,18,.88)
+        );
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 20px 65px rgba(0,0,0,.32),
+        inset 0 1px rgba(255,255,255,.035);
 }
 
+header::before{
+    content:"";
+    position:absolute;
+    top:-110px;
+    left:50%;
+    transform:translateX(-50%);
+    width:320px;
+    height:190px;
+    background:rgba(145,55,255,.17);
+    filter:blur(65px);
+    pointer-events:none;
+}
+
+header::after{
+    content:"";
+    position:absolute;
+    left:12%;
+    right:12%;
+    bottom:0;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(181,101,255,.6),
+        transparent
+    );
+}
+
+/* =========================
+   LOGO
+========================= */
+
 .logo{
-    font-size:28px;
-    font-weight:bold;
-    text-shadow:0 0 20px #9d3cff;
+    position:relative;
+    z-index:1;
+    font-size:clamp(24px,5vw,36px);
+    font-weight:900;
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #d1a4ff,
+        #9252ff
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 0 25px rgba(150,70,255,.16);
 }
 
 .subtitle{
-    margin-top:10px;
-    color:#aaa;
+    position:relative;
+    z-index:1;
+    margin-top:12px;
+    color:#aaa4b4;
     font-size:13px;
+    line-height:2;
 }
 
+/* =========================
+   STATUS
+========================= */
+
+.header-status{
+    position:relative;
+    z-index:1;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    padding:8px 13px;
+    border-radius:999px;
+    color:#c9a6ff;
+    background:rgba(145,70,255,.08);
+    border:1px solid rgba(164,88,255,.18);
+    font-size:11px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#a86aff;
+    box-shadow:0 0 11px rgba(168,106,255,.85);
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
 .back{
+    position:relative;
+    z-index:1;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    margin-top:18px;
-    padding:11px 19px;
+    gap:7px;
+    margin-top:22px;
+    padding:12px 20px;
     border-radius:14px;
     color:#fff;
     text-decoration:none;
+    font-size:13px;
+    font-weight:700;
     border:1px solid rgba(190,100,255,.28);
-    background:linear-gradient(
-        135deg,
-        rgba(105,20,185,.45),
-        rgba(45,10,90,.65)
-    );
-    transition:.25s;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(105,20,185,.55),
+            rgba(45,10,90,.72)
+        );
+    box-shadow:0 8px 25px rgba(75,20,130,.18);
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
 }
 
 .back:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 25px rgba(130,30,255,.22);
+    transform:translateY(-2px);
+    border-color:rgba(205,145,255,.55);
+    box-shadow:0 12px 30px rgba(103,40,190,.28);
 }
+
+.back:active{
+    transform:translateY(0);
+}
+
+/* =========================
+   HISTORY HEADER
+========================= */
+
+.history-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin:40px 5px 22px;
+}
+
+.history-title{
+    font-size:20px;
+    font-weight:800;
+}
+
+.history-title span{
+    color:#a96aff;
+}
+
+.history-desc{
+    margin-top:7px;
+    color:#756f80;
+    font-size:11px;
+}
+
+/* =========================
+   TIMELINE
+========================= */
 
 .timeline{
     position:relative;
-    margin-top:25px;
-    padding-right:25px;
+    padding-right:38px;
 }
 
 .timeline::before{
     content:"";
     position:absolute;
-    right:8px;
-    top:0;
-    bottom:0;
+    right:10px;
+    top:5px;
+    bottom:5px;
     width:2px;
     background:linear-gradient(
         to bottom,
-        #9c36ff,
-        #4b1680,
-        transparent
+        #a04fff,
+        #6930a7 55%,
+        rgba(105,48,167,0)
     );
-    box-shadow:0 0 12px rgba(150,50,255,.5);
+    box-shadow:
+        0 0 12px rgba(150,50,255,.42);
 }
+
+/* =========================
+   EVENT
+========================= */
 
 .event{
     position:relative;
-    margin-bottom:20px;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid rgba(180,90,255,.2);
-    background:rgba(18,7,35,.72);
-    backdrop-filter:blur(12px);
-    box-shadow:0 8px 30px rgba(0,0,0,.2);
+    margin-bottom:22px;
+    padding:21px 22px;
+    border-radius:22px;
+    border:1px solid rgba(180,90,255,.18);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,10,42,.84),
+            rgba(11,5,19,.84)
+        );
+    backdrop-filter:blur(13px);
+    box-shadow:
+        0 12px 38px rgba(0,0,0,.26),
+        inset 0 1px rgba(255,255,255,.025);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
 }
 
 .event::before{
     content:"";
     position:absolute;
-    right:-25px;
-    top:25px;
-    width:13px;
-    height:13px;
+    right:-35px;
+    top:27px;
+    width:15px;
+    height:15px;
     border-radius:50%;
     background:#a84cff;
-    border:3px solid #10051c;
-    box-shadow:0 0 15px #a84cff;
+    border:4px solid #10051c;
+    box-shadow:
+        0 0 0 1px rgba(174,91,255,.35),
+        0 0 17px rgba(168,76,255,.8);
 }
 
+.event:hover{
+    transform:translateX(-4px);
+    border-color:rgba(184,111,255,.36);
+    box-shadow:
+        0 17px 45px rgba(0,0,0,.34),
+        0 0 25px rgba(130,55,255,.06);
+}
+
+/* =========================
+   EVENT DATE
+========================= */
+
 .event-date{
-    display:inline-block;
-    padding:5px 10px;
-    margin-bottom:10px;
+    display:inline-flex;
+    align-items:center;
+    padding:6px 11px;
+    margin-bottom:11px;
     border-radius:10px;
-    color:#d8b4ff;
+    color:#d7b3ff;
     font-size:11px;
-    background:rgba(130,40,220,.12);
+    background:rgba(130,40,220,.10);
     border:1px solid rgba(180,90,255,.15);
 }
 
+/* =========================
+   EVENT CONTENT
+========================= */
+
 .event h2{
     font-size:17px;
-    margin-bottom:8px;
+    line-height:1.8;
+    margin-bottom:7px;
+    color:#f5f1fa;
 }
 
 .event p{
-    color:#bcb3c7;
+    color:#bcb4c8;
     font-size:13px;
     line-height:2;
 }
 
+.event p b{
+    color:#c394ff;
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
 .terminal{
-    margin-top:25px;
-    padding:18px;
-    border-radius:17px;
-    background:#020204;
+    position:relative;
+    overflow:hidden;
+    margin-top:34px;
+    padding:21px;
+    border-radius:19px;
+    background:
+        linear-gradient(
+            145deg,
+            #030305,
+            #09050e
+        );
     border:1px solid rgba(170,80,255,.18);
     color:#a96cff;
     font-family:monospace;
     direction:ltr;
     text-align:left;
     font-size:12px;
-    line-height:2;
-    box-shadow:inset 0 0 20px rgba(100,0,180,.06);
+    line-height:2.1;
+    box-shadow:
+        inset 0 0 25px rgba(100,0,180,.07),
+        0 12px 35px rgba(0,0,0,.22);
 }
+
+.terminal::before{
+    content:"SYSTEM";
+    position:absolute;
+    top:10px;
+    right:12px;
+    direction:ltr;
+    color:#40334f;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     text-align:center;
-    margin-top:30px;
-    color:#666;
+    margin-top:35px;
+    padding:22px 10px 5px;
+    border-top:1px solid rgba(164,99,255,.1);
+    color:#686271;
     font-size:11px;
     line-height:2;
 }
 
+.footer-brand{
+    color:#9870ba;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:650px){
+
+    .container{
+        width:94%;
+        padding-top:12px;
+    }
+
+    header{
+        padding:31px 15px 28px;
+        border-radius:23px;
+    }
 
     .logo{
         font-size:23px;
     }
 
+    .history-head{
+        display:block;
+        margin-top:31px;
+    }
+
     .timeline{
-        padding-right:21px;
+        padding-right:29px;
     }
 
     .timeline::before{
-        right:6px;
+        right:7px;
+    }
+
+    .event{
+        padding:19px;
+        border-radius:19px;
     }
 
     .event::before{
-        right:-21px;
+        right:-27px;
+        width:14px;
+        height:14px;
+    }
+
+    .event:hover{
+        transform:none;
+    }
+
+    .terminal{
+        font-size:10px;
+        overflow-x:auto;
+    }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:400px){
+
+    body{
+        padding:10px;
+    }
+
+    .container{
+        width:100%;
+    }
+
+    .back{
+        width:100%;
+    }
+
+    .event{
+        padding:17px;
+    }
+
+    .event h2{
+        font-size:15px;
+    }
+
+    .event p{
+        font-size:12px;
+    }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none !important;
     }
 }
 </style>
@@ -205,6 +515,10 @@ footer{
 <body>
 
 <div class="container">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header>
 
@@ -216,6 +530,11 @@ footer{
             آرشیو تغییرات و اتفاقات مهم سایت
         </div>
 
+        <div class="header-status">
+            <span class="status-dot"></span>
+            آرشیو رسمی پروژه
+        </div>
+
         <a class="back" href="index.html">
             🏠 بازگشت به خانه
         </a>
@@ -223,12 +542,35 @@ footer{
     </header>
 
 
+    <!-- =========================
+         SECTION HEADER
+    ========================== -->
+
+    <div class="history-head">
+
+        <div>
+            <div class="history-title">
+                🗂️ <span>خط زمانی پروژه</span>
+            </div>
+
+            <div class="history-desc">
+                مسیر توسعه و قابلیت‌های اضافه‌شده به سایت
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TIMELINE
+    ========================== -->
+
     <div class="timeline">
 
 
         <!-- EVENT 1 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 🚀 شروع پروژه
@@ -244,12 +586,12 @@ footer{
                 گیمینگ او شکل گرفت.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 2 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 🖥️ توسعه سایت
@@ -265,12 +607,12 @@ footer{
                 اختصاصی با تم تاریک و بنفش شکل گرفت.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 3 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 🔗 توسعه لینک‌ها
@@ -286,12 +628,12 @@ footer{
                 قرار گرفت.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 4 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 📺 قابلیت جدید
@@ -306,12 +648,12 @@ footer{
                 کلیپ‌های سایت ایجاد شد.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 5 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 🎥 استریم
@@ -327,12 +669,12 @@ footer{
                 در آپارات دسترسی داشته باشند.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 6 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 📥 قابلیت جدید
@@ -347,12 +689,12 @@ footer{
                 قابل دانلود سایت ایجاد شد.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 7 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 📦 اولین فایل
@@ -368,12 +710,12 @@ footer{
                 به دانلود سنتر اضافه شد.
             </p>
 
-        </div>
+        </article>
 
 
         <!-- EVENT 8 -->
 
-        <div class="event">
+        <article class="event">
 
             <div class="event-date">
                 🛠️ بهبود سایت
@@ -388,12 +730,14 @@ footer{
                 مشکلات و باگ‌های موجود برطرف شدند.
             </p>
 
-        </div>
+        </article>
 
     </div>
 
 
-    <!-- TERMINAL -->
+    <!-- =========================
+         TERMINAL
+    ========================== -->
 
     <div class="terminal">
 
@@ -407,9 +751,13 @@ footer{
     </div>
 
 
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
-        🎮 AMIR_AMAZING_GAME
+        🎮 <span class="footer-brand">AMIR_AMAZING_GAME</span>
         <br>
         ✦ آرشیو رسمی تاریخچه سایت ✦
 
