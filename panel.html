@@ -42,10 +42,6 @@ body{
         linear-gradient(135deg,#030005,#0d0018 48%,#040006);
 }
 
-/* =========================
-   BACKGROUND
-========================= */
-
 body::before{
     content:"";
     position:fixed;
@@ -73,19 +69,11 @@ body::after{
     z-index:-1;
 }
 
-/* =========================
-   LAYOUT
-========================= */
-
 .container{
     width:min(1120px,94%);
     margin:auto;
     padding:18px 0 55px;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 header{
     position:relative;
@@ -211,10 +199,6 @@ header::before{
     background:rgba(125,35,220,.10);
 }
 
-/* =========================
-   DASHBOARD TITLE
-========================= */
-
 .page-title{
     margin:26px 0 17px;
 }
@@ -229,10 +213,6 @@ header::before{
     color:#817687;
     font-size:11px;
 }
-
-/* =========================
-   QUICK STATS
-========================= */
 
 .quick-stats{
     display:grid;
@@ -279,20 +259,12 @@ header::before{
     font-weight:bold;
 }
 
-/* =========================
-   GRID
-========================= */
-
 .grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
     margin-top:16px;
 }
-
-/* =========================
-   CARD
-========================= */
 
 .card{
     position:relative;
@@ -335,10 +307,6 @@ header::before{
     margin-bottom:13px;
 }
 
-/* =========================
-   INPUTS
-========================= */
-
 input,
 textarea{
     width:100%;
@@ -369,10 +337,6 @@ textarea{
     min-height:125px;
     resize:vertical;
 }
-
-/* =========================
-   BUTTONS
-========================= */
 
 button{
     width:100%;
@@ -422,10 +386,6 @@ button.danger{
     border-color:rgba(255,100,130,.18);
 }
 
-/* =========================
-   FORM STATUS
-========================= */
-
 .form-status{
     display:none;
     margin-top:10px;
@@ -455,10 +415,6 @@ button.danger{
     border:1px solid rgba(160,90,255,.17);
     background:rgba(130,40,255,.06);
 }
-
-/* =========================
-   NEWS LIST
-========================= */
 
 .news-toolbar{
     display:flex;
@@ -518,10 +474,6 @@ button.danger{
     font-size:9px;
 }
 
-/* =========================
-   STAT ROW
-========================= */
-
 .stat-row{
     display:flex;
     justify-content:space-between;
@@ -547,10 +499,6 @@ button.danger{
     direction:ltr;
 }
 
-/* =========================
-   LINK STATUS
-========================= */
-
 .link-status{
     display:flex;
     align-items:center;
@@ -571,6 +519,8 @@ button.danger{
 .link-state{
     color:#777;
     font-size:9px;
+    text-align:left;
+    direction:ltr;
 }
 
 .link-state.ok{
@@ -580,10 +530,6 @@ button.danger{
 .link-state.error{
     color:var(--red);
 }
-
-/* =========================
-   TERMINAL
-========================= */
 
 .terminal{
     position:relative;
@@ -614,10 +560,6 @@ button.danger{
     min-height:18px;
 }
 
-/* =========================
-   CLOCK
-========================= */
-
 .clock{
     margin-top:9px;
     color:#c7a8ff;
@@ -625,10 +567,6 @@ button.danger{
     direction:ltr;
     text-align:right;
 }
-
-/* =========================
-   TOAST
-========================= */
 
 #toastContainer{
     position:fixed;
@@ -655,6 +593,7 @@ button.danger{
         );
     box-shadow:0 15px 35px rgba(0,0,0,.35);
     animation:toastIn .25s ease;
+    word-break:break-word;
 }
 
 .toast.success{
@@ -676,10 +615,6 @@ button.danger{
     }
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
     text-align:center;
     padding:28px 0 0;
@@ -687,10 +622,6 @@ footer{
     font-size:9px;
     line-height:2;
 }
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:800px){
 
@@ -781,10 +712,6 @@ footer{
 
 <div class="container">
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
 
     <div class="header-content">
@@ -816,7 +743,6 @@ footer{
 
     </div>
 
-
     <div class="header-actions">
 
         <a class="header-btn" href="index.html">
@@ -846,11 +772,6 @@ footer{
 
 </header>
 
-
-<!-- =========================
-     TITLE
-========================= -->
-
 <div class="page-title">
 
     <h1>
@@ -863,109 +784,39 @@ footer{
 
 </div>
 
-
-<!-- =========================
-     QUICK STATS
-========================= -->
-
 <div class="quick-stats">
 
     <div class="quick-card">
-
-        <div class="quick-icon">
-            📰
-        </div>
-
-        <div class="quick-label">
-            تعداد واقعی اخبار
-        </div>
-
-        <div
-            class="quick-value"
-            id="quickNews"
-        >
-            ...
-        </div>
-
+        <div class="quick-icon">📰</div>
+        <div class="quick-label">تعداد واقعی اخبار</div>
+        <div class="quick-value" id="quickNews">...</div>
     </div>
 
-
     <div class="quick-card">
-
-        <div class="quick-icon">
-            👁️
-        </div>
-
-        <div class="quick-label">
-            بازدیدهای این دستگاه
-        </div>
-
-        <div
-            class="quick-value"
-            id="quickVisits"
-        >
-            0
-        </div>
-
+        <div class="quick-icon">👁️</div>
+        <div class="quick-label">بازدیدهای این دستگاه</div>
+        <div class="quick-value" id="quickVisits">0</div>
     </div>
 
-
     <div class="quick-card">
-
-        <div class="quick-icon">
-            🖥️
-        </div>
-
-        <div class="quick-label">
-            ورود به پنل
-        </div>
-
-        <div
-            class="quick-value"
-            id="quickOpens"
-        >
-            0
-        </div>
-
+        <div class="quick-icon">🖥️</div>
+        <div class="quick-label">ورود به پنل</div>
+        <div class="quick-value" id="quickOpens">0</div>
     </div>
 
-
     <div class="quick-card">
-
-        <div class="quick-icon">
-            🕐
-        </div>
-
-        <div class="quick-label">
-            ساعت سیستم
-        </div>
-
-        <div
-            class="quick-value clock"
-            id="liveClock"
-        >
-            --:--:--
-        </div>
-
+        <div class="quick-icon">🕐</div>
+        <div class="quick-label">ساعت سیستم</div>
+        <div class="quick-value clock" id="liveClock">--:--:--</div>
     </div>
 
 </div>
 
-
-<!-- =========================
-     MAIN GRID
-========================= -->
-
 <div class="grid">
-
-
-<!-- NEWS MANAGEMENT -->
 
 <div class="card">
 
-    <h2>
-        📰 مدیریت اخبار
-    </h2>
+    <h2>📰 مدیریت اخبار</h2>
 
     <div class="card-description">
         انتشار و مدیریت مستقیم اخبار ذخیره‌شده در Supabase
@@ -988,10 +839,7 @@ footer{
         🚀 انتشار خبر
     </button>
 
-    <div
-        id="newsStatus"
-        class="form-status"
-    ></div>
+    <div id="newsStatus" class="form-status"></div>
 
     <div class="news-toolbar">
 
@@ -1011,10 +859,7 @@ footer{
 
     </div>
 
-    <div
-        id="newsList"
-        class="news-list"
-    >
+    <div id="newsList" class="news-list">
         <div class="form-status info">
             ⏳ در حال دریافت اخبار...
         </div>
@@ -1022,14 +867,9 @@ footer{
 
 </div>
 
-
-<!-- SYSTEM -->
-
 <div class="card">
 
-    <h2>
-        ⚙️ وضعیت سیستم
-    </h2>
+    <h2>⚙️ وضعیت سیستم</h2>
 
     <div class="card-description">
         بررسی واقعی اتصال بخش‌های اصلی سایت
@@ -1041,10 +881,7 @@ footer{
             Supabase Database
         </span>
 
-        <span
-            id="dbState"
-            class="link-state"
-        >
+        <span id="dbState" class="link-state">
             CHECKING...
         </span>
 
@@ -1056,10 +893,7 @@ footer{
             News API
         </span>
 
-        <span
-            id="newsApiState"
-            class="link-state"
-        >
+        <span id="newsApiState" class="link-state">
             CHECKING...
         </span>
 
@@ -1071,10 +905,7 @@ footer{
             Browser Storage
         </span>
 
-        <span
-            id="storageState"
-            class="link-state ok"
-        >
+        <span id="storageState" class="link-state ok">
             AVAILABLE
         </span>
 
@@ -1098,14 +929,9 @@ footer{
 
 </div>
 
-
-<!-- SITE LINKS -->
-
 <div class="card">
 
-    <h2>
-        🔗 دسترسی سریع
-    </h2>
+    <h2>🔗 دسترسی سریع</h2>
 
     <div class="card-description">
         دسترسی سریع به بخش‌های مختلف پروژه
@@ -1133,204 +959,95 @@ footer{
 
 </div>
 
-
-<!-- COMMUNITY -->
-
 <div class="card">
 
-    <h2>
-        🌐 شبکه‌های رسمی
-    </h2>
+    <h2>🌐 شبکه‌های رسمی</h2>
 
     <div class="card-description">
         دسترسی مستقیم به صفحات رسمی AMIR_AMAZING_GAME
     </div>
 
-    <button
-        onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME')"
-    >
+    <button onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME')">
         📺 آپارات
     </button>
 
-    <button
-        onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME/live')"
-    >
+    <button onclick="openExternal('https://www.aparat.com/AMIR_AMAZING_GAME/live')">
         🔴 استریم آپارات
     </button>
 
-    <button
-        onclick="openExternal('https://rubika.ir/joing/IHHIBDHD0EROPTPBILOBRQGVCMQEJKML')"
-    >
+    <button onclick="openExternal('https://rubika.ir/joing/IHHIBDHD0EROPTPBILOBRQGVCMQEJKML')">
         👥 گروه روبیکا
     </button>
 
-    <button
-        onclick="openExternal('https://rubika.ir/amir_amazing_game1')"
-    >
+    <button onclick="openExternal('https://rubika.ir/amir_amazing_game1')">
         💜 روبیکا
     </button>
 
 </div>
 
-
-<!-- LOCAL STATISTICS -->
-
 <div class="card">
 
-    <h2>
-        📊 آمار دستگاه
-    </h2>
+    <h2>📊 آمار دستگاه</h2>
 
     <div class="card-description">
         این آمار در LocalStorage همین مرورگر نگهداری می‌شود.
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            👁️ بازدید ثبت‌شده
-        </span>
-
-        <span
-            id="visits"
-            class="stat-value"
-        >
-            0
-        </span>
-
+        <span class="stat-name">👁️ بازدید ثبت‌شده</span>
+        <span id="visits" class="stat-value">0</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            🖥️ دفعات ورود به پنل
-        </span>
-
-        <span
-            id="opens"
-            class="stat-value"
-        >
-            0
-        </span>
-
+        <span class="stat-name">🖥️ دفعات ورود به پنل</span>
+        <span id="opens" class="stat-value">0</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            📰 اخبار دیتابیس
-        </span>
-
-        <span
-            id="newsCount"
-            class="stat-value"
-        >
-            ...
-        </span>
-
+        <span class="stat-name">📰 اخبار دیتابیس</span>
+        <span id="newsCount" class="stat-value">...</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            🕐 آخرین ورود
-        </span>
-
-        <span
-            id="lastLogin"
-            class="stat-value"
-        >
-            ---
-        </span>
-
+        <span class="stat-name">🕐 آخرین ورود</span>
+        <span id="lastLogin" class="stat-value">---</span>
     </div>
 
-    <button
-        class="danger"
-        onclick="resetStats()"
-    >
+    <button class="danger" onclick="resetStats()">
         🗑️ پاک کردن آمار این دستگاه
     </button>
 
 </div>
 
-
-<!-- DEVICE INFO -->
-
 <div class="card">
 
-    <h2>
-        📱 اطلاعات دستگاه
-    </h2>
+    <h2>📱 اطلاعات دستگاه</h2>
 
     <div class="card-description">
         اطلاعات واقعی مرورگر و محیط اجرای پنل
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            🌐 مرورگر
-        </span>
-
-        <span
-            id="browserInfo"
-            class="stat-value"
-        >
-            ...
-        </span>
-
+        <span class="stat-name">🌐 مرورگر</span>
+        <span id="browserInfo" class="stat-value">...</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            📱 سیستم‌عامل
-        </span>
-
-        <span
-            id="osInfo"
-            class="stat-value"
-        >
-            ...
-        </span>
-
+        <span class="stat-name">📱 سیستم‌عامل</span>
+        <span id="osInfo" class="stat-value">...</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            📐 اندازه صفحه
-        </span>
-
-        <span
-            id="screenInfo"
-            class="stat-value"
-        >
-            ...
-        </span>
-
+        <span class="stat-name">📐 اندازه صفحه</span>
+        <span id="screenInfo" class="stat-value">...</span>
     </div>
 
     <div class="stat-row">
-
-        <span class="stat-name">
-            📶 وضعیت اتصال
-        </span>
-
-        <span
-            id="networkInfo"
-            class="stat-value"
-        >
-            ...
-        </span>
-
+        <span class="stat-name">📶 وضعیت اتصال</span>
+        <span id="networkInfo" class="stat-value">...</span>
     </div>
 
-    <button
-        class="secondary"
-        onclick="copySystemInfo()"
-    >
+    <button class="secondary" onclick="copySystemInfo()">
         📋 کپی اطلاعات سیستم
     </button>
 
@@ -1338,57 +1055,33 @@ footer{
 
 </div>
 
-
-<!-- =========================
-     TERMINAL
-========================= -->
-
 <div class="terminal">
 
-    <div
-        class="terminal-line"
-        id="terminal1"
-    >
+    <div class="terminal-line" id="terminal1">
         &gt; AMIR_AMAZING_GAME SYSTEM
     </div>
 
-    <div
-        class="terminal-line"
-        id="terminal2"
-    >
+    <div class="terminal-line" id="terminal2">
         &gt; MANAGEMENT PANEL INITIALIZING...
     </div>
 
-    <div
-        class="terminal-line"
-        id="terminal3"
-    >
+    <div class="terminal-line" id="terminal3">
         &gt; DATABASE CONNECTION: CHECKING...
     </div>
 
-    <div
-        class="terminal-line"
-        id="terminal4"
-    >
+    <div class="terminal-line" id="terminal4">
         &gt; STATISTICS MODULE: ONLINE
     </div>
 
-    <div
-        class="terminal-line"
-        id="terminal5"
-    >
+    <div class="terminal-line" id="terminal5">
         &gt; BROWSER STORAGE: AVAILABLE
     </div>
 
-    <div
-        class="terminal-line"
-        id="terminal6"
-    >
+    <div class="terminal-line" id="terminal6">
         &gt; SYSTEM STATUS: READY
     </div>
 
 </div>
-
 
 <footer>
     🎮 AMIR_AMAZING_GAME
@@ -1400,7 +1093,6 @@ footer{
 
 </div>
 
-
 <script>
 
 /* =====================================================
@@ -1411,8 +1103,8 @@ const SUPABASE_URL =
     "https://deiaynhcldaxbybctphg.supabase.co";
 
 /*
-  کلید فعلی خودت را اینجا قرار بده.
-  عمداً کلید واقعی داخل نسخه پاسخ تکرار نشده.
+   کلید واقعی Publishable خودت را اینجا قرار بده.
+   کلید واقعی در پاسخ نمایش داده نشده.
 */
 const SUPABASE_KEY =
     "PUBLISHABLE_KEY_HERE";
@@ -1456,7 +1148,7 @@ function showToast(message,type=""){
             toast.remove();
         },250);
 
-    },3200);
+    },5000);
 
 }
 
@@ -1605,7 +1297,7 @@ async function publishNews(){
                 await response.text();
 
             throw new Error(
-                `HTTP ${response.status} ${error}`
+                `HTTP ${response.status}: ${error}`
             );
 
         }
@@ -1642,11 +1334,14 @@ async function publishNews(){
         status.className =
             "form-status error";
 
-        status.textContent =
-            "❌ انتشار خبر انجام نشد. اتصال یا مجوز دیتابیس را بررسی کن.";
+        status.innerHTML =
+            "❌ انتشار خبر انجام نشد." +
+            "<br>" +
+            escapeHTML(error.message);
+
 
         showToast(
-            "❌ انتشار خبر ناموفق بود.",
+            `❌ ${error.message}`,
             "error"
         );
 
@@ -1688,17 +1383,34 @@ async function loadNews(){
             );
 
 
+        const responseText =
+            await response.text();
+
+
         if(!response.ok){
 
             throw new Error(
-                "HTTP " + response.status
+                `HTTP ${response.status}: ${responseText || "Supabase پاسخ خالی برگرداند."}`
             );
 
         }
 
 
-        const news =
-            await response.json();
+        let news;
+
+        try{
+
+            news =
+                JSON.parse(responseText);
+
+        }catch(parseError){
+
+            throw new Error(
+                "پاسخ Supabase قابل خواندن نیست: " +
+                responseText
+            );
+
+        }
 
 
         document.getElementById(
@@ -1843,13 +1555,14 @@ async function deleteNews(id){
             );
 
 
+        const responseText =
+            await response.text();
+
+
         if(!response.ok){
 
-            const error =
-                await response.text();
-
             throw new Error(
-                `HTTP ${response.status}: ${error}`
+                `HTTP ${response.status}: ${responseText || "Supabase پاسخ خالی برگرداند."}`
             );
 
         }
@@ -1873,7 +1586,7 @@ async function deleteNews(id){
 
 
         showToast(
-            "❌ حذف انجام نشد؛ احتمالاً مجوز DELETE فعال نیست.",
+            `❌ حذف انجام نشد: ${error.message}`,
             "error"
         );
 
@@ -1883,7 +1596,7 @@ async function deleteNews(id){
 
 
 /* =====================================================
-   SYSTEM CHECK
+   SYSTEM CHECK — DEBUG VERSION
 ===================================================== */
 
 async function runSystemCheck(){
@@ -1899,6 +1612,11 @@ async function runSystemCheck(){
         "CHECKING...",
         ""
     );
+
+    document.getElementById(
+        "terminal3"
+    ).textContent =
+        "> DATABASE CONNECTION: CHECKING...";
 
 
     try{
@@ -1916,6 +1634,26 @@ async function runSystemCheck(){
                     }
                 }
             );
+
+
+        /*
+           خیلی مهم:
+           قبلاً فقط response.status بررسی می‌شد.
+           حالا متن واقعی پاسخ Supabase هم خوانده می‌شود.
+        */
+        const responseText =
+            await response.text();
+
+
+        console.log(
+            "SUPABASE STATUS:",
+            response.status
+        );
+
+        console.log(
+            "SUPABASE RESPONSE:",
+            responseText
+        );
 
 
         if(response.ok){
@@ -1944,21 +1682,86 @@ async function runSystemCheck(){
                 "success"
             );
 
-        }else{
-
-            setStatus(
-                "dbState",
-                "HTTP ERROR",
-                "error"
-            );
-
-            setStatus(
-                "newsApiState",
-                "ERROR",
-                "error"
-            );
+            return;
 
         }
+
+
+        /* ==============================
+           HTTP ERROR
+        ============================== */
+
+        setStatus(
+            "dbState",
+            `HTTP ${response.status}`,
+            "error"
+        );
+
+        setStatus(
+            "newsApiState",
+            "ERROR",
+            "error"
+        );
+
+
+        document.getElementById(
+            "terminal3"
+        ).textContent =
+            `> DATABASE ERROR: HTTP ${response.status}`;
+
+
+        let readableError =
+            responseText ||
+            "Supabase پاسخ خالی برگرداند.";
+
+
+        /*
+           اگر Supabase پاسخ JSON داده باشد،
+           پیام خواناتر استخراج می‌شود.
+        */
+
+        try{
+
+            const json =
+                JSON.parse(responseText);
+
+            const parts = [];
+
+            if(json.message)
+                parts.push(json.message);
+
+            if(json.details)
+                parts.push(json.details);
+
+            if(json.hint)
+                parts.push("Hint: " + json.hint);
+
+            if(json.code)
+                parts.push("Code: " + json.code);
+
+            if(parts.length){
+                readableError =
+                    parts.join(" | ");
+            }
+
+        }catch(e){
+            // پاسخ JSON نبود؛ همان متن خام استفاده می‌شود.
+        }
+
+
+        showToast(
+            `❌ Supabase HTTP ${response.status}: ${readableError}`,
+            "error"
+        );
+
+
+        console.error(
+            "SUPABASE DATABASE ERROR:",
+            {
+                status:response.status,
+                response:responseText
+            }
+        );
 
 
     }catch(error){
@@ -1983,8 +1786,14 @@ async function runSystemCheck(){
 
 
         showToast(
-            "🔴 اتصال Supabase برقرار نشد.",
+            `🔴 خطای اتصال: ${error.message}`,
             "error"
+        );
+
+
+        console.error(
+            "SUPABASE CONNECTION ERROR:",
+            error
         );
 
     }
