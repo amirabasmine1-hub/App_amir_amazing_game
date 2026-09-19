@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>📺 اتاق تماشا | AMIR_AMAZING_GAME</title>
 
 <style>
@@ -12,107 +13,480 @@
     padding:0;
 }
 
+:root{
+    --purple:#9d4dff;
+    --purple-light:#c58aff;
+    --bg:#07030d;
+    --card:rgba(18,9,32,.78);
+    --border:rgba(169,91,255,.22);
+    --text:#fff;
+    --muted:#9d97aa;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     min-height:100vh;
     font-family:Tahoma,Arial,sans-serif;
-    color:#fff;
+    color:var(--text);
     background:
-        radial-gradient(circle at 15% 20%,rgba(130,30,255,.25),transparent 35%),
-        radial-gradient(circle at 85% 80%,rgba(0,100,255,.18),transparent 35%),
-        linear-gradient(135deg,#07000f,#11001f,#040009);
-    padding:20px;
+        radial-gradient(circle at 12% 10%,rgba(125,40,255,.22),transparent 32%),
+        radial-gradient(circle at 88% 70%,rgba(70,20,255,.15),transparent 35%),
+        linear-gradient(135deg,#06020b,#10051b 50%,#040207);
+    overflow-x:hidden;
 }
+
+/* =========================
+   BACKGROUND GRID
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+    background-size:34px 34px;
+    mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-    width:min(100%,1000px);
+    width:min(1100px,92%);
     margin:auto;
+    padding:25px 0 35px;
 }
+
+/* =========================
+   TOP HEADER
+========================= */
 
 header{
+    position:relative;
+    overflow:hidden;
     text-align:center;
-    padding:25px 15px;
-    border:1px solid rgba(170,80,255,.25);
-    border-radius:24px;
-    background:rgba(20,7,35,.75);
-    backdrop-filter:blur(15px);
-    box-shadow:0 0 35px rgba(120,20,255,.12);
+    padding:42px 20px 35px;
+    border:1px solid var(--border);
+    border-radius:28px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,13,50,.86),
+            rgba(10,5,18,.86)
+        );
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.035);
 }
 
+/* نور بالای هدر */
+
+header::before{
+    content:"";
+    position:absolute;
+    top:-100px;
+    left:50%;
+    transform:translateX(-50%);
+    width:300px;
+    height:180px;
+    background:rgba(150,65,255,.18);
+    filter:blur(65px);
+    pointer-events:none;
+}
+
+/* خط نورانی */
+
+header::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    right:12%;
+    left:12%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(173,91,255,.65),
+        transparent
+    );
+}
+
+/* =========================
+   LOGO
+========================= */
+
 .logo{
-    font-size:25px;
-    font-weight:bold;
-    text-shadow:0 0 18px #9d3cff;
+    position:relative;
+    z-index:1;
+    font-size:clamp(25px,5vw,38px);
+    font-weight:900;
+    letter-spacing:.5px;
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #d0a2ff,
+        #9251ff
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 0 25px rgba(155,65,255,.18);
 }
 
 .subtitle{
-    margin-top:10px;
-    color:#aaa;
-    font-size:13px;
+    position:relative;
+    z-index:1;
+    margin-top:12px;
+    color:#aaa4b4;
+    font-size:14px;
+    line-height:2;
 }
 
-.back{
+/* =========================
+   HEADER STATUS
+========================= */
+
+.header-status{
+    position:relative;
+    z-index:1;
     display:inline-flex;
+    align-items:center;
+    gap:8px;
     margin-top:18px;
-    padding:11px 18px;
+    padding:8px 13px;
+    border-radius:999px;
+    color:#c9a6ff;
+    background:rgba(145,70,255,.08);
+    border:1px solid rgba(164,88,255,.18);
+    font-size:11px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#a86aff;
+    box-shadow:0 0 10px rgba(168,106,255,.8);
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back{
+    position:relative;
+    z-index:1;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    margin-top:22px;
+    padding:12px 20px;
     border-radius:14px;
     text-decoration:none;
     color:#fff;
-    background:linear-gradient(135deg,#6414b5,#351078);
-    border:1px solid rgba(190,100,255,.3);
+    font-size:13px;
+    font-weight:700;
+    background:
+        linear-gradient(
+            135deg,
+            #6d25c2,
+            #351078
+        );
+    border:1px solid rgba(193,122,255,.28);
+    box-shadow:
+        0 8px 25px rgba(75,20,130,.22);
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
 }
+
+.back:hover{
+    transform:translateY(-2px);
+    border-color:rgba(201,139,255,.55);
+    box-shadow:
+        0 12px 30px rgba(103,40,190,.3);
+}
+
+.back:active{
+    transform:translateY(0);
+}
+
+/* =========================
+   SECTION HEADER
+========================= */
+
+.section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin:38px 4px 18px;
+}
+
+.section-title{
+    font-size:19px;
+    font-weight:800;
+}
+
+.section-title span{
+    color:#a968ff;
+}
+
+.section-desc{
+    color:#777181;
+    font-size:11px;
+}
+
+/* =========================
+   VIDEO GRID
+========================= */
 
 .videos{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-    margin-top:20px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
 }
 
+/* =========================
+   VIDEO CARD
+========================= */
+
 .video-card{
-    padding:15px;
-    border-radius:22px;
-    background:rgba(18,7,35,.75);
-    border:1px solid rgba(170,80,255,.22);
-    box-shadow:0 10px 35px rgba(0,0,0,.25);
+    position:relative;
+    overflow:hidden;
+    padding:14px;
+    border-radius:24px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,10,43,.86),
+            rgba(11,5,19,.86)
+        );
+    border:1px solid rgba(168,88,255,.19);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.3),
+        inset 0 1px rgba(255,255,255,.025);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.video-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:3px;
+    height:100%;
+    background:linear-gradient(
+        #8d42ff,
+        #c183ff,
+        transparent
+    );
+    opacity:.7;
+}
+
+.video-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(184,112,255,.38);
+    box-shadow:
+        0 22px 55px rgba(0,0,0,.4),
+        0 0 30px rgba(128,53,255,.07);
+}
+
+/* =========================
+   VIDEO TITLE
+========================= */
+
+.video-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:4px 5px 13px;
 }
 
 .video-card h2{
     font-size:15px;
-    margin-bottom:12px;
+    font-weight:800;
+    color:#f4effa;
+}
+
+.video-number{
+    min-width:27px;
+    height:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    color:#c493ff;
+    background:rgba(143,68,255,.1);
+    border:1px solid rgba(166,88,255,.18);
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+.video-wrapper{
+    position:relative;
+    overflow:hidden;
+    border-radius:17px;
+    background:#000;
+    border:1px solid rgba(255,255,255,.05);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.4);
 }
 
 video{
     width:100%;
     display:block;
-    border-radius:15px;
+    aspect-ratio:16/9;
     background:#000;
 }
 
+/* =========================
+   VIDEO INFO
+========================= */
+
+.video-info{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 5px 2px;
+    color:#777080;
+    font-size:10px;
+}
+
+.video-info strong{
+    color:#a98bc8;
+    font-weight:600;
+}
+
+/* =========================
+   ERROR
+========================= */
+
 .error{
     display:none;
-    margin-top:10px;
-    padding:10px;
+    margin-top:12px;
+    padding:11px 12px;
     border-radius:12px;
     color:#ffb0b0;
-    background:rgba(180,0,0,.12);
-    border:1px solid rgba(255,80,80,.2);
-    font-size:12px;
+    background:rgba(180,0,0,.10);
+    border:1px solid rgba(255,80,80,.18);
+    font-size:11px;
+    line-height:1.8;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     text-align:center;
-    color:#777;
-    font-size:12px;
-    margin-top:25px;
+    color:#686271;
+    font-size:11px;
+    margin-top:38px;
+    padding:22px 10px 8px;
+    border-top:1px solid rgba(164,99,255,.1);
 }
 
+.footer-brand{
+    color:#9870ba;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:700px){
+
+    .container{
+        width:94%;
+        padding-top:12px;
+    }
+
+    header{
+        padding:32px 15px 28px;
+        border-radius:23px;
+    }
+
     .videos{
         grid-template-columns:1fr;
+        gap:17px;
+    }
+
+    .section-head{
+        display:block;
+        margin-top:30px;
+    }
+
+    .section-desc{
+        margin-top:7px;
+    }
+
+    .video-card{
+        border-radius:21px;
     }
 
     .logo{
-        font-size:21px;
+        font-size:23px;
+    }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:400px){
+
+    body{
+        padding:10px;
+    }
+
+    .container{
+        width:100%;
+    }
+
+    header{
+        padding:27px 13px 24px;
+    }
+
+    .video-card{
+        padding:11px;
+    }
+
+    .back{
+        width:100%;
+    }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none !important;
     }
 }
 </style>
@@ -122,61 +496,196 @@ footer{
 
 <div class="container">
 
-<header>
-    <div class="logo">📺 اتاق تماشا</div>
-    <div class="subtitle">کلیپ‌های AMIR_AMAZING_GAME</div>
-    <a class="back" href="index.html">🏠 بازگشت به خانه</a>
-</header>
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-<div class="videos">
+    <header>
 
-    <div class="video-card">
-        <h2>🎬 کلیپ روبیکا ۱</h2>
-
-        <video controls preload="metadata">
-            <source
-                src="Screen_Recording_20260917_224344_Rubika.mp4"
-                type="video/mp4">
-            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-        </video>
-
-        <div class="error">
-            ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
+        <div class="logo">
+            📺 اتاق تماشا
         </div>
+
+        <div class="subtitle">
+            کلیپ‌ها و ویدیوهای منتشرشده در
+            <strong>AMIR_AMAZING_GAME</strong>
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            آرشیو ویدیوها
+        </div>
+
+        <a class="back" href="index.html">
+            🏠 بازگشت به خانه
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         SECTION
+    ========================== -->
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-title">
+                🎬 <span>ویدیوها</span>
+            </div>
+
+            <div class="section-desc">
+                کلیپ‌های ذخیره‌شده در آرشیو
+            </div>
+        </div>
+
     </div>
 
 
-    <div class="video-card">
-        <h2>🎬 کلیپ روبیکا ۲</h2>
+    <!-- =========================
+         VIDEOS
+    ========================== -->
 
-        <video controls preload="metadata">
-            <source
-                src="Screen_Recording_20260917_230018_Rubika.mp4"
-                type="video/mp4">
-            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-        </video>
+    <div class="videos">
 
-        <div class="error">
-            ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
-        </div>
+
+        <!-- VIDEO 1 -->
+
+        <article class="video-card">
+
+            <div class="video-header">
+
+                <h2>
+                    🎬 کلیپ روبیکا ۱
+                </h2>
+
+                <div class="video-number">
+                    01
+                </div>
+
+            </div>
+
+            <div class="video-wrapper">
+
+                <video
+                    controls
+                    preload="metadata"
+                    playsinline>
+
+                    <source
+                        src="Screen_Recording_20260917_224344_Rubika.mp4"
+                        type="video/mp4">
+
+                    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+
+                </video>
+
+            </div>
+
+            <div class="video-info">
+
+                <span>
+                    📱 Rubika
+                </span>
+
+                <strong>
+                    ویدیو ۱
+                </strong>
+
+            </div>
+
+            <div class="error">
+                ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
+            </div>
+
+        </article>
+
+
+        <!-- VIDEO 2 -->
+
+        <article class="video-card">
+
+            <div class="video-header">
+
+                <h2>
+                    🎬 کلیپ روبیکا ۲
+                </h2>
+
+                <div class="video-number">
+                    02
+                </div>
+
+            </div>
+
+            <div class="video-wrapper">
+
+                <video
+                    controls
+                    preload="metadata"
+                    playsinline>
+
+                    <source
+                        src="Screen_Recording_20260917_230018_Rubika.mp4"
+                        type="video/mp4">
+
+                    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+
+                </video>
+
+            </div>
+
+            <div class="video-info">
+
+                <span>
+                    📱 Rubika
+                </span>
+
+                <strong>
+                    ویدیو ۲
+                </strong>
+
+            </div>
+
+            <div class="error">
+                ⚠️ فایل ویدیو پیدا نشد یا نام فایل اشتباه است.
+            </div>
+
+        </article>
+
+
     </div>
 
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+        🎮 <span class="footer-brand">AMIR_AMAZING_GAME</span>
+    </footer>
+
 </div>
 
-<footer>
-    🎮 AMIR_AMAZING_GAME
-</footer>
-
-</div>
 
 <script>
+
+/* =========================
+   VIDEO ERROR HANDLING
+========================= */
+
 document.querySelectorAll("video").forEach(video => {
-    const errorBox = video.parentElement.querySelector(".error");
+
+    const errorBox =
+        video.closest(".video-card").querySelector(".error");
 
     video.addEventListener("error", () => {
+
         errorBox.style.display = "block";
+
     });
+
 });
+
 </script>
 
 </body>
